@@ -2,6 +2,9 @@
 
 # the conteco handler maps onto the .invoke API entry point
 # the arguments are supplied as is to the .invoke method
+# script waits until output-parser-tagged has finished to exit
 (
-    .invoke echo $@ > >( /conteco/bin/controlplane/base/internal/output-parser ) 2> >( /conteco/bin/controlplane/base/internal/output-parser );
+    export PATH="/conteco/bin/controlplane/base/internal:$CONTECO_EXECUTIONPLANE_ORIGINALPATH"
+    .invoke $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
+    wait-for-output-parser-tagged
 )

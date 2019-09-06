@@ -8,3 +8,16 @@
     .invoke $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
     wait-for-output-parser-tagged
 )
+
+##########################################################
+
+# If conteco runs not inline then it should issue the .invoke command to the output/processing console
+# This needs setting up: conteco should only do the last command
+
+# from processing/output console 
+# mkfifo CONTECO_FIFO
+# exec < CONTECO_FIFO
+
+# from input console
+# exec 3> CONTECO_FIFO;
+# echo ".invoke $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );" >&3

@@ -1,6 +1,32 @@
 #!/usr/bin/env bash
 . executionplane-invoke "bin/controlplane/base/.invoke $@"
 (
-    echo "$@"
+    selector="${BASH_ARGV[0]}"
+    # check selector prefix, add if required
+    if [[ $selector != *"${CONTECO_REALM}/${CONTECO_ECOSYSTEM}."* ]] ; then
+        selector="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${selector}"
+    fi
+    . executionplane-info "selector=$selector"
+
+    # loop through selections
+    contecoDir=$(pwd)
+    for f in $selector;
+        do
+        if [[ -d $f ]] ; then
+            # set environment
+            cd $f
+             . ./environment
+            cd $contecoDir
+            # add physical flag
+        elif [[ $f == $@ ]] ; then
+            # add virtual flag
+            . set-environment-from-selector $f
+        fi
+        echo "Execute command: $@ and $f"
+        printenv
+        done;
+
+
+    echo "$@ and $selector"
 )
 . executionplane-complete

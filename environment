@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+export CONTECO_LABEL="Conteco controlplane base"
+export CONTECO_DESCRIPTION="The Conteco controlplane base image."
+
+export CONTECO_TYPE="controlplane"
+export CONTECO_NAME="base"
+export CONTECO_TAG="v1.0.0"
+
+export CONTECO_BASE="external.controlplane:v1.0.0"
+export CONTECO_BUILD="image-base"

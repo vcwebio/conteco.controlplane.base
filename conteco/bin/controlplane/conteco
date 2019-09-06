@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+. executionplane-invoke "bin/controlplane/conteco $@"
+(
+    echo $@
+)
+. executionplane-complete

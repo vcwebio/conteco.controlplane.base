@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+export PATH="/conteco/bin/controlplane:${PATH}"
+export CONTECO_EXECUTIONPLANE_ORIGINALPATH=$PATH
+
+export CONTECO_EXECUTIONTAG=$(create-random)
+export CONTECO_REPOSITORYPREFIX="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}"

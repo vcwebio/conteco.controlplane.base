@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-. executionplane-invoke "bin/controlplane/conteco $@"
+
+# the conteco handler maps onto the .invoke API entry point
+# the arguments are supplied as is to the .invoke method
 (
-    echo $@
+    .invoke echo $@ > >( /conteco/bin/controlplane/base/internal/output-parser ) 2> >( /conteco/bin/controlplane/base/internal/output-parser );
 )
-. executionplane-complete

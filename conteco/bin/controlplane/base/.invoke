@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+. executionplane-invoke "bin/controlplane/base/.invoke $@"
+(
+    echo "$@"
+)
+. executionplane-complete

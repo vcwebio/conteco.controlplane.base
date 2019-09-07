@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+nextcommand=$1
+shift
+export CONTECO_OS="windows"
+export CONTECO_PWD_VOLUME="/c/conteco/pwd"
+$nextcommand $@

@@ -3,14 +3,17 @@
     . executionplane-invoke "bin/controlplane/base/configure $@"
 
     selector="${BASH_ARGV[0]}"
-    if [[ -d $f ]] ; then
-        . ./$f/environment
-    elif [[ $f == $@ ]] ; then
+    if [[ -d $selector ]] ; then
+        . ./$selector/environment
+    else 
         . set-environment-from-selector $f
     fi
 
     method=$1
     case $method in
+        load|unload)
+            .image $method
+            ;;
         forced-extract)
             echo ".container run -v $CONTECO_PWD_VOLUME:/infometis/pwd "$CONTECO_REALM/$CONTECO_ECOSYSTEM.$CONTECO_TYPE:$CONTECO_NAME" --executiontag ${CONTECO_EXECUTIONTAG} --interactive --extract"
             ;;
@@ -22,12 +25,6 @@
             part2=$( echo $lastpart | cut -d '.' -f 2)
             part3=$( echo $lastpart | cut -d '.' -f 3)
             echo ".container labelandtag '$part0/$part1.$part2:$part3'"
-            ;;
-        load)
-            echo ".container pull"
-            ;;
-        unload)
-            echo ".container rmi"
             ;;
         extract)
             echo ".container run -v $CONTECO_PWD_VOLUME:/conteco/pwd '$CONTECO_REALM/$CONTECO_ECOSYSTEM.$CONTECO_TYPE:$CONTECO_NAME' --executiontag ${CONTECO_EXECUTIONTAG} --interactive --extract"

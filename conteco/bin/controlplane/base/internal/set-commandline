@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+selector=$1
+shift
+
+commandline=""
+previous=""
+for i
+do
+    commandline="$commandline $previous"
+    previous=$i
+done        
+echo "$commandline $selector"
+
+

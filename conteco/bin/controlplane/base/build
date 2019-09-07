@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+(
+    . executionplane-invoke "bin/controlplane/base/build $@"
+
+    selector="${BASH_ARGV[0]}"
+    if [[ -d $f ]] ; then
+        . ./$f/environment
+    elif [[ $f == $@ ]] ; then
+        . executionplane-error "Repository node does not exist."
+        exit
+    fi
+
+    method=$1
+    case $method in
+        --initial)
+#            .container build
+            echo ".container build"
+            ;;
+        *)
+#            .this "$method" "$@"
+#            if [[ -f ./$method ]] ; then
+#                chmod 777 ./$method
+#                "./$method"
+#                rm "./$method"
+#            else
+                . executionplane-error "Implementation for $method not found."
+#            fi
+            ;;
+    esac
+
+    . executionplane-complete
+)

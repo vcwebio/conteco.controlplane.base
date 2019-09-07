@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+(
+    . executionplane-invoke "bin/controlplane/base/conteco $@"
+
+    selector="${BASH_ARGV[0]}"
+    # check selector prefix, add if required
+    if [[ $selector != *"${CONTECO_REALM}/${CONTECO_ECOSYSTEM}."* ]] ; then
+        selector="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${selector}"
+    fi
+    . executionplane-info "selector=$selector"
+
+    # loop through selections
+    contecoDir=$(pwd)
+    for f in $selector;
+    do
+        commandline=$(set-commandline $f $@)
+        $commandline
+    done;
+    . executionplane-complete
+)

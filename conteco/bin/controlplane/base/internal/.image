@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+method=`basename "$0"`
+arguments=$@
+(
+    . executionplane-invoke "bin/controlplane/base/internal/$method $@"
+    case "$1" in
+        load)
+            imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
+            executionplane docker image pull "$imageName:${CONTECO_TAG}"
+            executionplane docker image tag "$imageName:${CONTECO_TAG}" "$imageName"
+            executionplane-wait-for-output-parser
+            ;;
+        unload)
+            imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
+            executionplane docker rmi "$imageName"
+            executionplane docker rmi "$imageName:${CONTECO_TAG}"
+            executionplane-wait-for-output-parser
+            ;;
+        *)
+            . executionplane-error "Method not recognised: $1."
+            ;;
+    esac
+    . executionplane-complete
+)

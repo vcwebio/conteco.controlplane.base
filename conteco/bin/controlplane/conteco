@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-# the conteco handler maps onto the .invoke API entry point
-# the arguments are supplied as is to the .invoke method
+# The commandline interactive conteco handler
+# It ports to the functional API conteco method
+# the arguments are prefixed with the API conteco method and supplied to the .invoke method
 # script waits until output-parser-tagged has finished to exit
 (
     export PATH="/conteco/bin/controlplane/base/internal:$CONTECO_EXECUTIONPLANE_ORIGINALPATH"
-    .invoke $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
+    .invoke conteco $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
     wait-for-output-parser-tagged
 )
 
@@ -21,3 +22,4 @@
 # from input console
 # exec 3> CONTECO_FIFO;
 # echo ".invoke $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );" >&3
+ 

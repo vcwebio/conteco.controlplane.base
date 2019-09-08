@@ -2,23 +2,35 @@
 method=`basename "$0"`
 arguments=$@
 (
-    . executionplane-invoke "bin/controlplane/base/internal/$method $@"
+    . executionplane-invoke "$0 $@"
+    imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
     case "$1" in
+        extract)
+            container=$(docker create $imageName)
+            executionplane docker cp $container:/conteco/git-repository "/conteco/pwd/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
+            ;;
         load)
-            imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
             executionplane docker image pull "$imageName:${CONTECO_TAG}"
             executionplane docker image tag "$imageName:${CONTECO_TAG}" "$imageName"
-            executionplane-wait-for-output-parser
+            ;;
+        pull)
+            executionplane docker image pull "$2"
+            ;;
+        rm)
+            executionplane docker rmi "$2" $(extract-flags $@)
+            ;;
+        run)
+            shift
+            executionplane docker run $@
             ;;
         unload)
-            imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-            executionplane docker rmi "$imageName"
-            executionplane docker rmi "$imageName:${CONTECO_TAG}"
-            executionplane-wait-for-output-parser
+            executionplane docker rmi "$imageName" $(extract-flags $@)
+            executionplane docker rmi "$imageName:${CONTECO_TAG}" $(extract-flags $@)
             ;;
         *)
             . executionplane-error "Method not recognised: $1."
             ;;
     esac
+    executionplane-wait-for-output-parser
     . executionplane-complete
 )

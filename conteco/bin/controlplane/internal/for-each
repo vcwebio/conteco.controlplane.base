@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+(
+    . executionplane-invoke "$0 $@"
+
+    # loop through selections
+    contecoDir=$(pwd)
+    selector="${BASH_ARGV[0]}"
+    if [[ $selector != *"${CONTECO_REALM}/${CONTECO_ECOSYSTEM}."* ]] ; then
+        selector="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${selector}"
+    fi
+    for f in $selector;
+    do
+    (
+        # apply environment
+        if [[ -d $f ]] ; then
+            . ./$f/environment
+        else 
+            withoutrealm=$( echo ${BASH_ARGV[0]} | cut -d '/' -f 2)
+            export CONTECO_TYPE=$( echo $withoutrealm | cut -d '.' -f 1)
+            export CONTECO_NAME=$( echo $withoutrealm | cut -d '.' -f 2)
+            export CONTECO_TAG=""
+        fi
+
+        # create commandline, replacing selector for path
+        commandline=""
+        previous=""
+        for i
+        do
+            commandline="$commandline $previous"
+            previous=$i
+        done        
+
+        # execute command
+        $commandline $f
+    )
+    done;
+    . executionplane-complete
+)

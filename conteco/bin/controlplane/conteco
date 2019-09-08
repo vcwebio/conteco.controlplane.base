@@ -5,8 +5,8 @@
 # the arguments are prefixed with the API conteco method and supplied to the .invoke method
 # script waits until output-parser-tagged has finished to exit
 (
-    export PATH="/conteco/bin/controlplane/base/internal:$CONTECO_EXECUTIONPLANE_ORIGINALPATH"
-    .invoke conteco $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
+    export PATH="/conteco/bin/controlplane/internal:$CONTECO_EXECUTIONPLANE_ORIGINALPATH"
+    .invoke $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
     wait-for-output-parser-tagged
 )
 

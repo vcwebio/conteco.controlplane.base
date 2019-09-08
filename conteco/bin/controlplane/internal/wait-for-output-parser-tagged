@@ -4,5 +4,5 @@ test="continue"
 while [[ $test != "" ]]
 do 
     usleep 500000
-    test=$(ps aux | grep -i /conteco/bin/controlplane/base/internal/output-parser-tagged)
+    test=$(ps aux | grep -i /conteco/bin/controlplane/internal/output-parser-tagged)
     done

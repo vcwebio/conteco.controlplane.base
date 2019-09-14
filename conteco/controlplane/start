@@ -1,0 +1,2 @@
+echo "Starting controlplane.${CONTECO_NAME}"
+docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v /conteco/pwd:/conteco/pwd ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.controlplane.${CONTECO_NAME} --interactive start linux

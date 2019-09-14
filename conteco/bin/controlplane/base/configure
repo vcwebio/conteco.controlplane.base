@@ -8,14 +8,14 @@
         extract)
             for-each .image $@
             ;;
+        container)
+            .image $@
+            ;;
+        image)
+            .image $@
+            ;;
         load)
             for-each .image $@
-            ;;
-        pull)
-            .image $@
-            ;;
-        rm)
-            .image $@
             ;;
         unload)
             for-each .image $@

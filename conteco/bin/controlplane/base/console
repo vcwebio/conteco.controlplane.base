@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+(
+    export PATH="/conteco/bin/${CONTECO_TYPE}/${CONTECO_NAME}:/conteco/bin/${CONTECO_TYPE}/${CONTECO_NAME}/internal:/conteco/bin/${CONTECO_TYPE}/internal:$CONTECO_EXECUTIONPLANE_ORIGINALPATH"
+    . executionplane-invoke "$0 $@"
+
+	executionplane "$@"
+
+    . executionplane-complete
+)

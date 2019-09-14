@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob
+rootSelections=( "/conteco/pwd/*/*" "/conteco/pwd/*/*/services/*" "/conteco/pwd/*/*/stacks/*" )
+subfolders=("/conteco/*" "/conteco/*/*" "/conteco/*/*/*" "/conteco/*/*/*/*" "/conteco/*/*/*/*/*")
+
+for rootfolder in "${rootSelections[@]}"
+do
+    echo "$rootfolder"
+    for f in $rootfolder/*;
+        do
+        if [[ -f $f ]] ; then
+            filename=`basename "$f"`
+            if [[ $filename != *"."* ]] ; then
+                echo "$f"
+                dos2unix $f
+            fi
+        fi
+        done;
+    for subfolder in "${subfolders[@]}"
+    do
+        echo "$rootfolder$subfolder"
+        for f in $rootfolder$subfolder;
+            do
+            if [[ -f $f ]] ; then
+                if [[ $filename != *"."* ]] ; then
+                    echo "$f"
+                    dos2unix $f
+                fi
+            fi
+            done;
+    done;
+done

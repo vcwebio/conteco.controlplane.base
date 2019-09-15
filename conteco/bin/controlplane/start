@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
 . .profile
-. "$1" bash
+. "$1"
+bash

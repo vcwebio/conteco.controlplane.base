@@ -9,40 +9,50 @@ The external API consists of five lifecycle method groups and six auxiliary meth
 ## Lifecycle Method Groups
 
 __`configure`__  
-Configure API grouping.  
+The `configure` lifecycle method groups deals with image definition methods.  
+[`configure` API Methods](./CONTROLPLANE-BASE-EXTERNAL-CONFIGURE-API-METHODS.md)  
 
 __`build`__  
-Build API grouping.  
-Implementation of basic build method.
+The `build` lifecycle method groups deals with image build methods.  
+[`build` API Methods](./CONTROLPLANE-BASE-EXTERNAL-BUILD-API-METHODS.md)  
 
 __`release`__  
-Release API grouping.  
+The `release` lifecycle method groups deals with image release methods.  
+[`release` API Methods](./CONTROLPLANE-BASE-EXTERNAL-RELEASE-API-METHODS.md)  
 
 __`deploy`__   
-Deploy API grouping.  
+The `deploy` lifecycle method groups deals with image deploy methods.  
+[`deploy` API Methods](./CONTROLPLANE-BASE-EXTERNAL-DEPLOY-API-METHODS.md)  
 
 __`run`__  
-Run API grouping.  
+The `run` lifecycle method groups deals with run methods.  
+[`run` API Methods](./CONTROLPLANE-BASE-EXTERNAL-RUN-API-METHODS.md)  
 
 ## Auxiliary Method Groups
 
 __`cluster`__  
-Add info.
+The `cluster` lifecycle method groups deals with run methods.  
+[`cluster` API Methods](./CONTROLPLANE-BASE-EXTERNAL-CLUSTER-API-METHODS.md)  
 
 __`console`__  
-Add info.
+The `console` lifecycle method groups deals with run methods.  
+[`console` API Methods](./CONTROLPLANE-BASE-EXTERNAL-CONSOLE-API-METHODS.md)  
 
 __`container`__  
-Add info.
+The `container` lifecycle method groups deals with run methods.  
+[`container` API Methods](./CONTROLPLANE-BASE-EXTERNAL-CONTAINER-API-METHODS.md)  
 
 __`engine`__  
-Add info.
+The `engine` lifecycle method groups deals with run methods.  
+[`engine` API Methods](./CONTROLPLANE-BASE-EXTERNAL-ENGINE-API-METHODS.md)  
 
 __`image`__  
-Add info.
+The `image` lifecycle method groups deals with run methods.  
+[`image` API Methods](./CONTROLPLANE-BASE-EXTERNAL-IMAGE-API-METHODS.md)  
 
 __`repository`__  
-Add info.
+The `repository` lifecycle method groups deals with run methods.  
+[`repository` API Methods](./CONTROLPLANE-BASE-EXTERNAL-REPOSITORY-API-METHODS.md)  
 
 -----
 [`controlplane.base`](../README.md) >> `controlplane.base` External API

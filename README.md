@@ -38,15 +38,15 @@ The external `controlplane` API implements the `boot-commandline` method which p
 They can be prepared for both Windows and Linux.  
 Note that all `controlplane` images avail of this interface, not just `controlplane.base`.  
 
-__start__  
+__`start`__  
 Method to start a container of the `controlplane` image on Linux.
 
-__start-output-console__  
+__`start-output-console`__  
 Method to start the external execution console.  
 This implementation is used both for Windows and Linux.  
 
-__start-registry__
+__`start-registry`__
 Method to start a docker container registry in a standalone container.  
 
-__start.bat__  
+__`start.bat`__  
 Method to start a container of the `controlplane` image on Windows.

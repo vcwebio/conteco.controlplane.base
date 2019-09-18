@@ -16,7 +16,8 @@ COPY ./ /conteco/git-repository/
 
 ##### BEGIN image/Dockerfile/build-instructions #####
 ENV CONTECO_ENTRYPOINT="bash" \
-    CONTECO_PREENTRYPOINT="/conteco/bin/controlplane/internal/entrypoint"
+    CONTECO_PREENTRYPOINT="/conteco/bin/controlplane/internal/entrypoint" \
+	CONTECO_PWD="/conteco/pwd"
 WORKDIR /conteco/pwd
 ##### END image/Dockerfile/build-instructions #####
 

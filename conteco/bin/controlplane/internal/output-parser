@@ -30,13 +30,13 @@ do
       arguments=$(echo "$INPUT" | jq -r '. | .arguments')
       if [[ "$action" == "          " ]] ; then
         echo ""
-      elif [[ "$action" == "COMMAND"* ]] || [[ "$action" == "INFO"* ]] || [[ "$action" == "ERROR"* ]] ; then
-        echo "${action:0:10} $arguments"
-      else
+      elif [[ "$action" == "INVOKED"* ]] || [[ "$action" == "COMPLETED"* ]] ; then
         echo "${action:0:10} $executionplane"
         if [[ "$arguments" != "" ]] ; then
           echo "           $arguments"
         fi
+      else
+        echo "${action:0:10} $arguments"
       fi
 
     # output message found unless source is wrapper

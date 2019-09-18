@@ -21,17 +21,13 @@
             export CONTECO_TAG=""
         fi
 
-        # create commandline, replacing selector for path
-        commandline=""
-        previous=""
-        for i
-        do
-            commandline="$commandline $previous"
-            previous=$i
-        done        
+		# extract command from arguments
+		command=$1
+		shift
 
-        # execute command
-        $commandline $f
+        # execute command for current selector.
+		# first argument indicates it was processed by foreach
+        $command for-each-node ${@:1:$#-1} $f
     )
     done;
     . executionplane-complete

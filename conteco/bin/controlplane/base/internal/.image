@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
-method=`basename "$0"`
-arguments=$@
 (
     . executionplane-invoke "$0 $@"
-    imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
     case "$1" in
+<<<<<<< HEAD
         extract)
             container=$(docker create $imageName)
             executionplane docker cp $container:/conteco/git-repository "/conteco/pwd/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
@@ -41,10 +39,24 @@ arguments=$@
             executionplane docker rmi "$imageName" $(extract-flags $@)
             executionplane docker rmi "$imageName:${CONTECO_TAG}" $(extract-flags $@)
             ;;
+=======
+		prune)
+			executionplane docker image $@
+			;;
+		pull)
+			executionplane docker image $@
+			;;
+		rm)
+			executionplane docker image $@
+			;;
+		tag)
+			executionplane docker image $@
+			;;
+>>>>>>> workspace
         *)
-            . executionplane-error "Method not recognised: $1."
+            executionplane-error "Method not recognised: $1."
             ;;
     esac
     executionplane-wait-for-output-parser
-    . executionplane-complete
+    executionplane-complete
 )

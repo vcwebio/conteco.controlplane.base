@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+method=`basename "$0"`
+arguments=$@
+(
+    . executionplane-invoke "$0 $@"
+    case "$1" in
+        *)
+            . executionplane-error "Method not recognised: $1."
+            ;;
+    esac
+    executionplane-wait-for-output-parser
+    . executionplane-complete
+)

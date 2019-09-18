@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
 . .profile
+<<<<<<< HEAD
 . "$1" bash
+=======
+. "$1"
+bash
+>>>>>>> workspace

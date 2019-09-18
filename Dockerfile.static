@@ -25,7 +25,11 @@ ENV CONTECO_REALM="vcwebio" \
     CONTECO_ECOSYSTEM="conteco" \
     CONTECO_TYPE="controlplane" \
     CONTECO_NAME="base" \
+<<<<<<< HEAD
     CONTECO_TAG="v1.0.3" \
+=======
+    CONTECO_TAG="v1.0.4" \
+>>>>>>> workspace
     CONTECO_BASE="external.controlplane:v1.0.0" \
     CONTECO_BUILD="image-base"
 LABEL io.vcweb.schema-version="1.0" \
@@ -33,7 +37,11 @@ LABEL io.vcweb.schema-version="1.0" \
       io.vcweb.ecosystem="conteco" \
       io.vcweb.type="controlplane" \
       io.vcweb.name="base" \
+<<<<<<< HEAD
       io.vcweb.tag="v1.0.3" \
+=======
+      io.vcweb.tag="v1.0.4" \
+>>>>>>> workspace
       io.vcweb.base="external.controlplane:v1.0.0" \
       io.vcweb.build="image-base" \
       io.vcweb.label="Conteco controlplane base" \

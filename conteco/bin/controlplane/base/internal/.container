@@ -6,7 +6,7 @@ arguments=$@
     imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
     case "$1" in
 		cp)
-			executionplane docker cp $@
+			executionplane docker $@
 			;;
 		create)
 			executionplane-output docker $@

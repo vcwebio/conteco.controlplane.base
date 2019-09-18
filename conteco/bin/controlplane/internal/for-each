@@ -27,7 +27,7 @@
 
         # execute command for current selector.
 		# first argument indicates it was processed by foreach
-        $1 foreach ${@:1:$#-1} $f
+        $command for-each-node ${@:1:$#-1} $f
     )
     done;
     . executionplane-complete

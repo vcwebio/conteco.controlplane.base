@@ -2,12 +2,25 @@
 method=`basename "$0"`
 arguments=$@
 (
+    export PATH="/conteco/bin/${CONTECO_TYPE}/${CONTECO_NAME}:/conteco/bin/${CONTECO_TYPE}/${CONTECO_NAME}/internal:/conteco/bin/${CONTECO_TYPE}/internal:$CONTECO_EXECUTIONPLANE_ORIGINALPATH"
     . executionplane-invoke "$0 $@"
     case "$1" in
+		prune)
+			.image prune --force
+			;;
+		pull)
+			.image $@
+			;;
+		rm)
+			.image $@
+			;;
+		tag)
+			.image $@
+			;;
         *)
             . executionplane-error "Method not recognised: $1."
             ;;
     esac
-    executionplane-wait-for-output-parser
+    . executionplane-wait-for-output-parser
     . executionplane-complete
 )

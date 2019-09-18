@@ -5,46 +5,22 @@ arguments=$@
     . executionplane-invoke "$0 $@"
     imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
     case "$1" in
-        extract)
-            container=$(docker create $imageName)
-            executionplane docker cp $container:/conteco/git-repository "/conteco/pwd/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-            ;;
-        container)
-			case "$2" in
-				prune)
-					executionplane docker container prune --force
-					;;
-			esac
-            ;;
-        image)
-			case "$2" in
-				prune)
-					executionplane docker image prune --force
-					;;
-				pull)
-					executionplane docker image pull "$2"
-					;;
-				rm)
-					executionplane docker rmi "$2" $(extract-flags $@)
-					;;
-			esac
-            ;;
-        load)
-            executionplane docker image pull "$imageName:${CONTECO_TAG}"
-            executionplane docker image tag "$imageName:${CONTECO_TAG}" "$imageName"
-            ;;
+		cp)
+			executionplane docker cp $@
+			;;
+		create)
+			executionplane-output docker $@
+			;;
+		prune)
+			executionplane docker container $@
+			;;
         run)
-            shift
-            executionplane docker run $@
-            ;;
-        unload)
-            executionplane docker rmi "$imageName" $(extract-flags $@)
-            executionplane docker rmi "$imageName:${CONTECO_TAG}" $(extract-flags $@)
+            executionplane docker container $@
             ;;
         *)
-            . executionplane-error "Method not recognised: $1."
+            executionplane-error "Method not recognised: $1."
             ;;
     esac
-    executionplane-wait-for-output-parser
+    . executionplane-wait-for-output-parser
     . executionplane-complete
 )

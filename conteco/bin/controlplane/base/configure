@@ -3,31 +3,6 @@ if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
     . executionplane-invoke "$0 $@"
-<<<<<<< HEAD
-
-    method=$1
-    case $method in
-        extract)
-            for-each .image $@
-            ;;
-        container)
-            .image $@
-            ;;
-        image)
-            .image $@
-            ;;
-        load)
-            for-each .image $@
-            ;;
-        unload)
-            for-each .image $@
-            ;;
-        *)
-            . executionplane-error "Method needs repository node selection for execution."
-            ;;
-    esac
-    . executionplane-complete
-=======
 	method=$1
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in
@@ -48,7 +23,6 @@ if [[ "$1" == "for-each-node" ]] ; then
 			;;
 	esac
     executionplane-complete
->>>>>>> workspace
 )
 else
     export PATH="/conteco/bin/${CONTECO_TYPE}/${CONTECO_NAME}:/conteco/bin/${CONTECO_TYPE}/${CONTECO_NAME}/internal:/conteco/bin/${CONTECO_TYPE}/internal:$CONTECO_EXECUTIONPLANE_ORIGINALPATH"

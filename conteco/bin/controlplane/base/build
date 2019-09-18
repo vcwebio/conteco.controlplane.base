@@ -1,32 +1,49 @@
 #!/usr/bin/env bash
+if [[ "$1" == "for-each-node" ]] ; then
 (
-    . executionplane-invoke "bin/controlplane/base/build $@"
-
-    selector="${BASH_ARGV[0]}"
-    if [[ -d $f ]] ; then
-        . ./$f/environment
-    elif [[ $f == $@ ]] ; then
-        . executionplane-error "Repository node does not exist."
-        exit
-    fi
-
-    method=$1
-    case $method in
-        --initial)
-#            .container build
-            echo ".container build"
+	shift
+    . executionplane-invoke "$0 $@"
+	if [[ $# -gt 1 ]] ; then
+		method=$1
+		if [[ "$method" != "all" ]] ; then
+			method="image"
+		fi
+		rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
+		shift
+	else
+		method="image"
+		rootPath="${CONTECO_PWD}/$1"
+	fi
+	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
+	case $method in
+        image)
+			cd $rootPath
+			.container build -t $imageName -f Dockerfile.static .
+			cd $CONTECO_PWD
             ;;
-        *)
-#            .this "$method" "$@"
-#            if [[ -f ./$method ]] ; then
-#                chmod 777 ./$method
-#                "./$method"
-#                rm "./$method"
-#            else
+        all)
+            .this build "$rootPath"
+            if [[ -f $rootPath/build ]] ; then
+                chmod 777 $rootPath/build
+                "$rootPath/build" $@
+                rm "$rootPath/build"
+            else
                 . executionplane-error "Implementation for $method not found."
-#            fi
+            fi
             ;;
-    esac 
-
-    . executionplane-complete
+		*)
+			executionplane-error "Method needs repository node selection for execution."
+			;;
+	esac
+    executionplane-complete
 )
+else
+    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
+	for-each $(basename $0) $@
+fi
+
+# build = build image
+# build image 
+# build image full
+# build all
+# build all full

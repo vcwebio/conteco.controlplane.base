@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+imageName=$1
+action=$2
+shift
+shift
+
+. executionplane-capture-output .container create $imageName
+tmpfile=$(mktemp /tmp/scriptfile.XXXXXX)
+.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/extract/controlplane/$action $tmpfile
+chmod 777 $tmpfile
+$tmpfile $@
+rm $tmpfile
+

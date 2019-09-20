@@ -7,29 +7,32 @@ if [[ "$1" == "for-each-node" ]] ; then
 		method=$1
 		if [[ "$method" != "all" ]] ; then
 			method="image"
+		else
+			shift
 		fi
-		rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
-		shift
 	else
 		method="image"
+	fi
+	if [[ $# -gt 1 ]] ; then
+		rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
+	else
 		rootPath="${CONTECO_PWD}/$1"
 	fi
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in
         image)
-			cd $rootPath
-			.container build -t $imageName -f Dockerfile.static .
-			cd $CONTECO_PWD
+			.container build -t $imageName -f $rootPath/Dockerfile.static $rootPath
             ;;
         all)
-            .this build "$rootPath"
-            if [[ -f $rootPath/build ]] ; then
-                chmod 777 $rootPath/build
-                "$rootPath/build" $@
-                rm "$rootPath/build"
-            else
-                . executionplane-error "Implementation for $method not found."
-            fi
+			extract-and-execute $imageName build $@
+# move to separate file: extract-and-execute
+#			. executionplane-capture-output .container create $imageName
+#			tmpfile=$(mktemp /tmp/scriptfile.XXXXXX)
+#			.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/extract/controlplane/build $tmpfile
+#            chmod 777 $tmpfile
+#			$tmpfile $@
+#			rm $tmpfile
+# move to separate file: extract-and-execute
             ;;
 		*)
 			executionplane-error "Method needs repository node selection for execution."

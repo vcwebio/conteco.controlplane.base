@@ -21,11 +21,44 @@ if [[ "$1" == "for-each-node" ]] ; then
 			;;
 		extract)
 			. executionplane-capture-output .container create $imageName
-			.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo "${CONTECO_PWD}/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
+			destination="${CONTECO_PWD}/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
+			executionplane mkdir -p $destination
+			.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
 			;;
 		load)
 			.image pull "$imageName:${CONTECO_TAG}"
 			.image tag "$imageName:${CONTECO_TAG}" "$imageName"
+			;;
+		removecr)
+			executionplane-info $rootPath
+			shopt -s nullglob
+			rootSelections=( "" "/services/*" "/stacks/*" )
+			subfolders=( "/docs/*" "/conteco/*" "/conteco/*/*" "/conteco/*/*/*" "/conteco/*/*/*/*" "/conteco/*/*/*/*/*" )
+			for rootfolder in "${rootSelections[@]}"
+			do
+				for f in $rootPath$rootfolder/*;
+				do
+					if [[ -f $f ]] ; then
+						filename=`basename "$f"`
+						if [[ $filename != *"."* || $filename == *".static" || $filename == *".md" ]] ; then
+							executionplane-info "removing cr in $f"
+							dos2unix $f
+						fi
+					fi
+				done;
+				for subfolder in "${subfolders[@]}"
+				do
+					for f in $rootPath$rootfolder$subfolder;
+					do
+						if [[ -f $f ]] ; then
+							if [[ $filename != *"."* || $filename == *".md" ]] ; then
+								executionplane-info "removing cr in $f"
+								dos2unix $f
+							fi
+						fi
+					done;
+				done;
+			done
 			;;
 		unload)
 			.image rm "$imageName" $(extract-flags $@)

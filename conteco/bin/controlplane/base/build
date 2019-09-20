@@ -24,8 +24,12 @@ if [[ "$1" == "for-each-node" ]] ; then
 	case $method in
         image)
 			if [[ ($1 == "full" && ${CONTECO_TYPE} != "external") || ($1 == "deep" && ${CONTECO_BASE} != "external."*) ]] ; then
-				baseImage=$(echo ${CONTECO_BASE} | cut -f1 -d":")
-				build $method ${@:1:$#-1} $baseImage
+				if [[ ${CONTECO_BASE} == *":"* ]] ; then
+					executionplane-warning "${CONTECO_BASE} : Specific versions excluded from 'deep' and 'all' switch."
+				else
+					baseImage=$(echo ${CONTECO_BASE} | cut -f1 -d":")
+					build $method ${@:1:$#-1} $baseImage
+				fi
 			fi
 			.container build -t $imageName -f $rootPath/Dockerfile.static $rootPath
             ;;

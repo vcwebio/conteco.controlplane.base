@@ -3,9 +3,10 @@ if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
     . executionplane-invoke "$0 $@"
+	# two build modes: image (root only) and all (images within repository)
 	if [[ $# -gt 1 ]] ; then
 		method=$1
-		if [[ "$method" != "all" ]] ; then
+		if [[ "$method" != "all" && "$method" != "image" ]] ; then
 			method="image"
 		else
 			shift
@@ -13,6 +14,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 	else
 		method="image"
 	fi
+	# set path of node
 	if [[ $# -gt 1 ]] ; then
 		rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
 	else
@@ -21,18 +23,14 @@ if [[ "$1" == "for-each-node" ]] ; then
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in
         image)
+			if [[ ($1 == "full" && ${CONTECO_TYPE} != "external") || ($1 == "deep" && ${CONTECO_BASE} != "external."*) ]] ; then
+				baseImage=$(echo ${CONTECO_BASE} | cut -f1 -d":")
+				build $method ${@:1:$#-1} $baseImage
+			fi
 			.container build -t $imageName -f $rootPath/Dockerfile.static $rootPath
             ;;
         all)
 			extract-and-execute $imageName build $@
-# move to separate file: extract-and-execute
-#			. executionplane-capture-output .container create $imageName
-#			tmpfile=$(mktemp /tmp/scriptfile.XXXXXX)
-#			.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/extract/controlplane/build $tmpfile
-#            chmod 777 $tmpfile
-#			$tmpfile $@
-#			rm $tmpfile
-# move to separate file: extract-and-execute
             ;;
 		*)
 			executionplane-error "Method needs repository node selection for execution."
@@ -44,9 +42,3 @@ else
     export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
 	for-each $(basename $0) $@
 fi
-
-# build = build image
-# build image 
-# build image full
-# build all
-# build all full

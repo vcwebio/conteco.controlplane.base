@@ -10,8 +10,8 @@ ENTRYPOINT ["/conteco/bin/image/wrapper/entrypoint"]
 
 ##### BEGIN image/Dockerfile/conteco #####
 COPY ./conteco/ /conteco/
-RUN chmod -R +x /conteco/bin && rm -rf /conteco/git-repository/*
-COPY ./ /conteco/git-repository/
+RUN chmod -R +x /conteco/bin && rm -rf /conteco/repo/*
+COPY ./ /conteco/repo/
 ##### END image/Dockerfile/conteco #####
 
 ##### BEGIN image/Dockerfile/build-instructions #####
@@ -28,7 +28,8 @@ ENV CONTECO_REALM="$CONTECO_REALM" \
     CONTECO_NAME="$CONTECO_NAME" \
     CONTECO_TAG="$CONTECO_TAG" \
     CONTECO_BASE="$CONTECO_BASE" \
-    CONTECO_BUILD="$CONTECO_BUILD"
+    CONTECO_BUILD="$CONTECO_BUILD" \
+    CONTECO_LABELSPACE="$CONTECO_LABELSPACE"
 LABEL $CONTECO_LABELSPACE.schema-version="1.0" \
       $CONTECO_LABELSPACE.realm="$CONTECO_REALM" \
       $CONTECO_LABELSPACE.ecosystem="$CONTECO_ECOSYSTEM" \

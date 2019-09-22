@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+(
+	rootPath="${BASH_ARGV[0]}"
+	arguments="${@:1:$#-1}"
+    . executionplane-invoke "$0 $@"
+	currentpwd=$(pwd)
+	cd $rootPath
+    case "$1" in
+        add|branch|checkout|commit|config|merge|status|tag)
+            executionplane git $arguments
+            ;;
+		log)
+			executionplane git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10
+			;;
+        *)
+            . executionplane-error "Method not recognised: $1."
+            ;;
+    esac
+	cd $currentpwd
+    executionplane-wait-for-output-parser
+    executionplane-complete
+)

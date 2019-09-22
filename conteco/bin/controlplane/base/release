@@ -1,28 +1,38 @@
 #!/usr/bin/env bash
+if [[ "$1" == "for-each-node" ]] ; then
 (
-    . executionplane-invoke "bin/controlplane/base/release $@"
-
-    selector="${BASH_ARGV[0]}"
-    if [[ -d $f ]] ; then
-        . ./$f/environment
-    elif [[ $f == $@ ]] ; then
-        . executionplane-error "Repository node does not exist."
-        exit
-    fi
-
-    method=$1
-    case $method in
-        *)
-#            .this "$method" "$@"
-#            if [[ -f ./$method ]] ; then
-#                chmod 777 ./$method
-#                "./$method"
-#                rm "./$method"
-#            else
-                . executionplane-error "Implementation for $method not found."
-#            fi
+	shift
+    . executionplane-invoke "$0 $@"
+	# two release modes: image (root only) and all (images within repository)
+	if [[ $# -gt 1 ]] ; then
+		method=$1
+		if [[ " all image " != *"$method"* ]] ; then
+			method="image"
+		else
+			shift
+		fi
+	else
+		method="image"
+	fi
+	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
+	case $method in
+        image)
+			.image push $imageName
+			if [[ "${CONTECO_TAG}" != "" ]] ; then
+				.image push "$imageName:${CONTECO_TAG}"
+			fi
             ;;
-    esac
-
-    . executionplane-complete
+        all)
+			extract-and-execute $imageName release $@
+            ;;
+	esac
+    executionplane-complete
 )
+else
+    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
+	for-each $(basename $0) $@
+fi
+# release [image]
+# release all 
+# release [image] rollback - not for base implementation: equals remove current and re-release previous as latest (tag issue)
+# release all rollback - not for base implementation: equals remove current and re-release previous as latest (tag issue)

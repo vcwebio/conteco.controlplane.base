@@ -1,28 +1,25 @@
 #!/usr/bin/env bash
+if [[ "$1" == "for-each-node" ]] ; then
 (
-    . executionplane-invoke "bin/controlplane/base/deploy $@"
-
-    selector="${BASH_ARGV[0]}"
-    if [[ -d $f ]] ; then
-        . ./$f/environment
-    elif [[ $f == $@ ]] ; then
-        . executionplane-error "Repository node does not exist."
-        exit
-    fi
-
-    method=$1
-    case $method in
-        *)
-#            .this "$method" "$@"
-#            if [[ -f ./$method ]] ; then
-#                chmod 777 ./$method
-#                "./$method"
-#                rm "./$method"
-#            else
-                . executionplane-error "Implementation for $method not found."
-#            fi
-            ;;
-    esac
-
-    . executionplane-complete
+	shift
+    . executionplane-invoke "$0 $@"
+	# sets method executed by image specific handler.
+	# three modes: --deploy, --remove and --redeploy
+	if [[ $# -gt 1 ]] ; then
+		method=$1
+		if [[ " --deploy --remove --redeploy " != *"$method"* ]] ; then
+			method="--deploy"
+		else
+			shift
+		fi
+	else
+		method="--deploy"
+	fi
+	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
+	extract-and-execute $imageName deploy $method $@
+	executionplane-complete
 )
+else
+    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
+	for-each $(basename $0) $@
+fi

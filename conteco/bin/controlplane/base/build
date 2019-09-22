@@ -6,7 +6,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 	# two build modes: image (root only) and all (images within repository)
 	if [[ $# -gt 1 ]] ; then
 		method=$1
-		if [[ "$method" != "all" && "$method" != "image" ]] ; then
+		if [[ " all image " != *"$method"* ]] ; then
 			method="image"
 		else
 			shift
@@ -23,7 +23,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in
         image)
-			if [[ ($1 == "full" && ${CONTECO_TYPE} != "external") || ($1 == "deep" && ${CONTECO_BASE} != "external."*) ]] ; then
+			if [[ ($1 == "--full" && ${CONTECO_TYPE} != "external") || ($1 == "--deep" && ${CONTECO_BASE} != "external."*) ]] ; then
 				if [[ ${CONTECO_BASE} == *":"* ]] ; then
 					executionplane-warning "${CONTECO_BASE} : Specific versions excluded from 'deep' and 'all' switch."
 				else
@@ -31,14 +31,14 @@ if [[ "$1" == "for-each-node" ]] ; then
 					build $method ${@:1:$#-1} $baseImage
 				fi
 			fi
-			.container build -t $imageName -f $rootPath/Dockerfile.static $rootPath
+			.image build -t $imageName -f $rootPath/Dockerfile.static $rootPath
+			if [[ "${CONTECO_TAG}" != "" ]] ; then
+				.image tag "$imageName" "$imageName:${CONTECO_TAG}" 
+			fi
             ;;
         all)
 			extract-and-execute $imageName build $@
             ;;
-		*)
-			executionplane-error "Method needs repository node selection for execution."
-			;;
 	esac
     executionplane-complete
 )

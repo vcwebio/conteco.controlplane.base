@@ -16,8 +16,22 @@ if [[ "$1" == "for-each-node" ]] ; then
 	fi
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in
+		add)
+			.repository add . "$rootPath"
+			;;
 		build)
 			cat $rootPath/Dockerfile | envsubst > $rootPath/Dockerfile.static
+			;;
+		cleanup)
+			.repository branch -d "workspace" "$rootPath"
+			;;
+		commit)
+			.repository commit -m "${@:1:$#-1}" "$rootPath"
+			;;
+		complete)
+			.repository checkout conteco "$rootPath"
+			.repository merge workspace "$rootPath"
+			.repository tag -f "${CONTECO_TAG}" "$rootPath"
 			;;
 		extract)
 			. executionplane-capture-output .container create $imageName
@@ -25,47 +39,35 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane mkdir -p $destination
 			.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
 			;;
+		log)
+			.repository log $rootPath
+			;;
 		load)
 			.image pull "$imageName:${CONTECO_TAG}"
 			.image tag "$imageName:${CONTECO_TAG}" "$imageName"
 			;;
-		removecr)
-			executionplane-info $rootPath
-			shopt -s nullglob
-			rootSelections=( "" "/services/*" "/stacks/*" )
-			subfolders=( "/docs/*" "/conteco/*" "/conteco/*/*" "/conteco/*/*/*" "/conteco/*/*/*/*" "/conteco/*/*/*/*/*" )
-			for rootfolder in "${rootSelections[@]}"
-			do
-				for f in $rootPath$rootfolder/*;
-				do
-					if [[ -f $f ]] ; then
-						filename=`basename "$f"`
-						if [[ $filename != *"."* || $filename == *".static" || $filename == *".md" ]] ; then
-							executionplane-info "removing cr in $f"
-							dos2unix $f
-						fi
-					fi
-				done;
-				for subfolder in "${subfolders[@]}"
-				do
-					for f in $rootPath$rootfolder$subfolder;
-					do
-						if [[ -f $f ]] ; then
-							if [[ $filename != *"."* || $filename == *".md" ]] ; then
-								executionplane-info "removing cr in $f"
-								dos2unix $f
-							fi
-						fi
-					done;
-				done;
-			done
+		prepare)
+			.repository config --global user.email "$2" "$rootPath"
+			.repository config --global user.name "$3" "$rootPath"
+			.repository branch "workspace" "$rootPath"
+			.repository checkout "workspace" "$rootPath"
+			;;
+		remove)
+			.console rm -rf $rootPath
+			;;
+		remove-crs)
+			remove-crs $rootPath
 			;;
 		unload)
-			.image rm "$imageName" $(extract-flags $@)
-			.image rm "$imageName:${CONTECO_TAG}" $(extract-flags $@)
+			arguments=${@:1:$#-1}
+			.image rm "$imageName" $arguments
+			.image rm "$imageName:${CONTECO_TAG}" $arguments
+			;;
+		status)
+			.repository status "$rootPath"
 			;;
 		*)
-			executionplane-error "Method needs repository node selection for execution."
+			executionplane-error "Method not recognised: $method."
 			;;
 	esac
     executionplane-complete

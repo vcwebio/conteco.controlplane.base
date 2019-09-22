@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-flags=""
-for i
-do
-    if [[ $i == "-"* ]] ; then
-        flags="$flags $i"
-    fi
-done
-echo "$flags"

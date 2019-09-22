@@ -12,7 +12,11 @@ arguments=$@
 			.image $@
 			;;
 		rm)
-			.image $@
+			if [[ "$1" == "all" ] ; then
+				.image rm $(docker image ls)
+			else
+				.image $@
+			fi
 			;;
 		tag)
 			.image $@

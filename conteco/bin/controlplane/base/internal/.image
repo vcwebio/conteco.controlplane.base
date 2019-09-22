@@ -2,10 +2,16 @@
 (
     . executionplane-invoke "$0 $@"
     case "$1" in
+		build)
+			executionplane docker image $@
+			;;
 		prune)
 			executionplane docker image $@
 			;;
 		pull)
+			executionplane docker image $@
+			;;
+		push)
 			executionplane docker image $@
 			;;
 		rm)

@@ -1,19 +1,17 @@
 #!/usr/bin/env bash
-method=`basename "$0"`
-arguments=$@
 (
     . executionplane-invoke "$0 $@"
-    imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
     case "$1" in
-		build)
-			executionplane docker $@
-			;;
 		cp)
 			executionplane docker $@
 			;;
 		create)
 			executionplane-output docker $@
 			;;
+        invoke)
+            docker container run -v $CONTECO_PWD_VOLUME:/conteco/pwd "$CONTECO_REALM/$CONTECO_ECOSYSTEM.$CONTECO_TYPE.$CONTECO_NAME" \
+				--executiontag ${CONTECO_EXECUTIONTAG} --interactive .invoke $@
+            ;;
 		prune)
 			executionplane docker container $@
 			;;

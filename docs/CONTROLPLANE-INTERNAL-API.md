@@ -9,10 +9,6 @@ __`entrypoint`__
 It sets the `CONTECO_EXECUTIONPLANE_BASEPATH` to `CONTECO_EXECUTIONPLANE_ORIGINALPATH` as it is a __ContEco__ defined image.  
 It also sets the default for `CONTECO_EXECUTIONTAG`.
 
-__`extract-flags`__  
-Auxiliary method that extracts all arguments that start with a hyphen.
-Used when only flags need to be transferred to a function call.
-
 __`for-each`__  
 Auxiliary method that executes the commanline argument for each path selection. The path selector is the last argument and gets replaced.  
 It is used by the lifecycle external API methods to apply the action over the node selection.  

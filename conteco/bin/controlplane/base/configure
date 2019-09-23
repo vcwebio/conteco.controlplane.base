@@ -25,10 +25,13 @@ if [[ "$1" == "for-each-node" ]] ; then
 		cleanup)
 			.repository branch -d "workspace" "$rootPath"
 			;;
+		checkout)
+			.repository branch "workspace" "$rootPath"
+			;;
 		commit)
 			.repository commit -m "'${@:1:$#-1}'" "$rootPath"
 			;;
-		complete)
+		checkin)
 			.repository checkout conteco "$rootPath"
 			.repository merge workspace "$rootPath"
 			.repository tag -f "${CONTECO_TAG}" "$rootPath"
@@ -39,6 +42,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane mkdir -p $destination
 			.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
 			;;
+		increment)
+			increment-version $1 $rootPath
+			;;
 		log)
 			.repository log $rootPath
 			;;
@@ -47,9 +53,8 @@ if [[ "$1" == "for-each-node" ]] ; then
 			.image tag "$imageName:${CONTECO_TAG}" "$imageName"
 			;;
 		prepare)
-			.repository config --global user.email "$1" "$rootPath"
-			.repository config --global user.name "$2" "$rootPath"
-			.repository branch "workspace" "$rootPath"
+			.repository config --global user.name "$1" "$rootPath"
+			.repository config --global user.email "$2" "$rootPath"
 			;;
 		remove)
 			.console rm -rf $rootPath

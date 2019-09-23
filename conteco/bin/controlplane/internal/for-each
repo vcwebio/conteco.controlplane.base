@@ -5,6 +5,9 @@
     # loop through selections
     contecoDir=$(pwd)
     selector="${BASH_ARGV[0]}"
+	if [[ "$selector" == "." ]] ; then
+		selector=
+	fi
     if [[ $selector != "${CONTECO_REALM}/${CONTECO_ECOSYSTEM}."* && $selector != "${CONTECO_REALM}/${CONTECO_ECOSYSTEM}" ]] ; then
 		if [[ $selector == "${CONTECO_ECOSYSTEM}."* ]] ; then
 			selector="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${selector}"

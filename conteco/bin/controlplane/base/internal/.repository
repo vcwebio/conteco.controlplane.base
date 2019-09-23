@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
 (
 	rootPath="${BASH_ARGV[0]}"
+	command=$1
+	shift
 	arguments="${@:1:$#-1}"
     . executionplane-invoke "$0 $@"
 	currentpwd=$(pwd)
 	cd $rootPath
-    case "$1" in
+    case "$command" in
         add|branch|checkout|config|merge|status|tag)
-            executionplane git $arguments
+            executionplane git $command $arguments
             ;;
 		commit)
-            executionplane git "$arguments"
+            executionplane git $command "$arguments"
             ;;
 		log)
-			executionplane git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10
+			executionplane git $command --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10
 			;;
         *)
             . executionplane-error "Method not recognised: $1."

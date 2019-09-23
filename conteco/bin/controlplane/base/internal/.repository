@@ -6,8 +6,11 @@
 	currentpwd=$(pwd)
 	cd $rootPath
     case "$1" in
-        add|branch|checkout|commit|config|merge|status|tag)
+        add|branch|checkout|config|merge|status|tag)
             executionplane git $arguments
+            ;;
+		commit)
+            executionplane git "$arguments"
             ;;
 		log)
 			executionplane git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10

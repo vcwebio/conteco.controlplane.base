@@ -26,7 +26,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 			.repository branch -d "workspace" "$rootPath"
 			;;
 		commit)
-			.repository commit -m "${@:1:$#-1}" "$rootPath"
+			.repository commit -m "'${@:1:$#-1}'" "$rootPath"
 			;;
 		complete)
 			.repository checkout conteco "$rootPath"
@@ -47,10 +47,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 			.image tag "$imageName:${CONTECO_TAG}" "$imageName"
 			;;
 		prepare)
-			.repository config --global user.email "$2" "$rootPath"
-			.repository config --global user.name "$3" "$rootPath"
+			.repository config --global user.email "$1" "$rootPath"
+			.repository config --global user.name "$2" "$rootPath"
 			.repository branch "workspace" "$rootPath"
-			.repository checkout "workspace" "$rootPath"
 			;;
 		remove)
 			.console rm -rf $rootPath

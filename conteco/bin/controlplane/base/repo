@@ -3,38 +3,37 @@ if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
     . executionplane-invoke "$0 $@"
-	if [[ $# -gt 1 ]] ; then
-		method=$1
-		shift
-	else
-		method="all"
-	fi
+	method=$1
+	shift
+	# set path of node
 	if [[ $# -gt 1 ]] ; then
 		rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
 	else
 		rootPath="${CONTECO_PWD}/$1"
 	fi
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-	case $method in
+
+    case "$method" in
 		add)
-			.repository add . "$rootPath"
-			;;
-		build)
-			cat $rootPath/Dockerfile | envsubst > $rootPath/Dockerfile.static
+			.repo add . "$rootPath"
 			;;
 		cleanup)
-			.repository branch -d "workspace" "$rootPath"
+			.repo branch -d "workspace" "$rootPath"
+			;;
+		create)
+			executionplane-error "Method $method not implemented"
 			;;
 		checkout)
-			.repository branch "workspace" "$rootPath"
+			.repo branch "workspace" "$rootPath"
+			.repo checkout "workspace" "$rootPath"
 			;;
 		commit)
-			.repository commit -m "'${@:1:$#-1}'" "$rootPath"
+			.repo commit -m "'${@:1:$#-1}'" "$rootPath"
 			;;
 		checkin)
-			.repository checkout conteco "$rootPath"
-			.repository merge workspace "$rootPath"
-			.repository tag -f "${CONTECO_TAG}" "$rootPath"
+			.repo checkout conteco "$rootPath"
+			.repo merge workspace "$rootPath"
+			.repo tag -f "${CONTECO_TAG}" "$rootPath"
 			;;
 		extract)
 			. executionplane-capture-output .container create $imageName
@@ -42,41 +41,43 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane mkdir -p $destination
 			.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
 			;;
-		increment)
-			increment-version $1 $rootPath
-			;;
-		log)
-			.repository log $rootPath
-			;;
 		load)
 			.image pull "$imageName:${CONTECO_TAG}"
 			.image tag "$imageName:${CONTECO_TAG}" "$imageName"
 			;;
+		log)
+			.repo log $rootPath
+			;;
 		prepare)
-			.repository config --global user.name "$1" "$rootPath"
-			.repository config --global user.email "$2" "$rootPath"
+			.repo config --global user.name "$1" "$rootPath"
+			.repo config --global user.email "$2" "$rootPath"
 			;;
 		remove)
 			.console rm -rf $rootPath
 			;;
-		remove-crs)
-			remove-crs $rootPath
+		status)
+			.repo status "$rootPath"
 			;;
 		unload)
 			arguments=${@:1:$#-1}
 			.image rm "$imageName" $arguments
 			.image rm "$imageName:${CONTECO_TAG}" $arguments
 			;;
-		status)
-			.repository status "$rootPath"
-			;;
-		*)
-			executionplane-error "Method not recognised: $method."
-			;;
-	esac
+        *)
+            . executionplane-error "Method not recognised: $method."
+            ;;
+    esac
     executionplane-complete
 )
 else
-    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
-	for-each $(basename $0) $@
+(
+	export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
+	selector=$(set-selector "${BASH_ARGV[0]}")
+	. check-selector-exists $selector
+	if [[ "$CONTECO_STATE" == "virtual" ]] ; then
+		$(basename $0) "for-each-node" ${@:1:$#-1} $selector
+	else
+		for-each $(basename $0) $@
+	fi
+)
 fi

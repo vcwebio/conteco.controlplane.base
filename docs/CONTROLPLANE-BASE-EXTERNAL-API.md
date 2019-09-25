@@ -50,9 +50,9 @@ __`image`__
 The `image` lifecycle method groups deals with run methods.  
 [`image` API Methods](./CONTROLPLANE-BASE-EXTERNAL-IMAGE-API-METHODS.md)  
 
-__`repository`__  
-The `repository` lifecycle method groups deals with run methods.  
-[`repository` API Methods](./CONTROLPLANE-BASE-EXTERNAL-REPOSITORY-API-METHODS.md)  
+__`repo`__  
+The `repo` lifecycle method groups deals with run methods.  
+[`repo` API Methods](./CONTROLPLANE-BASE-EXTERNAL-REPOSITORY-API-METHODS.md)  
 
 -----
 [`controlplane.base`](../README.md) >> `controlplane.base` External API

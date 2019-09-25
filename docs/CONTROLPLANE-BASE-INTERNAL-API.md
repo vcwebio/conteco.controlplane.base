@@ -30,9 +30,9 @@ __`.image`__
 The `.image` wrapper contains functionality that operates on images.  
 [`.image` API Methods](./CONTROLPLANE-BASE-INTERNAL-IMAGE-API-METHODS.md)  
 
-__`.repository`__  
-The `.repository` wrapper contains functionality that operates on GIT repositories.  
-[`.repository` API Methods](./CONTROLPLANE-BASE-INTERNAL-REPOSITORY-API-METHODS.md)  
+__`.repo`__  
+The `.repo` wrapper contains functionality that operates on GIT repositories.  
+[`.repo` API Methods](./CONTROLPLANE-BASE-INTERNAL-REPOSITORY-API-METHODS.md)  
 
 -----
 [`controlplane.base`](../README.md) >> `controlplane.base` Internal API

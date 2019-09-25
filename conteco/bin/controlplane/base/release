@@ -3,7 +3,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
     . executionplane-invoke "$0 $@"
-	# two release modes: image (root only) and all (images within repository)
+	# two release modes: image (root only) and all (images within repo)
 	if [[ $# -gt 1 ]] ; then
 		method=$1
 		if [[ " all image " != *"$method"* ]] ; then

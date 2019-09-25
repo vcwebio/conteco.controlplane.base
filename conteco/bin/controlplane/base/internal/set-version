@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+version=$1
+rootPath=$2
+
+oldtext="$CONTECO_TAG"
+export CONTECO_TAG=$version
+sedstring="s/$oldtext/$CONTECO_TAG/g"
+sed -i "s/$oldtext/$CONTECO_TAG/g" "$rootPath/environment"
+executionplane-info "New Version: $CONTECO_TAG"

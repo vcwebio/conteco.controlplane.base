@@ -8,7 +8,6 @@ major=$( echo "$CONTECO_TAG" | cut -d "." -f 1 )
 major=${major#"v"}
 minor=$( echo "$CONTECO_TAG" | cut -d "." -f 2 )
 revision=$( echo "$CONTECO_TAG" | cut -d "." -f 3 )
-oldtext="$CONTECO_TAG"
 
 if [[ "$versionpart" == "major" ]] ; then
 	major=$(($major + 1))
@@ -21,8 +20,5 @@ elif [[ "$versionpart" == "revision" ]] ; then
 	revision=$(($revision + 1))
 fi
 version="v$major.$minor.$revision"
-export CONTECO_TAG=$version
-
-sedstring="s/$oldtext/$CONTECO_TAG/g"
-sed -i "s/$oldtext/$CONTECO_TAG/g" "$rootPath/environment"
-executionplane-info "Version increment: $oldtext >>> $CONTECO_TAG"
+executionplane-info "Version increment: $CONTECO_TAG >>> $version"
+set-version $version $rootPath

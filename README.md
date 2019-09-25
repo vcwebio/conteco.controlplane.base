@@ -9,7 +9,7 @@ This image sets the API framework for the _controlplane_ images and provides the
 It implements the `controlplane` interface which is available from the commandline of all `controlplane` images.
 This interface contains methods that cover the extraction of commandline methods to start the commandline container in `inline` or `external` mode.  
 
-It implements the `controlplane.base` interface, externally accessible from `controlplane.base` and internally accessible from any other `controlplane` image based on it.  
+It implements the `controlplane.base` interface, externally accessible from `controlplane.base` and internally accessible from any other `controlplane` image.  
 This interface is hierarchical: it implements top level methods representing life cycle stages and system areas, each with a set of submethods.
 
 ## External and Internal APIs
@@ -34,8 +34,8 @@ This internal API contains wrappers around the various functional components.
 
 ## External Commandline Methods
 
-The external `controlplane` API implements the `boot-commandline` method which prepares and extract the external commandline methods.  
-They can be prepared for both Windows and Linux.  
+The external `controlplane` API implements the `boot-commandline` method which prepares and extract the external commandline methods.
+They can be prepared for both Windows and Linux. The files are stored in `/conteco/extract`.  
 Note that all `controlplane` images avail of this interface, not just `controlplane.base`.  
 
 __`start`__  

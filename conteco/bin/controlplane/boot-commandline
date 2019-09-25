@@ -2,14 +2,14 @@
 
 echo "Extracting controlplane.base start method."
 if [[ "$CONTECO_OS" != "linux" ]] ; then
-    (cat /conteco/controlplane/start-output-console ) | envsubst > "/conteco/pwd/start-output-console.bat"
-	(cat /conteco/controlplane/start-registry ) | envsubst > "/conteco/pwd/start-registry.bat"
-	(cat /conteco/controlplane/start.bat ) | envsubst > "/conteco/pwd/start.bat"
+    (cat /conteco/extract/start-output-console ) | envsubst > "/conteco/pwd/start-output-console.bat"
+	(cat /conteco/extract/start-registry ) | envsubst > "/conteco/pwd/start-registry.bat"
+	(cat /conteco/extract/start.bat ) | envsubst > "/conteco/pwd/start.bat"
 fi
 if [[ "$CONTECO_OS" != "windows" ]] ; then
-    (cat /conteco/controlplane/start-output-console ) | envsubst > "/conteco/pwd/start-output-console"
-	(cat /conteco/controlplane/start-registry ) | envsubst > "/conteco/pwd/start-registry"
-	(cat /conteco/controlplane/start ) | envsubst > "/conteco/pwd/start"
+    (cat /conteco/extract/start-output-console ) | envsubst > "/conteco/pwd/start-output-console"
+	(cat /conteco/extract/start-registry ) | envsubst > "/conteco/pwd/start-registry"
+	(cat /conteco/extract/start ) | envsubst > "/conteco/pwd/start"
 fi
 
 chmod 777 /conteco/pwd/start*

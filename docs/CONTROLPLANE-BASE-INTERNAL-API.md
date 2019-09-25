@@ -12,27 +12,30 @@ Each component is invoked as a method using its name.
 
 __`.cluster`__  
 The `.cluster` wrapper contains functionality that operates on cluster nodes.  
-[`.cluster` API Methods](./CONTROLPLANE-BASE-INTERNAL-CLUSTER-API-METHODS.md)  
+[`.cluster` API](./CONTROLPLANE-BASE-INTERNAL-CLUSTER-API.md)  
 
 __`.console`__  
 The `.console` wrapper contains functionality of Linus commandline.  
-[`.console` API Methods](./CONTROLPLANE-BASE-INTERNAL-CONSOLE-API-METHODS.md)  
+[`.console` API](./CONTROLPLANE-BASE-INTERNAL-CONSOLE-API.md)  
 
 __`.container`__  
 The `.container` wrapper contains functionality that operates on containers.  
-[`.container` API Methods](./CONTROLPLANE-BASE-INTERNAL-CONTAINER-API-METHODS.md)  
+[`.container` API](./CONTROLPLANE-BASE-INTERNAL-CONTAINER-API.md)  
 
 __`.engine`__  
 The `.engine` wrapper contains functionality that operates on the Docker engine.  
-[`.engine` API Methods](./CONTROLPLANE-BASE-INTERNAL-ENGINE-API-METHODS.md)  
+[`.engine` API](./CONTROLPLANE-BASE-INTERNAL-ENGINE-API.md)  
 
 __`.image`__  
 The `.image` wrapper contains functionality that operates on images.  
-[`.image` API Methods](./CONTROLPLANE-BASE-INTERNAL-IMAGE-API-METHODS.md)  
+[`.image` API](./CONTROLPLANE-BASE-INTERNAL-IMAGE-API.md)  
 
 __`.repo`__  
 The `.repo` wrapper contains functionality that operates on GIT repositories.  
-[`.repo` API Methods](./CONTROLPLANE-BASE-INTERNAL-REPOSITORY-API-METHODS.md)  
+[`.repo` API](./CONTROLPLANE-BASE-INTERNAL-REPO-API.md)  
+
+In addition there are a number of auxiliary methods used for the implementation of the external API:  
+[Auxiliary API](./CONTROLPLANE-BASE-INTERNAL-AUXILIARY-API.md)  
 
 -----
 [`controlplane.base`](../README.md) >> `controlplane.base` Internal API

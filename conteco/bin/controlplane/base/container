@@ -8,7 +8,7 @@ arguments=$@
 		cp)
 			.container $@
 			;;
-		create) # capture output in CONTECO_EXECUTIONPLANE_OUTPUT environment variable with executionplane-capture-output prefix
+		create)
 			.container $@
 			;;
 		prune)

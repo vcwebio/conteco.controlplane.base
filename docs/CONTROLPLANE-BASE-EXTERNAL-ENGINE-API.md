@@ -4,10 +4,10 @@
 
 # `engine` API
 
-The `engine` lifecycle method.
+The `engine` component.
 
-__`rm`__  
-Add info.  
+__`*`__  
+No methods implemented yet.  
 
 -----
 [`controlplane.base`](../README.md) >> [`controlplane` External API](./CONTROLPLANE-BASE-EXTERNAL-API.md) >> `engine` API

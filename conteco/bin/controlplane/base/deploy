@@ -7,8 +7,8 @@ if [[ "$1" == "for-each-node" ]] ; then
 	# three modes: --deploy, --remove and --redeploy
 	if [[ $# -gt 1 ]] ; then
 		method=$1
-		if [[ " --deploy --remove --redeploy " != *"$method"* ]] ; then
-			method="--deploy"
+		if [[ "$method" != "--"* ]] ; then
+			method="all"
 		else
 			shift
 		fi
@@ -16,7 +16,21 @@ if [[ "$1" == "for-each-node" ]] ; then
 		method="--deploy"
 	fi
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-	extract-and-execute $imageName deploy $method $@
+	case $method in
+        "deploy")
+			if [[ "$2" == "--redeploy" || "$2" == "--remove" ]] ; then
+				# implement remove
+				executionplane-error "Method not implemented!"
+			fi
+			if [[ "$2" != "--remove" ]] ; then
+				# implement deploy
+				executionplane-error "Method not implemented!"
+			fi
+			;;
+		all)
+			extract-and-execute $imageName deploy $@
+			;;
+	esac
 	executionplane-complete
 )
 else

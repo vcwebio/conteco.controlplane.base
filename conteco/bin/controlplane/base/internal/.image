@@ -15,7 +15,11 @@
 			executionplane docker image $@
 			;;
 		rm)
-			executionplane docker image $@
+			if [[ "$2" == "all" ] ; then
+				executionplane docker image rm $(docker image ls)
+			else
+				executionplane docker image $@
+			fi
 			;;
 		tag)
 			executionplane docker image $@

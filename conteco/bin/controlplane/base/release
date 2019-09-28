@@ -3,7 +3,6 @@ if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
     . executionplane-invoke "$0 $@"
-	# two release modes: image (root only) and all (images within repo)
 	if [[ $# -gt 1 ]] ; then
 		method=$1
 		if [[ " all image " != *"$method"* ]] ; then
@@ -17,9 +16,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in
         image)
-			.image push $imageName
+			.image push "$CONTECO_REGISTRY$imageName"
 			if [[ "${CONTECO_TAG}" != "" ]] ; then
-				.image push "$imageName:${CONTECO_TAG}"
+				.image push "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
 			fi
             ;;
         all)
@@ -32,7 +31,3 @@ else
     export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
 	for-each $(basename $0) $@
 fi
-# release [image]
-# release all 
-# release [image] rollback - not for base implementation: equals remove current and re-release previous as latest (tag issue)
-# release all rollback - not for base implementation: equals remove current and re-release previous as latest (tag issue)

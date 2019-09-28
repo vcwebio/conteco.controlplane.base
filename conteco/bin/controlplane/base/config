@@ -5,9 +5,13 @@ if [[ "$1" == "for-each-node" ]] ; then
     . executionplane-invoke "$0 $@"
 	if [[ $# -gt 1 ]] ; then
 		method=$1
-		shift
+		if [[ " all image " != *"$method"* ]] ; then
+			method="image"
+		else
+			shift
+		fi
 	else
-		method="all"
+		method="image"
 	fi
 	if [[ $# -gt 1 ]] ; then
 		rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
@@ -16,21 +20,28 @@ if [[ "$1" == "for-each-node" ]] ; then
 	fi
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in
-		build)
-			cat $rootPath/Dockerfile | envsubst > $rootPath/Dockerfile.static
+		image)
+			case $1 in
+				build)
+					cat $rootPath/Dockerfile | envsubst > $rootPath/Dockerfile.static
+					;;
+				increment)
+					increment-version $2 $rootPath
+					;;
+				remove-crs)
+					remove-crs $rootPath
+					;;
+				set-version)
+					set-version $2 $rootPath
+					;;
+				*)
+					executionplane-error "Method not recognised: $method."
+					;;
+			esac
 			;;
-		increment)
-			increment-version $1 $rootPath
-			;;
-		remove-crs)
-			remove-crs $rootPath
-			;;
-		set-version)
-			set-version $1 $rootPath
-			;;
-		*)
-			executionplane-error "Method not recognised: $method."
-			;;
+        all)
+			extract-and-execute $imageName config $@
+            ;;
 	esac
     executionplane-complete
 )

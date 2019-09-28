@@ -3,28 +3,26 @@ if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
     . executionplane-invoke "$0 $@"
-	# sets method executed by image specific handler.
-	# three modes: --deploy, --remove and --redeploy
 	if [[ $# -gt 1 ]] ; then
 		method=$1
-		if [[ "$method" != "--"* ]] ; then
-			method="all"
+		if [[ " all image " != *"$method"* ]] ; then
+			method="image"
 		else
 			shift
 		fi
 	else
-		method="--deploy"
+		method="image"
 	fi
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in
-        "deploy")
-			if [[ "$2" == "--redeploy" || "$2" == "--remove" ]] ; then
+        "image")
+			if [[ "$1" == "--redeploy" || "$1" == "--remove" ]] ; then
 				# implement remove
-				executionplane-error "Method not implemented!"
+				executionplane-error "Method $method --redeploy / --remove not implemented!"
 			fi
-			if [[ "$2" != "--remove" ]] ; then
+			if [[ "$1" != "--remove" ]] ; then
 				# implement deploy
-				executionplane-error "Method not implemented!"
+				executionplane-error "Method $method --deploy not implemented!"
 			fi
 			;;
 		all)

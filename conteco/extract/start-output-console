@@ -1,1 +1,1 @@
-docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v ${CONTECO_PWD_VOLUME}:/infometis/pwd ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.controlplane.${CONTECO_NAME} --interactive ${CONTECO_OS} output-console
+${CONTECO_SUDO}docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v ${CONTECO_PWD_VOLUME}:/infometis/pwd ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.controlplane.${CONTECO_NAME} --interactive ${CONTECO_OS} output-console

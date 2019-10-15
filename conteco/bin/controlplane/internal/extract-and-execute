@@ -11,3 +11,5 @@ chmod 777 $tmpfile
 $tmpfile $@
 rm $tmpfile
 
+# the method implementation is part of the image type - taken from image
+# the image specfic resources (e.g. service stack yaml) can be taken from repository.

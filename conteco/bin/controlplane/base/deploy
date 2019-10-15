@@ -6,12 +6,12 @@ if [[ "$1" == "for-each-node" ]] ; then
 	if [[ $# -gt 1 ]] ; then
 		method=$1
 		if [[ " all image " != *"$method"* ]] ; then
-			method="image"
+			method="all"
 		else
 			shift
 		fi
 	else
-		method="image"
+		method="all"
 	fi
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in

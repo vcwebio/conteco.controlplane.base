@@ -7,6 +7,9 @@ if [[ "$CONTECO_OS" != "linux" ]] ; then
 	(cat /conteco/extract/start.bat ) | envsubst > "/conteco/pwd/start.bat"
 fi
 if [[ "$CONTECO_OS" != "windows" ]] ; then
+	if [[ "$1" == "sudo" ]] ; then
+		export CONTECO_SUDO="sudo "
+	fi
     (cat /conteco/extract/start-output-console ) | envsubst > "/conteco/pwd/start-output-console"
 	(cat /conteco/extract/start-registry ) | envsubst > "/conteco/pwd/start-registry"
 	(cat /conteco/extract/start ) | envsubst > "/conteco/pwd/start"

@@ -16,13 +16,21 @@ if [[ "$1" == "for-each-node" ]] ; then
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in
         "image")
-			if [[ "$1" == "--redeploy" || "$1" == "--remove" ]] ; then
-				# implement remove
-				executionplane-error "Method $method --redeploy / --remove not implemented!"
+			command=$1
+			shift
+			if [[ "$command" == "downup" || "$command" == "down" ]] ; then
+				executionplane-error "Method $method downup / down not implemented!"
+				.cluster remove  "${CONTECO_TYPE}_${CONTECO_NAME}"
 			fi
-			if [[ "$1" != "--remove" ]] ; then
-				# implement deploy
-				executionplane-error "Method $method --deploy not implemented!"
+			if [[ "$command" != "down" ]] ; then
+				executionplane-error "Method $method up not implemented!"
+				rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
+				arguments="-c $rootPathe/conteco/assets/${CONTECO_TYPE}/${CONTECO_NAME}/deploy/docker-compose.yml ${CONTECO_TYPE}_${CONTECO_NAME}"
+#				composefolder="./infometis/${INFOMETIS_CONTAINERTYPE}/${INFOMETIS_CONTAINERNAME}"
+#				envsubst < "${composefolder}/docker-compose.yml" > "${composefolder}/docker-compose.yml.env"
+#				. executionplane docker stack deploy -c "${composefolder}/docker-compose.yml.env" "${INFOMETIS_CONTAINERNAME}"
+#				rm "${composefolder}/docker-compose.yml.env"
+				.cluster deploy $arguments
 			fi
 			;;
 		all)

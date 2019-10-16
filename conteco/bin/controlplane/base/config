@@ -34,6 +34,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 				set-version)
 					set-version $2 $rootPath
 					;;
+				set-registry)
+					set-version $2 $rootPath
+					;;
 				*)
 					executionplane-error "Method not recognised: $method."
 					;;

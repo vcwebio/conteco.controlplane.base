@@ -42,8 +42,19 @@ if [[ "$1" == "for-each-node" ]] ; then
 			.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
 			;;
 		load)
-			.image pull "$imageName:${CONTECO_TAG}"
-			.image tag "$imageName:${CONTECO_TAG}" "$imageName"
+			if [[ "$CONTECO_TAG" != "" ]] ; then
+				.image pull "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
+			else
+				.image pull "$CONTECO_REGISTRY$imageName"
+			fi
+			if [[ "$CONTECO_REGISTRY" != "" ]] ; then
+				if [[ "$CONTECO_TAG" != "" ]] ; then
+					.image tag "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}" "$imageName:${CONTECO_TAG}"
+					.image tag "$imageName:${CONTECO_TAG}" "$imageName"
+				else
+					.image tag "$CONTECO_REGISTRY$imageName" "$imageName"
+				fi
+			fi
 			;;
 		log)
 			.repo log $rootPath

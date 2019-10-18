@@ -16,12 +16,6 @@ if [[ "$1" == "for-each-node" ]] ; then
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $method in
         image)
-			if [[ "$CONTECO_REGISTRY" != "" ]] ; then
-				.image tag "$imageName" "$CONTECO_REGISTRY$imageName"
-				if [[ "${CONTECO_TAG}" != "" ]] ; then
-					.image tag "$imageName:${CONTECO_TAG}" "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
-				fi
-			fi
 			.image push "$CONTECO_REGISTRY$imageName"
 			if [[ "${CONTECO_TAG}" != "" ]] ; then
 				.image push "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"

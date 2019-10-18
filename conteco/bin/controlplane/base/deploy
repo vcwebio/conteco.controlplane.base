@@ -23,12 +23,12 @@ if [[ "$1" == "for-each-node" ]] ; then
 			fi
 			if [[ "$command" != "down" ]] ; then
 				rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
-				arguments="-c $rootPath/conteco/assets/${CONTECO_TYPE}/${CONTECO_NAME}/deploy/docker-compose.yml ${CONTECO_TYPE}_${CONTECO_NAME}"
-#				composefolder="./infometis/${INFOMETIS_CONTAINERTYPE}/${INFOMETIS_CONTAINERNAME}"
-#				envsubst < "${composefolder}/docker-compose.yml" > "${composefolder}/docker-compose.yml.env"
-#				. executionplane docker stack deploy -c "${composefolder}/docker-compose.yml.env" "${INFOMETIS_CONTAINERNAME}"
-#				rm "${composefolder}/docker-compose.yml.env"
+				tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
+				arguments="-c $tmpfile ${CONTECO_TYPE}_${CONTECO_NAME}"
+				composefile="$rootPath/conteco/assets/${CONTECO_TYPE}/${CONTECO_NAME}/deploy/docker-compose.yml"
+				cat $composefile | envsubst > $tmpfile
 				.cluster deploy $arguments
+				rm $tmpfile
 			fi
 			;;
 		all)

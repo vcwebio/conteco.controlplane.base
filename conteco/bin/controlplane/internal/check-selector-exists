@@ -5,15 +5,19 @@ pathExists="false"
 
 if [[ $selector == *"$" ]] ; then
 	selector="${selector::-1}"
-else
-	selector="${selector::-1}*"
 fi
 
-for f in $selector ;
-do
+if [[ " extract " == *"$2"* ]] ; then
+	for f in $selector* ;
+	do
+		if [[ "$f" == "$selector" ]] ; then
+			pathExists=true
+			break
+		fi
+	done;
+else
 	pathExists=true
-	break
-done;
+fi
 
 if [[ "$pathExists" == "false" ]] ; then
 	withoutrealm=$( echo $selector | cut -d '/' -f 2)

@@ -44,16 +44,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 		load)
 			if [[ "$CONTECO_TAG" != "" ]] ; then
 				.image pull "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
+				.image tag "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}" "$CONTECO_REGISTRY$imageName"
 			else
 				.image pull "$CONTECO_REGISTRY$imageName"
-			fi
-			if [[ "$CONTECO_REGISTRY" != "" ]] ; then
-				if [[ "$CONTECO_TAG" != "" ]] ; then
-					.image tag "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}" "$imageName:${CONTECO_TAG}"
-					.image tag "$imageName:${CONTECO_TAG}" "$imageName"
-				else
-					.image tag "$CONTECO_REGISTRY$imageName" "$imageName"
-				fi
 			fi
 			;;
 		log)
@@ -84,7 +77,8 @@ else
 (
 	export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
 	selector=$(set-selector "${BASH_ARGV[0]}")
-	. check-selector-exists $selector
+	echo $selector
+	. check-selector-exists $selector "$1"
 	if [[ "$CONTECO_STATE" == "virtual" ]] ; then
 		$(basename $0) "for-each-node" ${@:1:$#-1} $selector
 	else

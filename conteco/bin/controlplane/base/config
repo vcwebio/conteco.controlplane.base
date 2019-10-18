@@ -23,7 +23,10 @@ if [[ "$1" == "for-each-node" ]] ; then
 		image)
 			case $1 in
 				build)
+					(
+					export CONTECO_REGISTRY=
 					cat $rootPath/Dockerfile | envsubst > $rootPath/Dockerfile.static
+					)
 					;;
 				increment)
 					increment-version $2 $rootPath

@@ -3,7 +3,13 @@ selector=$1
 shopt -s nullglob
 pathExists="false"
 
-for f in $selector* ;
+if [[ $selector == *"$" ]] ; then
+	selector="${selector::-1}"
+else
+	selector="${selector::-1}*"
+fi
+
+for f in $selector ;
 do
 	pathExists=true
 	break

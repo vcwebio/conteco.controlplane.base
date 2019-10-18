@@ -3,6 +3,13 @@
     . executionplane-invoke "$0 $@"
     selector=$(set-selector "${BASH_ARGV[0]}")
 	shopt -s nullglob
+
+	if [[ $selector == *"$" ]] ; then
+		selector="${selector::-1}"
+	else
+		selector="${selector::-1}*"
+	fi
+
     for f in $selector* ;
     do
     (

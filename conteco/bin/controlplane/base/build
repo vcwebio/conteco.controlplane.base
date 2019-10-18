@@ -31,7 +31,11 @@ if [[ "$1" == "for-each-node" ]] ; then
 					build $method ${@:1:$#-1} $baseImage
 				fi
 			fi
-			.image build -t $imageName -f $rootPath/Dockerfile.static $rootPath
+#			.image build -t $imageName -f $rootPath/Dockerfile.static $rootPath
+			tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
+			cat $rootPath/Dockerfile | envsubst > $tmpfile
+			.image build -t $imageName -f $tmpfile $rootPath
+			rm $tmpfile
 			if [[ "${CONTECO_TAG}" != "" ]] ; then
 				.image tag "$imageName" "$imageName:${CONTECO_TAG}" 
 			fi

@@ -16,6 +16,7 @@ if [[ "$1" == "for-each-node" ]] ; then
     case "$method" in
 		add)
 			.repo add . "$rootPath"
+			.repo rm -r . "$rootPath"
 			;;
 		cleanup)
 			.repo branch -d "workspace" "$rootPath"
@@ -55,6 +56,12 @@ if [[ "$1" == "for-each-node" ]] ; then
 		prepare)
 			.repo config --global user.name "$1" "$rootPath"
 			.repo config --global user.email "$2" "$rootPath"
+			.repo remote set-url origin "https://github.com/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}.git" "$rootPath"
+			.repo config credential.helper store "$rootPath"
+			;;
+		push)
+			.repo push origin conteco $rootPath
+			.repo push -f origin "$CONTECO_TAG" $rootPath
 			;;
 		remove)
 			.console rm -rf $rootPath

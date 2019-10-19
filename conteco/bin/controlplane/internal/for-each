@@ -7,10 +7,10 @@
 	if [[ $selector == *"$" ]] ; then
 		selector="${selector::-1}"
 	else
-		selector="${selector::-1}*"
+		selector="$selector*"
 	fi
 
-    for f in $selector* ;
+    for f in $selector ;
     do
     (
         . ./$f/environment

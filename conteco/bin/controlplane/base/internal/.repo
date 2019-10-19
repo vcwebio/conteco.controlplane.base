@@ -8,7 +8,7 @@
 	currentpwd=$(pwd)
 	cd $rootPath
     case "$command" in
-        add|branch|checkout|config|merge|status|tag)
+        add|branch|checkout|config|merge|push|remote|status|tag)
             executionplane git $command $arguments
             ;;
 		commit)
@@ -18,7 +18,7 @@
 			executionplane git $command --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10
 			;;
         *)
-            . executionplane-error "Method not recognised: $1."
+            . executionplane-error "Method not recognised: $command."
             ;;
     esac
 	cd $currentpwd

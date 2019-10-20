@@ -28,6 +28,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 					cat $rootPath/Dockerfile | envsubst > $rootPath/Dockerfile.static
 					)
 					;;
+				deploy)
+					extract-and-execute $imageName config $@
+					;;
 				increment)
 					increment-version $2 $rootPath
 					;;

@@ -23,7 +23,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 			fi
 			if [[ "$command" != "down" ]] ; then
 				rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
-				tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
+				tmpfile=$(mktemp /tmp/docker-compose.yml.XXXXXX)
 				arguments="-c $tmpfile ${CONTECO_TYPE}_${CONTECO_NAME}"
 				composefolder="$rootPath/conteco/assets/${CONTECO_TYPE}/${CONTECO_NAME}/deploy"
 				composefile="$composefolder/docker-compose.yml"
@@ -33,6 +33,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 						. $environmentfile
 					fi
 					cat $composefile | envsubst > $tmpfile
+					cat $tmpfile
 				)
 				.cluster deploy $arguments
 				rm $tmpfile

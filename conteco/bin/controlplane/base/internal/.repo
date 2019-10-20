@@ -8,7 +8,7 @@
 	currentpwd=$(pwd)
 	cd $rootPath
     case "$command" in
-        add|branch|checkout|config|merge|push|remote|status|tag)
+        add|branch|checkout|config|merge|push|remote|rm|status|tag)
             executionplane git $command $arguments
             ;;
 		commit)

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+deployPath=$1
+
+# generate environment file
+environment_file=$'#!/usr/bin/env bash\n\n'
+environmentEntry=$(sed -n "/# START STACK CONFIGURATION/,/# END STACK CONFIGURATION/p" $deployPath/environment)
+environment_file="${environment_file}${environmentEntry}
+
+"
+environmentEntry=$(sed -n "/# START GLOBAL SERVICE CONFIGURATION/,/# END GLOBAL SERVICE CONFIGURATION/p" $deployPath/environment)
+environment_file="${environment_file}${environmentEntry}
+"
+tmpfile=$(mktemp /tmp/environmentfile.XXXXXX)
+cat $deployPath/environment.template > $tmpfile
+sed -i '/#!\/usr\/bin\/env bash/d' $tmpfile
+IFS=',' read -r -a keys <<< "${CONTECO_DC_GLOBAL}"
+for key in ${keys[@]};
+do
+	sed -i "/${key:1}/d" $tmpfile
+	done;
+environment_file="${environment_file}$(cat $tmpfile)"
+rm $tmpfile
+echo "$environment_file" > $deployPath/environment
+		

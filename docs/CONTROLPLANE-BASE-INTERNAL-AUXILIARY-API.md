@@ -6,15 +6,18 @@
 
 Auxiliary methods used to implement the external and internal API.
 
-__`increment-version`__ [$versionpart] [$rootpath]  
+__`config-deploy-generate-docker-compose-yml`__ [$rootpath]  
+Generates the docker-compose.yml file from template.
+
+__`config-increment-version`__ [$versionpart] [$rootpath]  
 Auxiliary method that takes the `$CONTECO_TAG` variable and increments the requested version part (_major_, _minor_ or _revision_).
-It updates the version by calling the `set-version` auxiliary method.  
+It updates the version by calling the `config-set-version` auxiliary method.  
 It only operates on the version format `vx.y.z`.
 
-__`remove-crs`__  
+__`config-remove-crs`__  
 Auxiliary method that remove CRs from files with no extension, `.static` or `.md` extension in selected folders.
 
-__`set-version`__ [$version] [$rootpath]  
+__`config-set-version`__ [$version] [$rootpath]  
 Sets the new version in the `$CONTECO_TAG` variable and `environment` file.
 
 -----

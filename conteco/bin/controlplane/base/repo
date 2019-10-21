@@ -16,7 +16,7 @@ if [[ "$1" == "for-each-node" ]] ; then
     case "$method" in
 		add)
 			.repo add . "$rootPath"
-			.repo rm -r . "$rootPath"
+#			.repo rm -r . "$rootPath"
 			;;
 		cleanup)
 			.repo branch -d "workspace" "$rootPath"

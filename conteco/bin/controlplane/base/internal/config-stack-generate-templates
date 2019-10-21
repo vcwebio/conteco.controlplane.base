@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+deployPath=$1
+
+# generate environment.template and docker-compose.template files
+(
+environment_template=$'#!/usr/bin/env bash\n\n'
+docker_compose_template=$'---\nversion: \'3\'\nservices:\n\n'
+IFS=',' read -r -a services <<< "${CONTECO_DC_GLOBAL_SERVICES}"
+for service in ${services[@]};
+do
+	servicePath="${CONTECO_PWD}/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.$service/conteco/assets/$(echo "$service" | tr . /)/deploy"
+	serviceEnvironment=$(sed -n "/# START VARIABLES/,/# END VARIABLES/p" $servicePath/environment)
+	environment_template="${environment_template}${serviceEnvironment}
+
+"
+	serviceDockerCompose=$(sed -n "/# START SERVICE/,/# END SERVICE/p" $servicePath/docker-compose.yml)
+	docker_compose_template="${docker_compose_template}${serviceDockerCompose}
+
+"
+	done;
+docker_compose_template="${docker_compose_template}networks: {${CONTECO_DC_NETWORKS}}"
+echo "$environment_template" > $deployPath/environment.template
+echo "$docker_compose_template" > $deployPath/docker-compose.yml.template
+)

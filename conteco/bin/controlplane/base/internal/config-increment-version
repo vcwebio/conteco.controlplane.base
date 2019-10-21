@@ -21,4 +21,4 @@ elif [[ "$versionpart" == "revision" ]] ; then
 fi
 version="v$major.$minor.$revision"
 executionplane-info "Version increment: $CONTECO_TAG >>> $version"
-set-version $version $rootPath
+config-set-version $version $rootPath

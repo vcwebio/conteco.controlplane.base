@@ -32,16 +32,19 @@ if [[ "$1" == "for-each-node" ]] ; then
 					extract-and-execute $imageName config $@
 					;;
 				increment)
-					increment-version $2 $rootPath
+					config-increment-version $2 $rootPath
 					;;
 				remove-crs)
-					remove-crs $rootPath
+					config-remove-crs $rootPath
 					;;
 				set-version)
-					set-version $2 $rootPath
+					config-set-version $2 $rootPath
 					;;
 				set-registry)
 					set-version $2 $rootPath
+					;;
+				stack)
+					extract-and-execute $imageName config $@
 					;;
 				*)
 					executionplane-error "Method not recognised: $method."

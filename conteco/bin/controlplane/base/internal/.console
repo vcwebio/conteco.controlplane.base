@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-(
-    . executionplane-invoke "$0 $@"
-    executionplane "$@"
-    executionplane-wait-for-output-parser
-    executionplane-complete
-)

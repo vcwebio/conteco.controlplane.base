@@ -18,7 +18,11 @@ do
 
 "
 	done;
-docker_compose_template="${docker_compose_template}networks: {${CONTECO_DC_NETWORKS}}"
+DOLLAR="$"
+docker_compose_template="${docker_compose_template}networks: {${DOLLAR}{CONTECO_DC_GLOBAL_NETWORKS}}
+
+volumes: {${DOLLAR}{CONTECO_DC_GLOBAL_VOLUMES}}
+"
 echo "$environment_template" > $deployPath/environment.template
 echo "$docker_compose_template" > $deployPath/docker-compose.yml.template
 )

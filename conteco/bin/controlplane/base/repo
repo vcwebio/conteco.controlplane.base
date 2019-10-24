@@ -11,73 +11,98 @@ if [[ "$1" == "for-each-node" ]] ; then
 	else
 		rootPath="${CONTECO_PWD}/$1"
 	fi
+	currentpwd=$(pwd)
+	if [[ -d $rootPath ]] ; then
+		cd $rootPath
+	fi
+	echo $rootPath
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-
     case "$method" in
 		add)
-			.repo add . "$rootPath"
-#			.repo rm -r . "$rootPath"
+			executionplane git add .
+			;;
+		branch)
+			executionplane git branch ${@:1:$#-1}
 			;;
 		cleanup)
-			.repo branch -d "workspace" "$rootPath"
+			executionplane git branch -d "workspace"
 			;;
 		create)
 			executionplane-error "Method $method not implemented"
 			;;
 		checkout)
-			.repo branch "workspace" "$rootPath"
-			.repo checkout "workspace" "$rootPath"
+			# if additional parameter, then original git checkout only
+			executionplane git branch "workspace"
+			executionplane git checkout "workspace"
 			;;
 		commit)
-			.repo commit -m "'${@:1:$#-1}'" "$rootPath"
+			# if next parameter is flag then or no additional parameter then git commit only
+			message="${@:1:$#-1}"
+			executionplane git commit -m "$(echo "$message")"
+			;;
+		compact)
+			executionplane git reflog expire --updateref --rewrite --stale-fix --expire=all --all
+			executionplane git repack -A -d -f -F --window=4095 --depth=4095 --unpack-unreachable=all
+			executionplane git prune --expire=all
+			executionplane git gc --prune=all --aggressive
+			executionplane git push --all
+			executionplane git push --tags
 			;;
 		checkin)
-			.repo checkout conteco "$rootPath"
-			.repo merge workspace "$rootPath"
-			.repo tag -f "${CONTECO_TAG}" "$rootPath"
+			executionplane git checkout conteco
+			executionplane git merge workspace
+			executionplane git tag -f "${CONTECO_TAG}"
 			;;
 		extract)
-			. executionplane-capture-output .container create $imageName
+			. executionplane-capture-output docker create $imageName
 			destination="${CONTECO_PWD}/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 			executionplane mkdir -p $destination
-			.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
+			executionplane docker container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
 			;;
 		load)
 			if [[ "$CONTECO_TAG" != "" ]] ; then
-				.image pull "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
-				.image tag "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}" "$CONTECO_REGISTRY$imageName"
+				executionplane docker image pull "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
+				executionplane docker tag "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}" "$CONTECO_REGISTRY$imageName"
 			else
-				.image pull "$CONTECO_REGISTRY$imageName"
+				executionplane docker image pull "$CONTECO_REGISTRY$imageName"
 			fi
 			;;
 		log)
-			.repo log $rootPath
+			executionplane git log
+			;;
+		log10)
+			executionplane git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10
 			;;
 		prepare)
-			.repo config --global user.name "$1" "$rootPath"
-			.repo config --global user.email "$2" "$rootPath"
-			.repo remote set-url origin "https://github.com/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}.git" "$rootPath"
-			.repo config credential.helper store "$rootPath"
+			executionplane git config --global user.name "$1"
+			executionplane git config --global user.email "$2"
+			executionplane git remote set-url origin "https://github.com/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}.git"
+			executionplane git config credential.helper store
 			;;
 		push)
-			.repo push origin conteco $rootPath
-			.repo push -f origin "$CONTECO_TAG" $rootPath
+			executionplane git push origin conteco
+			executionplane git push -f origin "$CONTECO_TAG"
 			;;
 		remove)
-			.console rm -rf $rootPath
+			cd $currentpwd
+			executionplane rm -rf $rootPath
 			;;
 		status)
-			.repo status "$rootPath"
+			executionplane git status
+			;;
+		tag)
+			executionplane git tag ${@:1:$#-1}
 			;;
 		unload)
 			arguments=${@:1:$#-1}
-			.image rm "$imageName" $arguments
-			.image rm "$imageName:${CONTECO_TAG}" $arguments
+			executionplane docker image rm "$imageName" $arguments
+			executionplane docker image rm "$imageName:${CONTECO_TAG}" $arguments
 			;;
         *)
             . executionplane-error "Method not recognised: $method."
             ;;
     esac
+	cd $currentpwd
     executionplane-complete
 )
 else

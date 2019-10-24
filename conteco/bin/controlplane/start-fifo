@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-# from processing/output console 
-mkfifo CONTECO_FIFO
-exec < CONTECO_FIFO

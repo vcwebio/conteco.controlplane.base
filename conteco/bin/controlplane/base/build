@@ -33,10 +33,10 @@ if [[ "$1" == "for-each-node" ]] ; then
 			fi
 			tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
 			cat $rootPath/Dockerfile | envsubst > $tmpfile
-			.image build -t $imageName -f $tmpfile $rootPath
+			executionplane docker build -t $imageName -f $tmpfile $rootPath
 			rm $tmpfile
 			if [[ "${CONTECO_TAG}" != "" ]] ; then
-				.image tag "$imageName" "$imageName:${CONTECO_TAG}" 
+				executionplane docker tag "$imageName" "$imageName:${CONTECO_TAG}" 
 			fi
             ;;
         all)

@@ -13,6 +13,5 @@ services:
     deploy: {${CONTECO_DC_SERVICE_DEPLOY}}
 # END SERVICE $CONTECO_TYPE.$CONTECO_NAME
 
-networks:
-  ${CONTECO_DC_SERVICE_NETWORKS}:
-    external: true
+volumes: {${CONTECO_DC_GLOBAL_VOLUMES}}
+networks: {${CONTECO_DC_GLOBAL_NETWORKS}}

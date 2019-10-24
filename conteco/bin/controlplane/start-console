@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-# from input console
-export CONTECO_FIFO_CONSOLE=active
-export PATH="/conteco/bin/controlplane:$PATH"
-exec 3> CONTECO_FIFO;
-bash
-

@@ -4,12 +4,9 @@ action=$2
 shift
 shift
 
-. executionplane-capture-output .container create $imageName
+. executionplane-capture-output docker create $imageName
 tmpfile=$(mktemp /tmp/scriptfile.XXXXXX)
-.container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/extract/controlplane/$action $tmpfile
+executionplane docker container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/extract/controlplane/$action $tmpfile
 chmod 777 $tmpfile
 $tmpfile $@
 rm $tmpfile
-
-# the method implementation is part of the image type - taken from image
-# the image specfic resources (e.g. service stack yaml) can be taken from repository.

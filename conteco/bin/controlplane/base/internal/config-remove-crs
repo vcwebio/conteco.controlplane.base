@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 rootPath=$1
 shopt -s nullglob
-rootSelections=( "" "/services/*" "/stacks/*" )
+rootSelections=( "" )
 subfolders=( "/docs/*" "/conteco/*" "/conteco/*/*" "/conteco/*/*/*" "/conteco/*/*/*/*" "/conteco/*/*/*/*/*" )
 for rootfolder in "${rootSelections[@]}"
 do
@@ -9,7 +9,7 @@ do
 	do
 		if [[ -f $f ]] ; then
 			filename=`basename "$f"`
-			if [[ $filename != *"."* || $filename == *".static" || $filename == *".md" ]] ; then
+			if [[ $filename != *"."* || $filename == "."* || $filename == *".static" || $filename == *".md" ]] ; then
 				executionplane-info "removing cr in $f"
 				dos2unix $f
 			fi
@@ -20,10 +20,8 @@ do
 		for f in $rootPath$rootfolder$subfolder;
 		do
 			if [[ -f $f ]] ; then
-				if [[ $filename != *"."* || $filename == *".md" ]] ; then
-					executionplane-info "removing cr in $f"
-					dos2unix $f
-				fi
+				executionplane-info "removing cr in $f"
+				dos2unix $f
 			fi
 		done;
 	done;

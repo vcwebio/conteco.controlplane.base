@@ -33,7 +33,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 						. $environmentfile
 					fi
 					cat $composefile | envsubst > $tmpfile
-					cat $tmpfile
+					executionplane-info $(cat $tmpfile)
 				)
 				executionplane docker stack deploy $arguments
 				rm $tmpfile

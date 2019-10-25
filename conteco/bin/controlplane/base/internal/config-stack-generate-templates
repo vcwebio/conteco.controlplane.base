@@ -20,7 +20,6 @@ do
 	done;
 DOLLAR="$"
 docker_compose_template="${docker_compose_template}networks: {${DOLLAR}{CONTECO_DC_GLOBAL_NETWORKS}}
-
 volumes: {${DOLLAR}{CONTECO_DC_GLOBAL_VOLUMES}}
 "
 echo "$environment_template" > $deployPath/environment.template

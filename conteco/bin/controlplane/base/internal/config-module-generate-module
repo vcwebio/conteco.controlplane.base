@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+deployPath=$1
+
+(
+# create folder /conteco/modeco
+
+# Within copy environment & docker-compose.yml files to ./conteco/assets/[name]/base/deploy
+
+# Create Dockerfile & environment
+
+# Create README.md & add LICENSE
+)

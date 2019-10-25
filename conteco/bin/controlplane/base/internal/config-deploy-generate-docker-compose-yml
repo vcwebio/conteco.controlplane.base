@@ -5,11 +5,9 @@ tmpfile=$(mktemp /tmp/docker-compose.yml.template.XXXXXX)
 templatePath="$deployPath/docker-compose.yml.template"
 if [ ! -f "$templatePath" ]; then
 	templatePath="/conteco/assets/controlplane/base/deploy/docker-compose.yml.template"
-	token=$(echo "$CONTECO_TYPE" | tr - _)
-	cat $templatePath > $tmpfile
-	sed -i -e "s/CONTECO_DC_SERVICE_/CONTECO_DC_${token^^}_/g" $tmpfile
-else
-	cat $templatePath > $tmpfile
 fi
+token=$(echo "$CONTECO_TYPE" | tr - _)
+cat $templatePath > $tmpfile
+sed -i -e "s/CONTECO_DC_SERVICE_/CONTECO_DC_${token^^}_/g" $tmpfile
 cat $tmpfile | envsubst '$CONTECO_TYPE,$CONTECO_NAME' | envsubst "$CONTECO_DC_GLOBAL"	> $deployPath/docker-compose.yml
 rm $tmpfile

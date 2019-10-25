@@ -26,14 +26,18 @@ if [[ "$1" == "for-each-node" ]] ; then
 				tmpfile=$(mktemp /tmp/docker-compose.yml.XXXXXX)
 				arguments="-c $tmpfile ${CONTECO_TYPE}_${CONTECO_NAME}"
 				composefolder="$rootPath/conteco/assets/${CONTECO_TYPE}/${CONTECO_NAME}/deploy"
-				composefile="$composefolder/docker-compose.yml"
+				if [[ "$1" == *"docker-compose.yml" ]] ; then
+					composefile="$composefolder/$1"
+				else
+					composefile="$composefolder/docker-compose.yml"
+				fi
 				environmentfile="$composefolder/environment"
 				(
 					if [[ -f "$environmentfile" ]] ; then
 						. $environmentfile
 					fi
 					cat $composefile | envsubst > $tmpfile
-					executionplane-info $(cat $tmpfile)
+					cat $tmpfile
 				)
 				executionplane docker stack deploy $arguments
 				rm $tmpfile

@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+deployPath=$1
+
+(
+DOLLAR="$"
+environment_template=$'#!/usr/bin/env bash\n\n'
+
+cp $deployPath/environment $deployPath/environment.backup
+environment_configuration=$(sed -n "/# START MODULE CONFIGURATION/,/# END MODULE CONFIGURATION/p" $deployPath/environment)
+environment_template="${environment_template}${environment_configuration}
+
+"
+
+environment_other=$(grep export $deployPath/environment.template | grep -v _PORTS | grep -v _DEPLOY | grep -v _NETWORKS | grep -v _VOLUMES)
+environment_template="${environment_template}# START OTHER VARIABLES
+$environment_other
+# END OTHER VARIABLES
+
+"
+environment_volumes=$(grep _VOLUMES $deployPath/environment.template | grep -v _GLOBAL_)
+intermediate=$(grep _VOLUMES_ $deployPath/environment.template | cut -d'"' -f 2 | tr '\n' '|')
+intermediate="${intermediate//|/: \{ \}, }"
+intermediate=$(echo $intermediate | sed 's/.$//')
+environment_template="${environment_template}# START VOLUMES VARIABLES
+$environment_volumes
+export CONTECO_DC_GLOBAL_VOLUMES=\"$intermediate\"
+# END VOLUMES VARIABLES
+
+"
+environment_ports=$(grep _PORTS $deployPath/environment.template)
+environment_template="${environment_template}# START PORTS VARIABLES
+$environment_ports
+# END PORTS VARIABLES
+
+"
+environment_networks=$(grep _NETWORKS $deployPath/environment.template | grep -v _GLOBAL_)
+environment_template="${environment_template}# START NETWORKS VARIABLES
+$environment_networks
+export CONTECO_DC_GLOBAL_NETWORKS=\"${DOLLAR}{CONTECO_ECOSYSTEM}_overlay: { external: true }\"
+# END NETWORKS VARIABLES
+
+"
+environment_deploy=$(grep _DEPLOY $deployPath/environment.template)
+environment_template="${environment_template}# START DEPLOY VARIABLES
+$environment_deploy
+# END DEPLOY VARIABLES
+
+"
+echo "$environment_template" > $deployPath/environment
+)

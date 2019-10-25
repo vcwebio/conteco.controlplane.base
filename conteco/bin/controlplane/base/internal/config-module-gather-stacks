@@ -3,58 +3,20 @@ deployPath=$1
 
 (
 DOLLAR="$"
-environment_input=$'#!/usr/bin/env bash\n\n'
+environment_template=$'#!/usr/bin/env bash\n\n'
 IFS=',' read -r -a stacks <<< "${CONTECO_DC_GLOBAL_STACKS}"
 for stack in ${stacks[@]};
 do
 	stackPath="${CONTECO_PWD}/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.$stack/conteco/assets/$(echo "$stack" | tr . /)/deploy"
 	cp $stackPath/docker-compose.yml $deployPath/$stack.docker-compose.yml
 	stackEnvironment=$(sed -n "/# START VARIABLES/,/# END VARIABLES/p" $stackPath/environment)
-	environment_input="${environment_input}${stackEnvironment}
+	environment_template="${environment_template}${stackEnvironment}
 "
 	done;
-environment_input="${environment_input}# START GLOBAL VARIABLES
+environment_template="${environment_template}# START GLOBAL VARIABLES
 export CONTECO_GLOBAL_NETWORKS=
 export CONTECO_GLOBAL_VOLUMES=
 # END GLOBAL VARIABLES
-"
-echo "$environment_input" > $deployPath/environment.input
-
-environment_template=$'#!/usr/bin/env bash\n\n'
-environment_other=$(grep export $deployPath/environment.input | grep -v _PORTS | grep -v _DEPLOY | grep -v _NETWORKS | grep -v _VOLUMES)
-environment_template="${environment_template}# START OTHER VARIABLES
-$environment_other
-# END OTHER VARIABLES
-
-"
-environment_volumes=$(grep _VOLUMES $deployPath/environment.input | grep -v _GLOBAL_)
-intermediate=$(grep _VOLUMES_ $deployPath/environment.input | cut -d'"' -f 2 | tr '\n' '|')
-intermediate="${intermediate//|/: \{ \}, }"
-intermediate=$(echo $intermediate | sed 's/.$//')
-environment_template="${environment_template}# START VOLUMES VARIABLES
-$environment_volumes
-export CONTECO_DC_GLOBAL_VOLUMES=\"$intermediate\"
-# END VOLUMES VARIABLES
-
-"
-environment_ports=$(grep _PORTS $deployPath/environment.input)
-environment_template="${environment_template}# START PORTS VARIABLES
-$environment_ports
-# END PORTS VARIABLES
-
-"
-environment_networks=$(grep _NETWORKS $deployPath/environment.input | grep -v _GLOBAL_)
-environment_template="${environment_template}# START NETWORKS VARIABLES
-$environment_networks
-export CONTECO_DC_GLOBAL_NETWORKS=\"${DOLLAR}{CONTECO_ECOSYSTEM}_overlay: { external: true }\"
-# END NETWORKS VARIABLES
-
-"
-environment_deploy=$(grep _DEPLOY $deployPath/environment.input)
-environment_template="${environment_template}# START DEPLOY VARIABLES
-$environment_deploy
-# END DEPLOY VARIABLES
-
 "
 echo "$environment_template" > $deployPath/environment.template
 )

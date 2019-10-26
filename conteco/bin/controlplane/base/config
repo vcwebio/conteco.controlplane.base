@@ -40,14 +40,11 @@ if [[ "$1" == "for-each-node" ]] ; then
 				set-version)
 					config-set-version $2 $rootPath
 					;;
-				set-registry)
-					set-version $2 $rootPath
-					;;
 				stack)
 					extract-and-execute $imageName config $@
 					;;
 				*)
-					executionplane-error "Method not recognised: $method."
+					executionplane-error "Method not recognised: $1."
 					;;
 			esac
 			;;
@@ -58,6 +55,6 @@ if [[ "$1" == "for-each-node" ]] ; then
     executionplane-complete
 )
 else
-    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
+    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
 	for-each $(basename $0) $@
 fi

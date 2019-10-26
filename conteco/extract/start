@@ -1,2 +1,6 @@
 echo "Starting controlplane.${CONTECO_NAME}"
-${CONTECO_SUDO}docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/conteco/pwd ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.controlplane.${CONTECO_NAME} --interactive start linux
+mode=$1
+if [[ "$mode" == "" && "$mode" != "modeco" ]] ; then
+	mode="conteco"
+fi
+${CONTECO_SUDO}docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/conteco/pwd ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.controlplane.$mode --interactive start $mode linux

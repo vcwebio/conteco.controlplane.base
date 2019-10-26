@@ -107,7 +107,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 )
 else
 (
-	export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
+	export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
 	selector=$(set-selector "${BASH_ARGV[0]}")
 	echo $selector
 	. check-selector-exists $selector "$1"

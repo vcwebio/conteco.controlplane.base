@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+(
+    export PATH="$CONTECO_EXECUTIONPLANE_APIEXTERNALPATH_BASE"
+    . executionplane-invoke "$0 $@"
+    "$@"
+    . executionplane-complete
+)

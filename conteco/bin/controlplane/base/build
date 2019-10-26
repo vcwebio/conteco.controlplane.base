@@ -46,6 +46,6 @@ if [[ "$1" == "for-each-node" ]] ; then
     executionplane-complete
 )
 else
-    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH"
+    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
 	for-each $(basename $0) $@
 fi

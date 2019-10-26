@@ -1,6 +1,7 @@
 
 git clone https://github.com/vcwebio/conteco.artifactory.base.git
 git clone https://github.com/vcwebio/conteco.controlplane.base.git
+git clone https://github.com/vcwebio/conteco.controlplane.conteco.git
 git clone https://github.com/vcwebio/conteco.docs.base.git
 git clone https://github.com/vcwebio/conteco.docs.env.git
 git clone https://github.com/vcwebio/conteco.docs.glossary.git

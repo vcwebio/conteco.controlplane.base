@@ -3,46 +3,31 @@ if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
     . executionplane-invoke "$0 $@"
-	# two build modes: image (root only) and all (images within repo)
-	if [[ $# -gt 1 ]] ; then
-		method=$1
-		if [[ " all image " != *"$method"* ]] ; then
-			method="image"
-		else
-			shift
-		fi
-	else
-		method="image"
-	fi
-	# set path of node
-	if [[ $# -gt 1 ]] ; then
+	# extract build method
+	if [[ $# -gt 1 && "$1" == "deep" ]] ; then
+		method="deep"
 		rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
 	else
 		rootPath="${CONTECO_PWD}/$1"
 	fi
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-	case $method in
-        image)
-			if [[ ($1 == "--full" && ${CONTECO_TYPE} != "external") || ($1 == "--deep" && ${CONTECO_BASE} != "external."*) ]] ; then
-				if [[ ${CONTECO_BASE} == *":"* ]] ; then
-					executionplane-warning "${CONTECO_BASE} : Specific versions excluded from 'deep' and 'all' switch."
-				else
-					baseImage=$(echo ${CONTECO_BASE} | cut -f1 -d":")
-					build $method ${@:1:$#-1} $baseImage
-				fi
-			fi
-			tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
-			cat $rootPath/Dockerfile | envsubst > $tmpfile
-			executionplane docker build -t $imageName -f $tmpfile $rootPath
-			rm $tmpfile
-			if [[ "${CONTECO_TAG}" != "" ]] ; then
-				executionplane docker tag "$imageName" "$imageName:${CONTECO_TAG}" 
-			fi
-            ;;
-        all)
-			extract-and-execute $imageName build $@
-            ;;
-	esac
+
+	# deep build down to base included
+	if [[ ($method == "deep" && "${CONTECO_TYPE}" != "external") ]] ; then
+		baseImage=$(echo ${CONTECO_BASE} | cut -f1 -d":")
+		build ${@:1:$#-1} $baseImage
+	fi
+
+	# build latest image
+	tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
+	cat $rootPath/Dockerfile | envsubst > $tmpfile
+	executionplane docker build -t $imageName -f $tmpfile $rootPath
+	rm $tmpfile
+
+	# tag latest image
+	if [[ "${CONTECO_TAG}" != "" ]] ; then
+		executionplane docker tag "$imageName" "$imageName:${CONTECO_TAG}" 
+	fi
     executionplane-complete
 )
 else

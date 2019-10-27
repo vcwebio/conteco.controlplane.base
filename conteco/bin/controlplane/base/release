@@ -3,28 +3,10 @@ if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
     . executionplane-invoke "$0 $@"
-	if [[ $# -gt 1 ]] ; then
-		method=$1
-		if [[ " all image " != *"$method"* ]] ; then
-			method="image"
-		else
-			shift
-		fi
-	else
-		method="image"
+	executionplane docker image push "$CONTECO_REGISTRY$imageName:latest"
+	if [[ "${CONTECO_TAG}" != "" ]] ; then
+		executionplane docker image push "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
 	fi
-	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-	case $method in
-        image)
-			executionplane docker image push "$CONTECO_REGISTRY$imageName:latest"
-			if [[ "${CONTECO_TAG}" != "" ]] ; then
-				executionplane docker image push "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
-			fi
-            ;;
-        all)
-			extract-and-execute $imageName release $@
-            ;;
-	esac
     executionplane-complete
 )
 else

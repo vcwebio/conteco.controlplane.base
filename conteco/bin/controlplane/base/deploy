@@ -3,50 +3,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
     . executionplane-invoke "$0 $@"
-	if [[ $# -gt 1 ]] ; then
-		method=$1
-		if [[ " all image " != *"$method"* ]] ; then
-			method="all"
-		else
-			shift
-		fi
-	else
-		method="all"
-	fi
-	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-	case $method in
-        "image")
-			command=$1
-			shift
-			if [[ "$command" == "downup" || "$command" == "down" ]] ; then
-				executionplane docker stack remove  "${CONTECO_TYPE}_${CONTECO_NAME}"
-			fi
-			if [[ "$command" != "down" ]] ; then
-				rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
-				tmpfile=$(mktemp /tmp/docker-compose.yml.XXXXXX)
-				arguments="-c $tmpfile ${CONTECO_TYPE}_${CONTECO_NAME}"
-				composefolder="$rootPath/conteco/assets/${CONTECO_TYPE}/${CONTECO_NAME}/deploy"
-				if [[ "$1" == *"docker-compose.yml" ]] ; then
-					composefile="$composefolder/$1"
-				else
-					composefile="$composefolder/docker-compose.yml"
-				fi
-				environmentfile="$composefolder/environment"
-				(
-					if [[ -f "$environmentfile" ]] ; then
-						. $environmentfile
-					fi
-					cat $composefile | envsubst > $tmpfile
-					cat $tmpfile
-				)
-				executionplane docker stack deploy $arguments
-				rm $tmpfile
-			fi
-			;;
-		all)
-			extract-and-execute $imageName deploy $@
-			;;
-	esac
+	executionplane-error "Method not implemented: ${CONTECO_NAME} $(basename $0)."
 	executionplane-complete
 )
 else

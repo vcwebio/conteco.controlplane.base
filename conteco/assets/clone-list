@@ -2,6 +2,7 @@
 git clone https://github.com/vcwebio/conteco.artifactory.base.git
 git clone https://github.com/vcwebio/conteco.controlplane.base.git
 git clone https://github.com/vcwebio/conteco.controlplane.conteco.git
+git clone https://github.com/vcwebio/conteco.controlplane.modeco.git
 git clone https://github.com/vcwebio/conteco.docs.base.git
 git clone https://github.com/vcwebio/conteco.docs.env.git
 git clone https://github.com/vcwebio/conteco.docs.glossary.git
@@ -41,7 +42,6 @@ git clone https://github.com/vcwebio/conteco.nginx.base.git
 git clone https://github.com/vcwebio/conteco.registry.base.git
 git clone https://github.com/vcwebio/conteco.stack.base.git
 git clone https://github.com/vcwebio/conteco.stack.ekg.git
-git clone https://github.com/vcwebio/conteco.stack.registry.git
 git clone https://github.com/vcwebio/conteco.streamsets.base.git
 git clone https://github.com/vcwebio/conteco.streamsets-libs.base.git
 git clone https://github.com/vcwebio/conteco.templates.base.git

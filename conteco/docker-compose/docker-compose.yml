@@ -16,10 +16,10 @@ services:
       resources: 
         limits: 
           cpus: '0.75'
-          memory: 128m
+          memory: '128m'
         reservations:
           cpus: '0.0'
-          memory: 32m
+          memory: '5m'
 # END SERVICE controlplane.base
 
 volumes: {${CONTECO_DC_GLOBAL_VOLUMES}}

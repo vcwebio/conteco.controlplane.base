@@ -27,6 +27,8 @@ git clone https://github.com/vcwebio/conteco.external.streamsets.git
 git clone https://github.com/vcwebio/conteco.external.streamsets-libs.git
 git clone https://github.com/vcwebio/conteco.external.zookeeper.git
 git clone https://github.com/vcwebio/conteco.filebeat.base.git
+git clone https://github.com/vcwebio/conteco.filebeat.es.git
+git clone https://github.com/vcwebio/conteco.filebeat.kafka.git
 git clone https://github.com/vcwebio/conteco.grafana.base.git
 git clone https://github.com/vcwebio/conteco.image.base.git
 git clone https://github.com/vcwebio/conteco.image.wrapper.git

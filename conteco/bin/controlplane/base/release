@@ -3,6 +3,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
     . executionplane-invoke "$0 $@"
+	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	executionplane docker image push "$CONTECO_REGISTRY$imageName:latest"
 	if [[ "${CONTECO_TAG}" != "" ]] ; then
 		executionplane docker image push "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"

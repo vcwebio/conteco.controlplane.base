@@ -35,8 +35,11 @@ git clone https://github.com/vcwebio/conteco.kafka-manager.base.git
 git clone https://github.com/vcwebio/conteco.kibana.base.git
 git clone https://github.com/vcwebio/conteco.ksql-server.base.git
 git clone https://github.com/vcwebio/conteco.metricbeat.base.git
+git clone https://github.com/vcwebio/conteco.metricbeat.node_es.git
+git clone https://github.com/vcwebio/conteco.metricbeat.overlay_es.git
 git clone https://github.com/vcwebio/conteco.module.base.git
 git clone https://github.com/vcwebio/conteco.module.swarm.git
+git clone https://github.com/vcwebio/conteco.module.swarm_es.git
 git clone https://github.com/vcwebio/conteco.nexus.base.git
 git clone https://github.com/vcwebio/conteco.nginx.base.git
 git clone https://github.com/vcwebio/conteco.registry.base.git

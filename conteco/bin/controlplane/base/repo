@@ -49,7 +49,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane git push --tags
 			;;
 		checkin)
-			executionplane git checkout conteco
+			executionplane git checkout "${CONTECO_ECOSYSTEM}"
 			executionplane git merge workspace
 			executionplane git tag -f "${CONTECO_TAG}"
 			;;
@@ -58,6 +58,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 			destination="${CONTECO_PWD}/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 			executionplane mkdir -p $destination
 			executionplane docker container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
+			;;
+		init)
+			executionplane git init
 			;;
 		load)
 			if [[ "$CONTECO_TAG" != "" ]] ; then
@@ -80,7 +83,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane git config credential.helper store
 			;;
 		push)
-			executionplane git push origin conteco
+			executionplane git push origin "${CONTECO_ECOSYSTEM}"
 			executionplane git push -f origin "$CONTECO_TAG"
 			;;
 		remove)

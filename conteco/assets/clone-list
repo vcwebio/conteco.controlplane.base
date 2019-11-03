@@ -37,7 +37,9 @@ git clone https://github.com/vcwebio/conteco.kafka-manager.base.git
 git clone https://github.com/vcwebio/conteco.kibana.base.git
 git clone https://github.com/vcwebio/conteco.ksql-server.base.git
 git clone https://github.com/vcwebio/conteco.metricbeat.base.git
+git clone https://github.com/vcwebio/conteco.metricbeat.node.git
 git clone https://github.com/vcwebio/conteco.metricbeat.node_es.git
+git clone https://github.com/vcwebio/conteco.metricbeat.overlay.git
 git clone https://github.com/vcwebio/conteco.metricbeat.overlay_es.git
 git clone https://github.com/vcwebio/conteco.module.base.git
 git clone https://github.com/vcwebio/conteco.module.swarm.git
@@ -52,5 +54,6 @@ git clone https://github.com/vcwebio/conteco.streamsets-libs.base.git
 git clone https://github.com/vcwebio/conteco.templates.base.git
 git clone https://github.com/vcwebio/conteco.templates.build.git
 git clone https://github.com/vcwebio/conteco.zookeeper.base.git
+git clone https://github.com/vcwebio/modeco.swarm_es.base.git
 
 grep export environment.template | grep -v _PORTS | grep -v _DEPLOY | grep -v _NETWORKS | grep -v _VOLUMES

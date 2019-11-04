@@ -49,6 +49,7 @@ git clone https://github.com/vcwebio/conteco.nginx.base.git
 git clone https://github.com/vcwebio/conteco.registry.base.git
 git clone https://github.com/vcwebio/conteco.stack.base.git
 git clone https://github.com/vcwebio/conteco.stack.ekg.git
+git clone https://github.com/vcwebio/conteco.stack.kz.git
 git clone https://github.com/vcwebio/conteco.streamsets.base.git
 git clone https://github.com/vcwebio/conteco.streamsets-libs.base.git
 git clone https://github.com/vcwebio/conteco.templates.base.git

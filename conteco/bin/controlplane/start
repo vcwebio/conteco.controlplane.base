@@ -5,6 +5,6 @@ if [[ "$mode" != "modeco" ]] ; then
 	mode="conteco"
 fi
 export CONTECO_ECOSYSTEM=$mode
-export PS1="$mode#$ "
+export PS1="$mode #$ "
 . "$1"
 bash

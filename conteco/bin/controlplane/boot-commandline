@@ -12,7 +12,7 @@ if [[ "$CONTECO_OS" != "windows" ]] ; then
 	fi
     (cat /conteco/extract/start-output-console ) | envsubst > "/conteco/pwd/start-output-console"
 	(cat /conteco/extract/start-registry ) | envsubst > "/conteco/pwd/start-registry"
-	(cat /conteco/extract/start ) | envsubst > "/conteco/pwd/start"
+	(cat /conteco/extract/start ) | envsubst "$CONTECO_SUDO,$CONTECO_REALM,$CONTECO_ECOSYSTEM" > "/conteco/pwd/start"
 fi
 
 chmod 777 /conteco/pwd/start*

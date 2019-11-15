@@ -1,0 +1,7 @@
+#
+# build [ootion] <selector>
+# The default method builds the image from the repository.
+# It tags the image with latest and the CONTECO_TAG.
+#
+# build deep first builds the base images recursively before building the current image.
+#

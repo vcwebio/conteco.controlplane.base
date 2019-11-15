@@ -1,0 +1,59 @@
+#
+# repo [arguments] <selector>
+# The repo interface exposes methods that operate on the repository:
+#
+# add
+# Stages all changed files
+#
+# cleanup
+# This method removes the workspace temporary branch from the repository..
+#
+# create
+# This method creates a new repository - not implemented yet.
+#
+# checkout
+# This method checks the repository out by creating a temporary workspace branch.
+#
+# commit [message]
+# The methods commits the staged file to the current checked out branch tagged with the associated message..
+#
+# compact
+# This methods compacts the commits to the repository and synchronises these with the origin.
+#
+# checkin
+# This method checks in the committed changes by merging the workspace branch into the main branch.
+#
+# extract <fully qualified selector>
+# This method extracts the repository from the image.
+# If no repository exists locally then it requires a $CONTECO_TYPE.$CONTECO_NAME fully qualified selector which it prefixes with $CONTECO_REALM and $CONTECO_ECOSYSTEM.
+#
+# load
+# The method pull the image from the repository.
+# It needs a fully qualified selector if no local repository of the image exists.
+#
+# log10
+# This method pretty prints the last 10 commits to the repository.
+#
+# prepare
+# This method sets the username and email of the current author and resets the remote origin.
+#
+# push
+# This method pushes the local commits to the remote origin.
+# It also tags the latest commit with the current $CONTECO_TAG
+#
+# remove
+# This method removes the local repository.
+#
+# unload
+# This method untags the image of the current repository, both the with the latest and the $CONTECO_TAG tag.
+#
+# A number of methods port directly onto git commands.
+# Using them through the controlplane interface allows to apply to multiple repositories using the selector
+#
+# branch [arguments]
+# init
+# log
+# remote [arguments]
+# status
+# tag [arguments]
+#

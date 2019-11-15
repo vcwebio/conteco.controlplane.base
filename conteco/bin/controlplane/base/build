@@ -2,7 +2,7 @@
 if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
-    . executionplane-invoke "$0 $@"
+  . executionplane-invoke "$0 $@"
 	# extract build method
 	if [[ $# -gt 1 && "$1" == "deep" ]] ; then
 		method="deep"
@@ -26,11 +26,11 @@ if [[ "$1" == "for-each-node" ]] ; then
 
 	# tag latest image
 	if [[ "${CONTECO_TAG}" != "" ]] ; then
-		executionplane docker tag "$imageName" "$imageName:${CONTECO_TAG}" 
+		executionplane docker tag "$imageName" "$imageName:${CONTECO_TAG}"
 	fi
-    executionplane-complete
+  executionplane-complete
 )
 else
-    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
+  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
 	for-each $(basename $0) $@
 fi

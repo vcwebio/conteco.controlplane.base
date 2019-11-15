@@ -1,5 +1,5 @@
 mode=$1
-if [[ "$mode" != "modeco" ]] ; then
+if [[ "$mode" != "modeco" && "$mode" != "base" ]] ; then
 	mode="conteco"
 fi
 echo "Starting controlplane.$mode"

@@ -1,0 +1,5 @@
+#
+# release <selector>
+# This method pushes the current repository image to the associated registry.
+# It pushes the image with the latest and the CONTECO_TAG.
+#

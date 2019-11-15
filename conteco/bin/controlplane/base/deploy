@@ -2,7 +2,7 @@
 if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
-    . executionplane-invoke "$0 $@"
+  . executionplane-invoke "$0 $@"
 	executionplane-error "Method not implemented: ${CONTECO_NAME} $(basename $0)."
 	executionplane-complete
 )

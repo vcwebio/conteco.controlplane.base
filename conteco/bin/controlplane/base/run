@@ -2,13 +2,13 @@
 if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
-    . executionplane-invoke "$0 $@"
+  . executionplane-invoke "$0 $@"
 	command=$1
 	shift
 	executionplane-error "Method not implemented: ${CONTECO_NAME} $(command $0)."
-    executionplane-complete
+  executionplane-complete
 )
 else
-    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
+  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
 	for-each $(basename $0) $@
 fi

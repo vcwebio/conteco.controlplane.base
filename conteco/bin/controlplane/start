@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 mode=$1
 shift
-if [[ "$mode" != "modeco" ]] ; then
+if [[ "$mode" != "modeco" && "$mode" != "base" ]] ; then
 	mode="conteco"
 fi
 export CONTECO_ECOSYSTEM=$mode
-export PS1="$mode #$ "
+export PS1="${mode}#$ "
 . "$1"
 bash

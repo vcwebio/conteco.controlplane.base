@@ -2,7 +2,7 @@
 if [[ "$1" == "for-each-node" ]] ; then
 (
 	shift
-    . executionplane-invoke "$0 $@"
+  . executionplane-invoke "$0 $@"
 	method=$1
 	shift
 	# set path of node
@@ -17,7 +17,7 @@ if [[ "$1" == "for-each-node" ]] ; then
 	fi
 	echo $rootPath
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-    case "$method" in
+  case "$method" in
 		add)
 			executionplane git add .
 			;;
@@ -86,6 +86,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane git push origin "${CONTECO_ECOSYSTEM}"
 			executionplane git push -f origin "$CONTECO_TAG"
 			;;
+		remote)
+			executionplane git remote ${@:1:$#-1}
+			;;
 		remove)
 			cd $currentpwd
 			executionplane rm -rf $rootPath
@@ -101,12 +104,12 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane docker image rm "$imageName" $arguments
 			executionplane docker image rm "$imageName:${CONTECO_TAG}" $arguments
 			;;
-        *)
-            . executionplane-error "Method not recognised: $method."
-            ;;
-    esac
+    *)
+      . executionplane-error "Method not recognised: $method."
+      ;;
+  esac
 	cd $currentpwd
-    executionplane-complete
+  executionplane-complete
 )
 else
 (

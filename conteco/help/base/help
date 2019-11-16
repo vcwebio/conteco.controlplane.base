@@ -1,0 +1,6 @@
+#
+# controlplane.base
+# The base implementation is not used as a standalone controlplane.
+# It implements functionality inherited by derived controlplanes.
+# It implements console, repo, build, release and some methods of config.
+#

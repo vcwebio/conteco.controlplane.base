@@ -82,6 +82,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane git remote set-url origin "https://github.com/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}.git"
 			executionplane git config credential.helper store
 			;;
+		pull)
+			executionplane git pull
+			;;
 		push)
 			executionplane git push origin "${CONTECO_ECOSYSTEM}"
 			executionplane git push -f origin "$CONTECO_TAG"

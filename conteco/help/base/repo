@@ -6,7 +6,7 @@
 # Stages all changed files
 #
 # cleanup
-# This method removes the workspace temporary branch from the repository..
+# This method removes the workspace temporary branch from the repository.
 #
 # create
 # This method creates a new repository - not implemented yet.

@@ -7,6 +7,7 @@ git clone https://github.com/vcwebio/conteco.docs.base.git
 git clone https://github.com/vcwebio/conteco.docs.env.git
 git clone https://github.com/vcwebio/conteco.docs.glossary.git
 git clone https://github.com/vcwebio/conteco.docs.modeco.git
+git clone https://github.com/vcwebio/conteco.docs.overview.git
 git clone https://github.com/vcwebio/conteco.elasticsearch.base.git
 git clone https://github.com/vcwebio/conteco.elasticsearch-dump.base.git
 git clone https://github.com/vcwebio/conteco.external.artifactory.git

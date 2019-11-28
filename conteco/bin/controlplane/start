@@ -4,6 +4,9 @@ shift
 if [[ "$mode" != "modeco" && "$mode" != "base" ]] ; then
 	mode="conteco"
 fi
+if [[ "$2" != "" ]] ; then
+	export CONTECO_REALM=$2
+fi
 export CONTECO_ECOSYSTEM=$mode
 export PS1="${mode}#$ "
 . "$1"

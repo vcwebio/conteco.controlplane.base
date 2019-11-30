@@ -1,21 +1,26 @@
 #!/usr/bin/env bash
-
+echo ""
+echo ""
 echo "Extracting controlplane.base start method."
+echo ""
 if [[ "$CONTECO_OS" != "linux" ]] ; then
-    (cat /conteco/extract/start-output-console ) | envsubst > "/conteco/pwd/start-output-console.bat"
-	(cat /conteco/extract/start-registry ) | envsubst > "/conteco/pwd/start-registry.bat"
-	(cat /conteco/extract/start.bat ) | envsubst > "/conteco/pwd/start.bat"
+    cat /conteco/extract/start-output-console | envsubst > "/conteco/pwd/start-output-console.bat"
+	cat /conteco/extract/start-registry | envsubst > "/conteco/pwd/start-registry.bat"
+	cat /conteco/extract/start.bat | envsubst > "/conteco/pwd/start.bat"
+	echo "(Windows) Run: start.bat [conteco/modeco] [realm] to start the controlplane for conteco, modeco resp."
 fi
 if [[ "$CONTECO_OS" != "windows" ]] ; then
 	if [[ "$1" == "sudo" ]] ; then
 		export CONTECO_SUDO="sudo "
 	fi
-  cat /conteco/extract/start-output-console | envsubst > "/conteco/pwd/start-output-console"
+	cat /conteco/extract/start-output-console | envsubst > "/conteco/pwd/start-output-console"
 	cat /conteco/extract/start-registry | envsubst > "/conteco/pwd/start-registry"
 	cat /conteco/extract/start | envsubst '${CONTECO_SUDO} ${CONTECO_REALM} ${CONTECO_ECOSYSTEM}' > "/conteco/pwd/start"
+	echo "(linux) Run: ./start [conteco/modeco] [realm] to start the controlplane for conteco, modeco resp."
 fi
-
+echo "The realm (account) is the name of the folder containing the repositories."
+echo ""
+echo "Use the --help flag to get more information on conteco, modeco and their APIs."
+echo ""
+echo ""
 chmod 777 /conteco/pwd/start*
-echo ""
-echo "Run start (linux) / start.bat (windows) to start the controlplane."
-echo ""

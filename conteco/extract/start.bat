@@ -10,4 +10,4 @@ set "SEARCHTEXT=\"
 set "REPLACETEXT=\\"
 set "PWD_VOLUME2=!PWD_VOLUME:%SEARCHTEXT%=%REPLACETEXT%!"
 
-docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v c:\conteco\pwd:/conteco/pwd ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.controlplane.%mode% --interactive start %PWD_VOLUME2%  %mode% windows %2
+docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v %cd%:/conteco/pwd ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.controlplane.%mode% --interactive start %PWD_VOLUME2%  %mode% windows %2

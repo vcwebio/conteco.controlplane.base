@@ -14,7 +14,6 @@ else
   echo ""
   exit
 fi
-export CONTECO_PWD_VOLUME="$1"
 echo "Extracting controlplane.base start method."
 echo ""
 if [[ "$CONTECO_OS" != "linux" ]] ; then
@@ -24,7 +23,7 @@ if [[ "$CONTECO_OS" != "linux" ]] ; then
 	echo "(Windows) Run: start.bat [conteco/modeco] [realm] to start the controlplane for conteco, modeco resp."
 fi
 if [[ "$CONTECO_OS" != "windows" ]] ; then
-	if [[ "$3" == "sudo" ]] ; then
+	if [[ "$2" == "sudo" ]] ; then
 		export CONTECO_SUDO="sudo "
 	fi
 	cat /conteco/extract/start-output-console | envsubst > "/conteco/pwd/start-output-console"

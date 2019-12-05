@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 echo ""
+echo "boot-commandline expects up to 2 arguments:"
+echo "mandatory: windows or linx"
+echo "optional: sudo (on linux only)"
 echo ""
+if [[ "$1" == "linux" ]] ; then
+  . linux
+elif [[ "$1" == "windows" ]] ; then
+  . windows
+else
+  echo "PLEASE PROVIDE OPERATING SYSTEM ARGUMENT: linux  OR windows"
+  echo ""
+  echo ""
+  exit
+fi
+export CONTECO_PWD_VOLUME="$1"
 echo "Extracting controlplane.base start method."
 echo ""
 if [[ "$CONTECO_OS" != "linux" ]] ; then
@@ -10,7 +24,7 @@ if [[ "$CONTECO_OS" != "linux" ]] ; then
 	echo "(Windows) Run: start.bat [conteco/modeco] [realm] to start the controlplane for conteco, modeco resp."
 fi
 if [[ "$CONTECO_OS" != "windows" ]] ; then
-	if [[ "$1" == "sudo" ]] ; then
+	if [[ "$3" == "sudo" ]] ; then
 		export CONTECO_SUDO="sudo "
 	fi
 	cat /conteco/extract/start-output-console | envsubst > "/conteco/pwd/start-output-console"
@@ -23,4 +37,4 @@ echo ""
 echo "Use the --help flag to get more information on conteco, modeco and their APIs."
 echo ""
 echo ""
-chmod 777 /conteco/pwd/start*
+chmod -R 777 /conteco

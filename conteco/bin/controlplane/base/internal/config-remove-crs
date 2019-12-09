@@ -2,7 +2,7 @@
 rootPath=$1
 shopt -s nullglob
 rootSelections=( "" )
-subfolders=( "/docs/*" "/conteco/*" "/conteco/*/*" "/conteco/*/*/*" "/conteco/*/*/*/*" "/conteco/*/*/*/*/*" )
+subfolders=( "/docs/*" "/conteco/*" "/conteco/*/*" "/conteco/*/*/*" "/conteco/*/*/*/*" "/conteco/*/*/*/*/*" "/modeco/*" )
 for rootfolder in "${rootSelections[@]}"
 do
 	for f in $rootPath$rootfolder/*;

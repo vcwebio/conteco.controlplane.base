@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+pwd_volume="$1"
+shift
+if [[ "$pwd_volume" != "/"* ]] ; then
+	pwd_volume=$( echo $pwd_volume | tr '\\' '\/' | tr -d ':' )
+	pwd_volume="/${pwd_volume//\/\//\/}"
+	pwd_volume="${pwd_volume,,}"
+fi
 mode=$1
 shift
 if [[ "$mode" != "modeco" && "$mode" != "base" ]] ; then
@@ -10,4 +17,5 @@ fi
 export CONTECO_ECOSYSTEM=$mode
 export PS1="${mode}#$ "
 . "$1"
+export CONTECO_PWD_VOLUME="$pwd_volume"
 bash

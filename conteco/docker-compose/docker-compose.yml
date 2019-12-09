@@ -5,20 +5,21 @@ services:
 # START SERVICE controlplane.base
   controlplane:
     image: ${CONTECO_REGISTRY}${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_DC_GLOBAL_IMAGE_NAME}
-    environment: [${CONTECO_DC_CONTROLPLANE_BASE_ENVIRONMENT}] 
-    command: [${CONTECO_DC_CONTROLPLANE_BASE_COMMAND}]
-    volumes: [${CONTECO_DC_CONTROLPLANE_BASE_VOLUMES}]
-    ports: [${CONTECO_DC_CONTROLPLANE_BASE_PORTS}]
-    networks: [${CONTECO_DC_CONTROLPLANE_BASE_NETWORKS}]
+    environment: []
+    command: ['usleep 500000000']
+    volumes: []
+    ports: []
+    networks: []
     deploy:
-      mode: ${CONTECO_DC_CONTROLPLANE_BASE_DEPLOY_MODE}
-      resources: 
-        limits: 
-          cpus: '${CONTECO_DC_CONTROLPLANE_BASE_DEPLOY_RESOURCES_LIMITS_CPUS}'
-          memory: '${CONTECO_DC_CONTROLPLANE_BASE_DEPLOY_RESOURCES_LIMITS_MEMORY}'
+      mode: replicated
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: '128m'
         reservations:
-          cpus: '${CONTECO_DC_CONTROLPLANE_BASE_DEPLOY_RESOURCES_RESERVATIONS_CPUS}'
-          memory: '${CONTECO_DC_CONTROLPLANE_BASE_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
+          cpus: '0.0'
+          memory: '5m'
+      labels: [${CONTECO_DC_CONTROLPLANE_DEPLOY_LABELS}]
 # END SERVICE controlplane.base
 
 volumes: {${CONTECO_DC_GLOBAL_VOLUMES}}

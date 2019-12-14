@@ -86,8 +86,8 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane git pull
 			;;
 		push)
-			executionplane git push origin "${CONTECO_ECOSYSTEM}"
-			executionplane git push -f origin "$CONTECO_TAG"
+			executionplane "--errors-only" git push origin "${CONTECO_ECOSYSTEM}"
+			executionplane "--errors-only" git push -f origin "$CONTECO_TAG"
 			;;
 		remote)
 			executionplane git remote ${@:1:$#-1}

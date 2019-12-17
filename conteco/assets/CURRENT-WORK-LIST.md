@@ -13,7 +13,7 @@ Leave them under `conteco.docs` until `soleco`and `infometis` is tackled.
 
 Default documentation for the conteco images.  
 
-## Postponed
+#### Remaining To Be Done
 
 Images not dealt with in alphabetical order.
 - controlplane.base
@@ -24,7 +24,33 @@ Images not dealt with in alphabetical order.
 - docs.modeco
 - docs.overview
 - elasticsearch.base
-
+- external.streamsets-libs
+- filebeat.base
+- filebeat.es
+- filebeat.kafka
+- grafana.base
+- image.wrapper
+- kafka.base
+- kibana.base
+- metricbeat.base
+- metricbeat.node
+- metricbeat.node_es
+- metricbeat.overlay
+- metricbeat.overlay_es
+- module.elk
+- module.kelk
+- module.swarm
+- module.swarm_es
+- nginx.base
+- nginx.rewrite
+- stack.ekg
+- stack.kz
+- streamsets-libs.elasticsearch
+- streamsets-libs.kafka
+- streamsets.base
+- streamsets.kafka
+- streamsets.kafka_es
+- templates.build
 
 ### `docs.conteco`
 
@@ -50,6 +76,12 @@ Incarnations can be cluster, micro, read/write  etc. ... . These are ___compiled
 
 Operational modules are made available to the next structural layer which deals with a solution. The solution consists of modules (could be seen as applications) and is in first instance local to one cluster. No firm ideas exist yet how this could be extended across multiple cluster however it is probably a master cluster with satellite clusters.
 
+### Modeco Base module
+
+Bring friendly names into conteco.module.* delivering a modeco.base.* that is ready for use.  
+The friendly names are there for a reason, having meaning.  
+Within modeco, there should be a facility to clone part of the module (multiple instances of), e.g. for multinode setup.  
+
 ## Controlplane Console
 
 ### Client Console v1
@@ -69,3 +101,13 @@ Service invocation opens the door to cluster-wide commands, executed on each nod
 The client requires swarm log collection (ELK or KELK type) to display the output.
 
 Invocation of Client Console v2 should (initially) follow the same pattern as v1: extraction with `boot-commandline` and invocation with `start-service` instead of `start`. The `start-service` command then starts the (replicated) client service and hooks interactively into the container instance on the local node.
+
+## Controlplane API
+
+### repo prepare
+
+Split into two parts: setting author details and setting HTTPS / SSH format on remote origin
+
+## modeco.swarm.base
+
+Make initial container log processing pipeline lighter and faster with priority to metrics processing, then logs, then other entries.

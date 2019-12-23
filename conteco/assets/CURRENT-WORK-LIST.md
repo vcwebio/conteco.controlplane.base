@@ -16,41 +16,11 @@ Default documentation for the conteco images.
 #### Remaining To Be Done
 
 Images not dealt with in alphabetical order.
+conteco
 - controlplane.base
 - controlplane.conteco
 - controlplane.modeco
-- docs.env
-- docs.glossary
-- docs.modeco
-- docs.overview
-- elasticsearch.base
-- external.streamsets-libs
-- filebeat.base
-- filebeat.es
-- filebeat.kafka
-- grafana.base
 - image.wrapper
-- kafka.base
-- kibana.base
-- metricbeat.base
-- metricbeat.node
-- metricbeat.node_es
-- metricbeat.overlay
-- metricbeat.overlay_es
-- module.elk
-- module.kelk
-- module.swarm
-- module.swarm_es
-- nginx.base
-- nginx.rewrite
-- stack.ekg
-- stack.kz
-- streamsets-libs.elasticsearch
-- streamsets-libs.kafka
-- streamsets.base
-- streamsets.kafka
-- streamsets.kafka_es
-- templates.build
 
 ### `docs.conteco`
 
@@ -79,6 +49,7 @@ Operational modules are made available to the next structural layer which deals 
 ### Modeco Base module
 
 Bring friendly names into conteco.module.* delivering a modeco.base.* that is ready for use.  
+Modules should only container a single instance per container type, and the new naming scheme then allows for cloning under this new name scheme.  
 The friendly names are there for a reason, having meaning.  
 Within modeco, there should be a facility to clone part of the module (multiple instances of), e.g. for multinode setup.  
 
@@ -111,3 +82,22 @@ Split into two parts: setting author details and setting HTTPS / SSH format on r
 ## modeco.swarm.base
 
 Make initial container log processing pipeline lighter and faster with priority to metrics processing, then logs, then other entries.
+
+## conteco.*.base
+
+Sort out the logging output of wrapped external images.
+
+## controlplane.conteco
+
+Use modeco.base.base as template for repo.  
+Modeco general documentation within should be moved to docs.modeco.
+
+## docs.conteco
+
+Create the ContEco documentation container.
+
+## metricbeat.base
+
+Create a single base for metricbeat that should cover most uses within the platform.  
+This single base container should then replace metricbeat.node and metricbeat.overlay.  
+The configuration should use the autodisover feature.

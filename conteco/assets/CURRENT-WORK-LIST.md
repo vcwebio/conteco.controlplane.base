@@ -2,25 +2,12 @@
 
 ## Documentation
 
-### Branding
-
-Brand the platform under vcWEB platform, with conteco, modeco, soleco and infometis as constituent parts.  
-The documentation images should be moved to the vcweb ecosystem - however this means that we need a controlplane!  
-Think about it ...  
-Leave them under `conteco.docs` until `soleco`and `infometis` is tackled.
-
 ### Default Documentation - ContEco Images
 
-Default documentation for the conteco images.  
-
-#### Remaining To Be Done
-
 Images not dealt with in alphabetical order.
-conteco
 - controlplane.base
 - controlplane.conteco
 - controlplane.modeco
-- image.wrapper
 
 ### `docs.conteco`
 
@@ -101,3 +88,7 @@ Create the ContEco documentation container.
 Create a single base for metricbeat that should cover most uses within the platform.  
 This single base container should then replace metricbeat.node and metricbeat.overlay.  
 The configuration should use the autodisover feature.
+
+## image.wrapper
+
+Modify `to-JSON` so the `output-to-JSON` override can amend the __@timestamp__, __source__, __level__ and __message__. This could be done with multivalue parsing on single output line.

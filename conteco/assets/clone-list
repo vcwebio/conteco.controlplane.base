@@ -40,7 +40,6 @@ git clone https://github.com/vcwebio/conteco.module.elk.git
 git clone https://github.com/vcwebio/conteco.module.kelk.git
 git clone https://github.com/vcwebio/conteco.module.swarm.git
 git clone https://github.com/vcwebio/conteco.module.swarm_es.git
-git clone https://github.com/vcwebio/conteco.module.traefik.git
 git clone https://github.com/vcwebio/conteco.nexus.base.git
 git clone https://github.com/vcwebio/conteco.nginx.base.git
 git clone https://github.com/vcwebio/conteco.nginx.rewrite.git

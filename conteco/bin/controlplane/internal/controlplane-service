@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+executionplane-info "Executing controlplane-service"
+name=$(create-random)
+executionplane docker service create --name "controlplane-$name" -d --mode global --restart-condition none --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock vcwebio/conteco.controlplane.base --executiontag "$CONTECO_EXECUTIONTAG" $@
+continue="true"
+while [[ "true" == "$continue" ]] ;
+do
+    sleep 1;
+    if [[ "$(docker service ls | grep "controlplane-$name" | grep global)" == "" ]] ; then
+      executionplane-error "controlplane-service: no service found"
+      continue="false"
+    elif [[ "$(docker service ls | grep "controlplane-$name" | grep global | grep 0/0)" != "" ]] ; then
+      continue="false"
+    fi
+done
+executionplane docker service rm "controlplane-$name"

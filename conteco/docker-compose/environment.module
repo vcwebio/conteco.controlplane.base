@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 # START CONFIGURATION
-export CONTECO_DC_GLOBAL_STACKS='controlplane.base'
-export CONTECO_DC_GLOBAL_STACKNAMES='controlplane'
-export CONTECO_DC_GLOBAL_VOLUME_LIST='controlplane_volume'
+export CONTECO_DC_GLOBAL_STACKS="controlplane.base"
+export CONTECO_DC_GLOBAL_STACKNAMES="controlplane"
+export CONTECO_DC_GLOBAL_BOOTSTACKS=""
+export CONTECO_DC_GLOBAL_RUNSTACKS="controlplane"
+export CONTECO_DC_GLOBAL_VOLUME_LIST="controlplane_volume"
 # END CONFIGURATION
 
 # START OTHER VARIABLES

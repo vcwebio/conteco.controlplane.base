@@ -51,9 +51,9 @@ git clone https://github.com/vcwebio/conteco.streamsets.kafka.git
 git clone https://github.com/vcwebio/conteco.streamsets.kafka-es.git
 git clone https://github.com/vcwebio/conteco.templates.build.git
 git clone https://github.com/vcwebio/conteco.zookeeper.base.git
-git clone https://github.com/vcwebio/modeco.base.base.git
 git clone https://github.com/vcwebio/modeco.elk.base.git
 git clone https://github.com/vcwebio/modeco.kelk.base.git
 git clone https://github.com/vcwebio/modeco.swarm.base.git
 git clone https://github.com/vcwebio/modeco.swarm_es.base.git
+git clone https://github.com/vcwebio/modeco.templates.base.git
 git clone https://github.com/vcwebio/modeco.traefik.base.git

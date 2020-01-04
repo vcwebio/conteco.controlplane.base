@@ -1,10 +1,50 @@
 # Current Work List
 
+## Repository Removals / Additions
+
+### Repository Removals
+
+__Docker Hub Removals__  
+* conteco.streamsets.kafka
+* conteco.streamsets.kafka_es
+* infometis.*
+
+### Repository Additions
+
+* modeco.ekg.base
+
+## Conteco Image Additions
+
+* Bash base (for scripting APIs)
+* Confluent Kafka-Connect
+* Confluent Avro Schema
+* LogStash
+* SQL Server
+* Wireshark
+
+## Conteco Repository Restructure
+
+### Modules
+
+Create module for ekg + url_rewrite and streamsets + url_rewrite.  
+Remove elk, kelk, swarm_es and swarm modules - create modules instead.
+
+### Templated Repository Generator
+
+Need to create a blank repository generator images generating blank images for amongst others
+* base
+* stack
+* module
+
+Could this also be used to update the schema of existing ones?
+
 ## Documentation
 
-### Default Documentation - ContEco Images
+The docs.overview image should have concise documentation to get started.  
+The specific, more specialised bits should go to the documentation of the implementing image.  
+There may be other docs images, e.g. examples etc. but not yet clear how.
 
-Images not dealt with in alphabetical order.
+- docs.overview (incorporate docs.modeco  and previously planned docs.conteco)
 - controlplane.base
 - controlplane.conteco
 - controlplane.modeco
@@ -34,6 +74,11 @@ The client requires swarm log collection (ELK or KELK type) to display the outpu
 Invocation of Client Console v2 should (initially) follow the same pattern as v1: extraction with `boot-commandline` and invocation with `start-service` instead of `start`. The `start-service` command then starts the (replicated) client service and hooks interactively into the container instance on the local node.
 
 ## Controlplane API
+
+### Cluster / Single Node flag
+
+Implement cluster / single node flag which default can be set from boot-commandline.  
+It should also be easy to set interactively.
 
 ### repo prepare
 

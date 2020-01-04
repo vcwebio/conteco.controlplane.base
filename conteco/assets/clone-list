@@ -47,8 +47,6 @@ git clone https://github.com/vcwebio/conteco.registry.base.git
 git clone https://github.com/vcwebio/conteco.stack.ekg.git
 git clone https://github.com/vcwebio/conteco.stack.kz.git
 git clone https://github.com/vcwebio/conteco.streamsets.base.git
-git clone https://github.com/vcwebio/conteco.streamsets.kafka.git
-git clone https://github.com/vcwebio/conteco.streamsets.kafka-es.git
 git clone https://github.com/vcwebio/conteco.templates.build.git
 git clone https://github.com/vcwebio/conteco.zookeeper.base.git
 git clone https://github.com/vcwebio/modeco.elk.base.git

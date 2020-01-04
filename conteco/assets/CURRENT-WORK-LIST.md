@@ -4,14 +4,17 @@
 
 ### Repository Removals
 
+* conteco.module.swarm
+* conteco.module.swarm_es
+
 __Docker Hub Removals__  
+* conteco.module.elk
+* conteco.module.kelk
 * conteco.streamsets.kafka
 * conteco.streamsets.kafka_es
 * infometis.*
-
-### Repository Additions
-
-* modeco.ekg.base
+* modeco.elk.base
+* modeco.kelk.base
 
 ## Conteco Image Additions
 

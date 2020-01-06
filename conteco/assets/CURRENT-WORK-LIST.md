@@ -4,26 +4,18 @@
 
 ### Repository Removals
 
-* conteco.module.swarm
-* conteco.module.swarm_es
-
 __Docker Hub Removals__  
-* conteco.module.elk
-* conteco.module.kelk
 * conteco.streamsets.kafka
 * conteco.streamsets.kafka_es
-* infometis.*
 * modeco.elk.base
 * modeco.kelk.base
 
 ## Conteco Image Additions
 
-* Bash base (for scripting APIs)
 * Confluent Kafka-Connect
 * Confluent Avro Schema
 * LogStash
 * SQL Server
-* Wireshark
 
 ## Conteco Repository Restructure
 

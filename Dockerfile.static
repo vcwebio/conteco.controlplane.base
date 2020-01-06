@@ -1,6 +1,6 @@
 ##### BEGIN image.base/Dockerfile/image-header #####
 FROM vcwebio/conteco.image.wrapper AS wrapper
-FROM vcwebio/conteco.external.controlplane:v1.0.0 AS base
+FROM vcwebio/conteco.external.controlplane AS base
 ##### END image.base/Dockerfile/image-header #####
 
 ##### BEGIN image.base/Dockerfile/conteco #####
@@ -27,7 +27,7 @@ ENV CONTECO_REALM="vcwebio" \
     CONTECO_TYPE="controlplane" \
     CONTECO_NAME="base" \
     CONTECO_TAG="v1.2.0" \
-    CONTECO_BASE="external.controlplane:v1.0.0" \
+    CONTECO_BASE="external.controlplane" \
     CONTECO_BUILD="image-base" \
     CONTECO_LABELSPACE="io.vcweb"
 LABEL io.vcweb.schema-version="1.0" \
@@ -36,7 +36,7 @@ LABEL io.vcweb.schema-version="1.0" \
       io.vcweb.type="controlplane" \
       io.vcweb.name="base" \
       io.vcweb.tag="v1.2.0" \
-      io.vcweb.base="external.controlplane:v1.0.0" \
+      io.vcweb.base="external.controlplane" \
       io.vcweb.build="image-base" \
       io.vcweb.label="Conteco controlplane base" \
       io.vcweb.description="The Conteco controlplane base image." \

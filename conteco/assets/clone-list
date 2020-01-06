@@ -1,5 +1,5 @@
-
 git clone https://github.com/vcwebio/conteco.artifactory.base.git
+git clone https://github.com/vcwebio/conteco.bash.base.git
 git clone https://github.com/vcwebio/conteco.controlplane.base.git
 git clone https://github.com/vcwebio/conteco.controlplane.conteco.git
 git clone https://github.com/vcwebio/conteco.controlplane.modeco.git
@@ -25,6 +25,7 @@ git clone https://github.com/vcwebio/conteco.external.registry.git
 git clone https://github.com/vcwebio/conteco.external.streamsets.git
 git clone https://github.com/vcwebio/conteco.external.streamsets-libs.git
 git clone https://github.com/vcwebio/conteco.external.traefik.git
+git clone https://github.com/vcwebio/conteco.external.tshark.git
 git clone https://github.com/vcwebio/conteco.external.zookeeper.git
 git clone https://github.com/vcwebio/conteco.filebeat.base.git
 git clone https://github.com/vcwebio/conteco.grafana.base.git
@@ -38,8 +39,6 @@ git clone https://github.com/vcwebio/conteco.metricbeat.node.git
 git clone https://github.com/vcwebio/conteco.metricbeat.overlay.git
 git clone https://github.com/vcwebio/conteco.module.ekg.git
 git clone https://github.com/vcwebio/conteco.module.streamsets.git
-git clone https://github.com/vcwebio/conteco.module.swarm.git
-git clone https://github.com/vcwebio/conteco.module.swarm_es.git
 git clone https://github.com/vcwebio/conteco.nexus.base.git
 git clone https://github.com/vcwebio/conteco.nginx.base.git
 git clone https://github.com/vcwebio/conteco.nginx.rewrite.git
@@ -48,6 +47,8 @@ git clone https://github.com/vcwebio/conteco.stack.ekg.git
 git clone https://github.com/vcwebio/conteco.stack.kz.git
 git clone https://github.com/vcwebio/conteco.streamsets.base.git
 git clone https://github.com/vcwebio/conteco.templates.build.git
+git clone https://github.com/vcwebio/conteco.traefik.base.git
+git clone https://github.com/vcwebio/conteco.tshark.base.git
 git clone https://github.com/vcwebio/conteco.zookeeper.base.git
 git clone https://github.com/vcwebio/modeco.ekg.base.git
 git clone https://github.com/vcwebio/modeco.kekg.base.git

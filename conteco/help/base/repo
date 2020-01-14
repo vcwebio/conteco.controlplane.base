@@ -1,59 +1,55 @@
 #
-# repo [arguments] <selector>
-# The repo interface exposes methods that operate on the repository:
+# repo [arguments]  <repository selector>
+# The repo API section implements methods that operate on the repository.
+# These are either direct ports of or implemented using methods from GIT.
 #
-# add
-# Stages all changed files
+# add  <repository selector>
+# Stages all changed files. A direct port of git add .
 #
-# cleanup
-# This method removes the workspace temporary branch from the repository.
+# branch [arguments]  <repository selector>
+# Executes _git branch_ [arguments] on the selected repositories.
 #
-# create
-# This method creates a new repository - not implemented yet.
+# create-workspace <repository selector>
+# This method creates a _workspace_ branch and checks it out.
 #
-# checkout
-# This method checks the repository out by creating a temporary workspace branch.
+# commit [message]  <repository selector>
+# Commits the staged files to the current branch.
 #
-# commit [message]
-# The methods commits the staged file to the current checked out branch tagged with the associated message..
+# compact  <repository selector>
+# Compacts the commit log with garbage collection and pushes it out to the remote.
 #
-# compact
-# This methods compacts the commits to the repository and synchronises these with the origin.
+# checkin-workspace  <repository selector>
+# Checks out the main branch and merges the _workspace_ branch into it.
+# It creates or updates the position of the tag with value `$CONTECO_TAG`.
 #
-# checkin
-# This method checks in the committed changes by merging the workspace branch into the main branch.
+# config <repository selector>
+# Sets the remote origin of the repository and sets the credentials to be stored.
 #
-# extract <fully qualified selector>
-# This method extracts the repository from the image.
-# If no repository exists locally then it requires a $CONTECO_TYPE.$CONTECO_NAME fully qualified selector which it prefixes with $CONTECO_REALM and $CONTECO_ECOSYSTEM.
+# init <repository selector>
+# Initialises or reinitialises the repository. Direct port of _git init_.
 #
-# load
-# The method pull the image from the repository.
-# It needs a fully qualified selector if no local repository of the image exists.
+# log <repository selector>
+# Displays the commit log of the repository. Direct port of _git log_.
 #
-# log10
-# This method pretty prints the last 10 commits to the repository.
+# log10  <repository selector>
+# Displays a compact summary of the last 10 commits of the repository.
 #
-# prepare
-# This method sets the username and email of the current author and resets the remote origin.
+# pull <repository selector>
+# Pulls the remote into the repository. Direct port of _git pull_.
 #
-# push
-# This method pushes the local commits to the remote origin.
+# push  <repository selector>
+# Pushes the current branch to its remote. Direct port of _git push_.
 # It also tags the latest commit with the current $CONTECO_TAG
 #
-# remove
-# This method removes the local repository.
+# remote <repository selector>
+# Direct port of _git remote_.
 #
-# unload
-# This method untags the image of the current repository, both the with the latest and the $CONTECO_TAG tag.
+# remove-workspace <repository selector>
+# Removes the workspace branch from the repository.
 #
-# A number of methods port directly onto git commands.
-# Using them through the controlplane interface allows to apply to multiple repositories using the selector
+# status <repository selector>
+# Gives the current status of the repository. Direct port of _git status_.
 #
-# branch [arguments]
-# init
-# log
-# remote [arguments]
-# status
-# tag [arguments]
+# tag <repository selector>
+# Direct port of _git tag_.
 #

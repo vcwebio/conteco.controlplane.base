@@ -4,9 +4,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 	shift
     . executionplane-invoke "$0 $@"
 	if [[ $# -gt 1 ]] ; then
-		rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
+		rootPath="/conteco/pwd/${BASH_ARGV[0]}"
 	else
-		rootPath="${CONTECO_PWD}/$1"
+		rootPath="/conteco/pwd/$1"
 	fi
 	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 	case $1 in
@@ -29,9 +29,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane-error "Method not recognised: $1."
 			;;
 	esac
-    executionplane-complete
+  executionplane-complete
 )
 else
-    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
+  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
 	for-each $(basename $0) $@
 fi

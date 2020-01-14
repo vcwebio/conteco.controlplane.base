@@ -7,9 +7,9 @@ if [[ "$1" == "for-each-node" ]] ; then
 	shift
 	# set path of node
 	if [[ $# -gt 1 ]] ; then
-	rootPath="${CONTECO_PWD}/${BASH_ARGV[0]}"
+	rootPath="/conteco/pwd/${BASH_ARGV[0]}"
 	else
-	rootPath="${CONTECO_PWD}/$1"
+	rootPath="/conteco/pwd/$1"
 	fi
 	currentpwd=$(pwd)
 	if [[ -d $rootPath ]] ; then
@@ -20,26 +20,19 @@ if [[ "$1" == "for-each-node" ]] ; then
 	case "$method" in
 		add)
 			executionplane git add .
-			;;
+		;;
 		branch)
 			executionplane git branch ${@:1:$#-1}
-			;;
-		cleanup)
-			executionplane git branch -d "workspace"
-			;;
-		create)
-			executionplane-error "Method $method not implemented"
-			;;
-		checkout)
+		;;
+		create-workspace)
 			# if additional parameter, then original git checkout only
 			executionplane git branch "workspace"
 			executionplane git checkout "workspace"
-			;;
+		;;
 		commit)
-			# if next parameter is flag then or no additional parameter then git commit only
 			message="${@:1:$#-1}"
 			executionplane git commit -m "$(echo "$message")"
-			;;
+		;;
 		compact)
 			executionplane git reflog expire --updateref --rewrite --stale-fix --expire=all --all
 			executionplane git repack -A -d -f -F --window=4095 --depth=4095 --unpack-unreachable=all
@@ -47,43 +40,27 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane git gc --prune=all --aggressive
 			executionplane git push --all
 			executionplane git push --tags
-			;;
-		checkin)
+		;;
+		checkin-workspace)
 			executionplane git checkout "${CONTECO_ECOSYSTEM}"
 			executionplane git merge workspace
 			executionplane git tag -f "${CONTECO_TAG}"
-			;;
-		extract)
-			. executionplane-capture-output docker create $imageName
-			destination="${CONTECO_PWD}/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-			executionplane mkdir -p $destination
-			executionplane docker container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
-			;;
+		;;
+		config)
+			executionplane git remote set-url origin "https://github.com/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}.git"
+			executionplane git config credential.helper store
+		;;
 		init)
 			executionplane git init
-			;;
-		load)
-			if [[ "$CONTECO_TAG" != "" ]] ; then
-				executionplane docker image pull "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
-				executionplane docker tag "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}" "$CONTECO_REGISTRY$imageName"
-			else
-				executionplane docker image pull "$CONTECO_REGISTRY$imageName"
-			fi
-			;;
+		;;
 		log)
-			executionplane git log
-			;;
+			executionplane git log ${@:1:$#-1}
+		;;
 		log10)
 			executionplane git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10
 			;;
-		prepare)
-			executionplane git config --global user.name "$1"
-			executionplane git config --global user.email "$2"
-			executionplane git remote set-url origin "https://github.com/${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}.git"
-			executionplane git config credential.helper store
-			;;
 		pull)
-			executionplane git pull
+			executionplane git pull ${@:1:$#-1}
 			;;
 		push)
 			executionplane "--errors-only" git push origin "${CONTECO_ECOSYSTEM}"
@@ -95,17 +72,15 @@ if [[ "$1" == "for-each-node" ]] ; then
 		remove)
 			cd $currentpwd
 			executionplane rm -rf $rootPath
-			;;
+		;;
+		remove-workspace)
+			executionplane git branch -d "workspace"
+		;;
 		status)
 			executionplane git status
 			;;
 		tag)
 			executionplane git tag ${@:1:$#-1}
-			;;
-		unload)
-			arguments=${@:1:$#-1}
-			executionplane docker image rm "$imageName" $arguments
-			executionplane docker image rm "$imageName:${CONTECO_TAG}" $arguments
 			;;
 		*)
 			executionplane-error "Method not recognised: $method."

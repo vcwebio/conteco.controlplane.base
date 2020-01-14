@@ -1,52 +1,58 @@
 # conteco.controlplane.base
 
-The _controlplane.base_ image of the __ContEco__ container ecosystem.
+The `controlplane.base` image of the __ContEco__ container ecosystem.
+See `conteco.docs.overview` for more information on the ContEco ecosystem.
 
-## Image Structure
+The `controlplane.base` image implement core controlplane functionality.
+* implementation of the commandline interfaces
+* extraction of the interactive commandline interface
+* full implementation of (console,) repo, build and release API
+* partial implementation of the config API - set of auxiliary methods
+* a set of internal auxiliary methods available to the internal API implementation.
 
-This image sets the API framework for the _controlplane_ images and provides the base implementation of the API methods.  
+See `conteco.docs.overview` for more information on how to extract and use the commandline interface.
 
-It implements the `controlplane` interface which is available from the commandline of all `controlplane` images.
-This interface contains methods that cover the extraction of commandline methods to start the commandline container in `inline` or `external` mode.  
+## Controlplane API
 
-It implements the `controlplane.base` interface, externally accessible from `controlplane.base` and internally accessible from any other `controlplane` image.  
-This interface is hierarchical: it implements top level methods representing life cycle stages and system areas, each with a set of submethods.
+The top level controlplane API consists of the following methods:
 
-## External and Internal APIs
+* __console__  
+API section containing methods that executes outside the context of a repository.  
+Partial implementation - [console API in detail](./docs/CONTROLPLANE-API-CONSOLE.md)
 
-The _controlplane.base_ image contains two external APIs.  
-These are backed up with two associated internal APIs for their implementation.
+* __repo__  
+API section dealing with version control, GIT based or directly ported from GIT.  
+Full implementation - [repo API in detail](./docs/CONTROLPLANE-API-REPO.md)
 
-[`controlplane` External API](./docs/CONTROLPLANE-EXTERNAL-API.md)  
-This API provides commmandline methods available to all `controlplane` images to setup and run as an inline or external execution console.  
+* __config__  
+API section dealing with repository configuration.  
+Partial implementation - [config API in detail](./docs/CONTROLPLANE-API-CONFIG.md)
 
-[`controlplane` Internal API](./docs/CONTROLPLANE-INTERNAL-API.md)  
-The internal API contains auxiliary methods available for implementation to all `controlplane` images.  
+* __build__
+Build API - container images only.  
+Full implementation - [build API in detail](./docs/CONTROLPLANE-API-BUILD.md)
 
-[`controlplane.base` External API](./docs/CONTROLPLANE-BASE-EXTERNAL-API.md)  
-This API consists of two parts: the lifecycle groupings and the auxiliary groupings.  
-The lifecycle groupings are common to all `controlplane` images although all methods may not be implemented.
-The `controlplane.base` image provides the base implementation for this API.  
-The auxiliary groupings are only implemented by `controlplane.base` and provide direct access to the different functional components.
+* __release__  
+Release API - container images only.  
+Full implementation - [release API in detail](./docs/CONTROLPLANE-API-RELEASE.md)
 
-[`controlplane.base` Internal API](./docs/CONTROLPLANE-BASE-INTERNAL-API.md)  
-This internal API contains wrappers around the various functional components.
+* __deploy__
+Deploy API - of container images, modules or solutions.
+No implementation within `controlplane.base`.
 
-## External Commandline Methods
+* __run__
+Run API - of modules or solutions.
+No implementation within `controlplane.base`.
 
-The external `controlplane` API implements the `boot-commandline` method which prepares and extract the external commandline methods.
-They can be prepared for both Windows and Linux. The files are stored in `/conteco/extract`.  
-Note that all `controlplane` images avail of this interface, not just `controlplane.base`.  
+## Commandline Interface API
 
-__`start`__  
-Method to start a container of the `controlplane` image on Linux.
 
-__`start-output-console`__  
-Method to start the external execution console.  
-This implementation is used both for Windows and Linux.  
 
-__`start-registry`__
-Method to start a docker container registry in a standalone container.  
+CLI and CLI extraction.
 
-__`start.bat`__  
-Method to start a container of the `controlplane` image on Windows.
+## API Auxiliary and internal Methods
+
+[Overview of API auxiliary methods](./docs/INTERNAL-API-AUXILIARY.md)
+
+[Overview of other internal implementation methods](./docs/INTERNAL-AUXILIARY.md)
+These methods can be used as part of the internal API implementation within `controlplane.base` or any derived controlplane.

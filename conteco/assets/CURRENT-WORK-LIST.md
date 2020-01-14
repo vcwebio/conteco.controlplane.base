@@ -5,10 +5,11 @@
 ### Repository Removals
 
 
-
 ### Conteco Image Additions
 
-* conteco.mysql.base
+
+### Repository Push
+
 
 ## ModEco Modules
 
@@ -41,17 +42,6 @@ The specific, more specialised bits should go to the documentation of the implem
 There may be other docs images, e.g. examples etc. but not yet clear how.
 
 docs.overview is to be the only dedicated documentation container until further notice.
-
-### `docs.modeco`
-
-Eliminate docs.modeco
-
-- docs.overview (incorporate docs.modeco  and previously planned docs.conteco)
-- controlplane.base
-- controlplane.conteco
-- controlplane.modeco
-
-Managing the ContEco ecosystem images using `conteco.controlplane.conteco`.
 
 ## Controlplane Console
 
@@ -90,7 +80,7 @@ Split into two parts: setting author details and setting HTTPS / SSH format on r
 
 Make initial container log processing pipeline lighter and faster with priority to metrics processing, then logs, then other entries.
 
-### conteco.*.base
+### conteco. * .base
 
 Sort out the logging output of wrapped external images.
 

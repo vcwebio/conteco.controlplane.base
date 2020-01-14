@@ -1,8 +1,12 @@
-[`controlplane.base`](../README.md) >> `controlplane` Internal API
+[`controlplane.base`](../README.md) >> Internal Implementation Methods
 
 -----
 
-# `controlplane` Internal API
+# Internal Implementation Methods
+
+__`.base`__  [method] [arguments]
+Entrypoint of the `controlplane.base` API from a derived controlplane API.  
+Each controlplane defines its entrypoint so base APIs can be accessed.
 
 __`check-selector-exists`__  [$imageName] [$action]
 Used by the `repo` component.
@@ -15,13 +19,13 @@ __`entrypoint`__
 It sets the `CONTECO_EXECUTIONPLANE_BASEPATH` to `CONTECO_EXECUTIONPLANE_ORIGINALPATH` as it is a __ContEco__ defined image.  
 It also sets the default for `CONTECO_EXECUTIONTAG`.
 
+__`extract-and-execute`__  [$imageName] [$action]
+Auxilairy method to extract and execute image specific lifecycle methods.
+
 __`for-each`__  
 Auxiliary method that executes the commanline argument for each path selection. The path selector is the last argument and gets replaced.  
 It is used by the lifecycle external API methods to apply the action over the node selection.  
 The method insert foreach as first argument to indicate it was processed by the function.
-
-__`extract-and-execute`__  [$imageName] [$action]
-Auxilairy method to extract and execute image specific lifecycle methods.
 
 __`output-parser`__  
 Method that parses the `executionplane` JSON output (from __stdout__ or __stderr__) into pretty console output.
@@ -44,4 +48,4 @@ This method is used when it is necessary to keep the process output sequentially
 At times a command may exit before its output buffer has been fully processed by the `output-parser` process.  
 
 -----
-[`controlplane.base`](../README.md) >> `controlplane` Internal API
+[`controlplane.base`](../README.md) >> Internal Implementation Methods

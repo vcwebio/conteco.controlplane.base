@@ -1,13 +1,10 @@
-[`controlplane.base`](../README.md) >> [`controlplane` Internal API](./CONTROLPLANE-BASE-INTERNAL-API.md) >> Auxiliary API
+[`controlplane.base`](../README.md) >> API Auxiliary Methods
 
 -----
 
-# Auxiliary API
+# API Auxiliary Methods
 
-Auxiliary methods used to implement the external and internal API.
-
-__`config-deploy-generate-docker-compose-yml`__ [$rootpath]  
-Generates the docker-compose.yml file from template.
+There are some auxiliary methods supporint the implementation of the `config` API.
 
 __`config-increment-version`__ [$versionpart] [$rootpath]  
 Auxiliary method that takes the `$CONTECO_TAG` variable and increments the requested version part (_major_, _minor_ or _revision_).
@@ -21,4 +18,4 @@ __`config-set-version`__ [$version] [$rootpath]
 Sets the new version in the `$CONTECO_TAG` variable and `environment` file.
 
 -----
-[`controlplane.base`](../README.md) >> [`controlplane` Internal API](./CONTROLPLANE-BASE-INTERNAL-API.md) >> Auxiliary API
+[`controlplane.base`](../README.md) >> Auxiliary API

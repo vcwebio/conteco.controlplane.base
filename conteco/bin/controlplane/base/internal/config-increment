@@ -2,6 +2,11 @@
 versionpart=$1
 rootPath=$2
 
+if [[ "$CONTECO_TAG_TYPE" 	!= "incremental"]] ; then
+	executionplane-warning "Repository $CONTECO_TAG is not of type incremental: action ignored."
+	exit 0
+fi
+
 executionplane-info "increment-version $versionpart $rootPath $CONTECO_TAG"
 
 major=$( echo "$CONTECO_TAG" | cut -d "." -f 1 )

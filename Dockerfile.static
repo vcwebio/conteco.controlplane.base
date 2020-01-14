@@ -16,8 +16,7 @@ COPY ./ /conteco/repo/
 
 ##### BEGIN image/Dockerfile/build-instructions #####
 ENV CONTECO_ENTRYPOINT="bash" \
-    CONTECO_PREENTRYPOINT="/conteco/bin/controlplane/internal/entrypoint" \
-	CONTECO_PWD="/conteco/pwd"
+    CONTECO_PREENTRYPOINT="/conteco/bin/controlplane/internal/entrypoint"
 WORKDIR /conteco/pwd
 ##### END image/Dockerfile/build-instructions #####
 
@@ -40,5 +39,5 @@ LABEL io.vcweb.schema-version="1.0" \
       io.vcweb.build="image-base" \
       io.vcweb.label="Conteco controlplane base" \
       io.vcweb.description="The Conteco controlplane base image." \
-      io.vcweb.docker.cmd.help="docker run vcwebio/conteco.controlplane.base --help" 
+      io.vcweb.docker.cmd.help="docker run vcwebio/conteco.controlplane.base --help"
 ##### END image.base/Dockerfile/env-labels-footer #####

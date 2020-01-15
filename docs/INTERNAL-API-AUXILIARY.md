@@ -4,7 +4,19 @@
 
 # API Auxiliary Methods
 
-There are some auxiliary methods supporint the implementation of the `config` API.
+## `/conteco/bin`
+
+__`base`__  
+Entrypoint for the API when called from the CLI.
+
+## `/conteco/bin/controlplane/internal`
+
+__`.base`__  
+Entrypoint for the API if called as a base API from a derived controlplane.
+
+## `/conteco/bin/controlplane/base/internal`
+
+This folder contains auxiliary methods supporting the implementation of the `config` API.
 
 __`config-increment-version`__ [$versionpart] [$rootpath]  
 Auxiliary method that takes the `$CONTECO_TAG` variable and increments the requested version part (_major_, _minor_ or _revision_).

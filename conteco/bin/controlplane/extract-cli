@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 echo ""
-echo "boot-commandline expects up to 2 arguments:"
+echo "extract-cli expects up to 2 arguments:"
 echo "mandatory: windows or linx"
 echo "optional: sudo (on linux only)"
 echo ""
-if [[ "$1" == "linux" ]] ; then
-  . linux
-elif [[ "$1" == "windows" ]] ; then
-  . windows
+if [[ " linux windows " == *"$1"* ]] ; then
+  export CONTECO_OS="$1"
 else
   echo "PLEASE PROVIDE OPERATING SYSTEM ARGUMENT: linux  OR windows"
   echo ""
@@ -17,8 +15,6 @@ fi
 echo "Extracting controlplane.base start method."
 echo ""
 if [[ "$CONTECO_OS" != "linux" ]] ; then
-    cat /conteco/extract/start-output-console | envsubst > "/conteco/pwd/start-output-console.bat"
-	cat /conteco/extract/start-registry | envsubst > "/conteco/pwd/start-registry.bat"
 	cat /conteco/extract/start.bat | envsubst > "/conteco/pwd/start.bat"
 	echo "(Windows) Run: start.bat [conteco/modeco] [realm] to start the controlplane for conteco, modeco resp."
 fi
@@ -26,8 +22,6 @@ if [[ "$CONTECO_OS" != "windows" ]] ; then
 	if [[ "$2" == "sudo" ]] ; then
 		export CONTECO_SUDO="sudo "
 	fi
-	cat /conteco/extract/start-output-console | envsubst > "/conteco/pwd/start-output-console"
-	cat /conteco/extract/start-registry | envsubst > "/conteco/pwd/start-registry"
 	cat /conteco/extract/start | envsubst '${CONTECO_SUDO} ${CONTECO_REALM} ${CONTECO_ECOSYSTEM}' > "/conteco/pwd/start"
 	echo "(linux) Run: ./start [conteco/modeco] [realm] to start the controlplane for conteco, modeco resp."
 fi

@@ -1,16 +1,5 @@
 # Current Work List
 
-## Repository Removals / Additions
-
-### Repository Removals
-
-
-### Conteco Image Additions
-
-
-### Repository Push
-
-
 ## ModEco Modules
 
 ### Cluster Registry Module
@@ -61,20 +50,27 @@ Service invocation opens the door to cluster-wide commands, executed on each nod
 
 The client requires swarm log collection (ELK or KELK type) to display the output.
 
-Invocation of Client Console v2 should (initially) follow the same pattern as v1: extraction with `boot-commandline` and invocation with `start-service` instead of `start`. The `start-service` command then starts the (replicated) client service and hooks interactively into the container instance on the local node.
+Invocation of Client Console v2 should (initially) follow the same pattern as v1: extraction with `extract-cli` and invocation with `start-service` instead of `start`. The `start-service` command then starts the (replicated) client service and hooks interactively into the container instance on the local node.
 
 ## Controlplane API
 
 ### Cluster / Single Node flag
 
-Implement cluster / single node flag which default can be set from boot-commandline.  
+Implement cluster / single node flag which default can be set from extract-cli.  
 It should also be easy to set interactively.
 
+## ModEco
+
+Tweak the structure of the ModEco ecosystem to create modules with packages.  
+CONTECO_TYPE becomes the module name and CONTECO_NAME the package name.  
+Modules would consist a core package with additional packages for optional features - backup, bulk import, etc.
+
+There should be templates of these packages to start from.  
+Use the base.* namespace for these templates.
+
+Could there be more than one core package? And what about demo? Core + import?
+
 ## Various Enhancements
-
-### repo prepare
-
-Split into two parts: setting author details and setting HTTPS / SSH format on remote origin
 
 ### modeco.swarm.base
 

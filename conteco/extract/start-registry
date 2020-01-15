@@ -1,1 +1,0 @@
-${CONTECO_SUDO}docker run -d -p 5000:5000 --restart=always --name registry_2_conteco -v registry_2_conteco_data:/var/lib/registry ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.registry.base:2

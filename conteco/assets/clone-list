@@ -19,8 +19,8 @@ git clone https://github.com/vcwebio/conteco.external.kafka-manager.git
 git clone https://github.com/vcwebio/conteco.external.kibana.git
 git clone https://github.com/vcwebio/conteco.external.ksql-server.git
 git clone https://github.com/vcwebio/conteco.external.logstash.git
-git clone https://github.com/vcwebio/conteco.external.mysql.git
 git clone https://github.com/vcwebio/conteco.external.metricbeat.git
+git clone https://github.com/vcwebio/conteco.external.mysql.git
 git clone https://github.com/vcwebio/conteco.external.nexus.git
 git clone https://github.com/vcwebio/conteco.external.nginx.git
 git clone https://github.com/vcwebio/conteco.external.registry.git
@@ -45,10 +45,10 @@ git clone https://github.com/vcwebio/conteco.metricbeat.node.git
 git clone https://github.com/vcwebio/conteco.metricbeat.overlay.git
 git clone https://github.com/vcwebio/conteco.module.ekg.git
 git clone https://github.com/vcwebio/conteco.module.streamsets.git
+git clone https://github.com/vcwebio/conteco.mysql.base.git
 git clone https://github.com/vcwebio/conteco.nexus.base.git
 git clone https://github.com/vcwebio/conteco.nginx.base.git
 git clone https://github.com/vcwebio/conteco.nginx.rewrite.git
-git clone https://github.com/vcwebio/conteco.mysql.base.git
 git clone https://github.com/vcwebio/conteco.registry.base.git
 git clone https://github.com/vcwebio/conteco.schema-registry.git
 git clone https://github.com/vcwebio/conteco.sql-server.base.git

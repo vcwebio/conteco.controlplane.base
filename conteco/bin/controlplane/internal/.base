@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 (
-	method=$1
-	shift
-    export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
-    . executionplane-invoke "$0 $@"
-    $method for-each-node $@
-    . executionplane-complete
+  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
+#  . executionplane-invoke "$0 $@"
+	$@
+#  . executionplane-complete
 )

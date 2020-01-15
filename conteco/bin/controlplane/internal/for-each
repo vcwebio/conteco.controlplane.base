@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 (
-    . executionplane-invoke "$0 $@"
+#    . executionplane-invoke "$0 $@"
     selector=$(set-selector "${BASH_ARGV[0]}")
 	shopt -s nullglob
 
@@ -17,5 +17,5 @@
         $command for-each-node ${@:2:$#-2} $f
     )
     done;
-    executionplane-complete
+#    executionplane-complete
 )

@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-export CONTECO_OS="linux"
-export CONTECO_PWD_VOLUME="/conteco/pwd"

@@ -1,6 +1,8 @@
 #
-# config [arguments]  <repository selector>
-# The config method implements various options:
+#
+# config API - controlplane.base
+#
+# The config API contains methods that configure the repository.
 #
 # config build <repository selector>
 # The build option regenerates the Dockerfile.static from the environment settings.
@@ -15,4 +17,5 @@
 #
 # config set-version <repository selector>
 # This build option assigns a specific value to the CONTECO_TAG environment variable.
+#
 #

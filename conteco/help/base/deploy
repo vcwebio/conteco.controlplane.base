@@ -1,4 +1,7 @@
 #
-# deploy
-# controlplane.base has no implementation for deploy.
+#
+# deploy API - controlplane.base
+#
+# controlplane.base does not implement any methods for deploy API.
+#
 #

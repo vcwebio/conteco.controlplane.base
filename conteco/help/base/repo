@@ -1,55 +1,58 @@
 #
-# repo [arguments]  <repository selector>
-# The repo API section implements methods that operate on the repository.
-# These are either direct ports of or implemented using methods from GIT.
 #
-# add  <repository selector>
+# repo API - controlplane.base
+#
+# The repo API consists of methods that operate on the repository.
+# These are either direct ports or implemented using methods of GIT.
+#
+# repo add  <repository selector>
 # Stages all changed files. A direct port of git add .
 #
-# branch [arguments]  <repository selector>
+# repo branch [arguments]  <repository selector>
 # Executes _git branch_ [arguments] on the selected repositories.
 #
-# create-workspace <repository selector>
+# repo create-workspace <repository selector>
 # This method creates a _workspace_ branch and checks it out.
 #
-# commit [message]  <repository selector>
+# repo commit [message]  <repository selector>
 # Commits the staged files to the current branch.
 #
-# compact  <repository selector>
+# repo compact  <repository selector>
 # Compacts the commit log with garbage collection and pushes it out to the remote.
 #
-# checkin-workspace  <repository selector>
+# repo checkin-workspace  <repository selector>
 # Checks out the main branch and merges the _workspace_ branch into it.
 # It creates or updates the position of the tag with value `$CONTECO_TAG`.
 #
-# config <repository selector>
+# repo config <repository selector>
 # Sets the remote origin of the repository and sets the credentials to be stored.
 #
-# init <repository selector>
+# repo init <repository selector>
 # Initialises or reinitialises the repository. Direct port of _git init_.
 #
-# log <repository selector>
+# repo log <repository selector>
 # Displays the commit log of the repository. Direct port of _git log_.
 #
-# log10  <repository selector>
+# repo log10  <repository selector>
 # Displays a compact summary of the last 10 commits of the repository.
 #
-# pull <repository selector>
+# repo pull <repository selector>
 # Pulls the remote into the repository. Direct port of _git pull_.
 #
-# push  <repository selector>
+# repo push  <repository selector>
 # Pushes the current branch to its remote. Direct port of _git push_.
 # It also tags the latest commit with the current $CONTECO_TAG
 #
-# remote <repository selector>
+# repo remote <repository selector>
 # Direct port of _git remote_.
 #
-# remove-workspace <repository selector>
+# repo remove-workspace <repository selector>
 # Removes the workspace branch from the repository.
 #
-# status <repository selector>
+# repo status <repository selector>
 # Gives the current status of the repository. Direct port of _git status_.
 #
-# tag <repository selector>
+# repo tag <repository selector>
 # Direct port of _git tag_.
+#
 #

@@ -1,16 +1,22 @@
 #
-# extract repo [repository short name]
+#
+# console API - controlplane.base
+#
+# The console API contains methods that run outside the image repository context.
+#
+# console extract repo [repository short name]
 # Extracts the repository from the container image specified by [repository short name].
 # The [repository short name] consists of $CONTECO_TYPE.$CONTECO_NAME, i.e. the last two name parts dot separated before the image tag.
 #
-# load [image name] [image tag - optional]
+# console load [image name] [image tag - optional]
 # Pulls and tags the container image specified by [image name].
 # If the [image tag] is supplied than it creates a second tag for the image.
 #
-# set-repo-user [name] [email]
+# console set-repo-user [name] [email]
 # Sets the current use identity to be used for GIT operations on the repositories.
 #
-# unload [image name] [image tag - optional]
-# Untags the container image specified by [image name].  
+# console unload [image name] [image tag - optional]
+# Untags the container image specified by [image name].
 # If the [image tag] is supplied than it untags both latest and tag specific image.
+#
 #

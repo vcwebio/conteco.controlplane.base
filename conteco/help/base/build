@@ -1,8 +1,14 @@
 #
-# build <repository selector>
-# The default method builds the image from the repository.
-# It tags the image with latest and the CONTECO_TAG.
 #
-# build deep <repository selector>
-# This option first builds the base images recursively before building the current image.
+# build API - controlplane.base
+#
+# The build API consists of one method that builds the repository container image.
+#
+# build <repository selector>
+# The build method without arguments builds the repository container image
+# and tags the image with latest and the CONTECO_TAG.
+#
+# build --deep <repository selector>
+# This _--deep_ flag force a recursive build of the base images recursively before building the container image.
+#
 #

@@ -3,4 +3,5 @@ if [[ "$mode" != "modeco" && "$mode" != "base" ]] ; then
 	mode="conteco"
 fi
 echo "Starting controlplane.$mode"
-${CONTECO_SUDO}docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/conteco/pwd ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.controlplane.$mode --interactive start $(pwd) $mode $2
+docker volume create --driver local --opt type=none --opt o=bind --opt device=$(pwd)/conteco/pwd controlplane > /dev/null
+${CONTECO_SUDO}docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd):/conteco/pwd ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.controlplane.$mode --interactive start controlplane $2

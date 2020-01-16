@@ -1,47 +1,5 @@
 # Current Work List
 
-## CLI Reform
-
-start must set CONTECO_OS - currently not setting it
-Deduce it from pwd supplied: Windows requires host mapping, thus \
-
-Remove mode from invocation - non-sensical
-
-docker volume create --driver local --opt type=none --opt o=bind --opt device=c:\conteco\pwd controlplane2
-docker volume create --driver local --opt type=nfs --opt o=addr=10.1.1.125,rw --opt device=:\conteco_pwd controlplane
-
-nfs still has permission issues, but bind can be used already
-someone says mapping directly to nfs server ...
-Note, instead of a bind mount to the host NFS directory, you can also do a volume mount directly the NFS server. Here are several examples of how to do that:
-
-  # create a reusable volume
-  $ docker volume create --driver local \
-      --opt type=nfs \
-      --opt o=nfsvers=4,addr=nfs.example.com,rw \
-      --opt device=:/path/to/dir \
-      foo
-
-  # or from the docker run command
-  $ docker run -it --rm \
-    --mount type=volume,dst=/container/path,volume-driver=local,volume-opt=type=nfs,\"volume-opt=o=nfsvers=4,addr=nfs.example.com\",volume-opt=device=:/host/path \
-    foo
-
-  # or to create a service
-  $ docker service create \
-    --mount type=volume,dst=/container/path,volume-driver=local,volume-opt=type=nfs,\"volume-opt=o=nfsvers=4,addr=nfs.example.com\",volume-opt=device=:/host/path \
-    foo
-
-  # inside a docker-compose file
-  ...
-  volumes:
-    nfs-data:
-      driver: local
-      driver_opts:
-        type: nfs
-        o: nfsvers=4,addr=nfs.example.com,rw
-        device: ":/path/to/dir"
-  ...
-
 ## ModEco Modules
 
 ### Cluster Registry Module

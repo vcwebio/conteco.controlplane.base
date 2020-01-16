@@ -1,18 +1,16 @@
 #!/usr/bin/env bash
 pwd_volume="$1"
-if [[ "$pwd_volume" != "/"* ]] ; then
+if [[ "$pwd_volume" == *"\\"* ]] ; then
 	pwd_volume=$( echo $pwd_volume | tr '\\' '\/' | tr -d ':' )
 	pwd_volume="/${pwd_volume//\/\//\/}"
 	pwd_volume="${pwd_volume,,}"
+	export CONTECO_OS="windows"
+else
+	export CONTECO_OS="linux"
 fi
-mode=$2
-if [[ "$mode" != "modeco" && "$mode" != "base" ]] ; then
-	mode="conteco"
+if [[ "$2" != "" ]] ; then
+	export CONTECO_REALM="$2"
 fi
-if [[ "$3" != "" ]] ; then
-	export CONTECO_REALM="$3"
-fi
-export CONTECO_ECOSYSTEM=$mode
-export PS1="${mode}#$ "
+export PS1="${CONTECO_ECOSYSTEM}#$ "
 export CONTECO_PWD_VOLUME="$pwd_volume"
 bash

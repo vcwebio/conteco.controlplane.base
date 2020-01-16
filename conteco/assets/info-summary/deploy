@@ -1,0 +1,19 @@
+REPOSITORY INFORMATION
+----------------------
+label               ${CONTECO_LABEL}
+description         ${CONTECO_DESCRIPTION}
+
+realm               ${CONTECO_REALM}
+ecosystem           ${CONTECO_ECOSYSTEM}
+
+image-type          ${CONTECO_TYPE}
+instance-name       ${CONTECO_NAME}
+image-tag           ${CONTECO_TAG}
+
+base-image          ${CONTECO_BASE}
+image-build         ${CONTECO_BUILD}
+
+stack-names         ${CONTECO_CD_GLOBAL_STACKNAMES}
+boot-stacks         ${CONTECO_CD_GLOBAL_BOOTSTACKS}
+run-stacks          ${CONTECO_CD_GLOBAL_RUNSTACKS}
+volume-list         ${CONTECO_CD_GLOBAL_VOLUME_LIST}

@@ -3,18 +3,14 @@
 The `controlplane.base` image of the __ContEco__ container ecosystem.
 See `conteco.docs.overview` for more information on the ContEco ecosystem.
 
-The `controlplane.base` image implement core controlplane functionality.
+The `controlplane.base` image implements the core controlplane functionality.  
 * implementation of the commandline interfaces
 * extraction of the interactive commandline interface
 * full implementation of (console,) repo, build and release API
 * partial implementation of the config API - set of auxiliary methods
 * a set of internal auxiliary methods available to the internal API implementation.
 
-See `conteco.docs.overview` for more information on how to extract and use the commandline interface.
-
 ## Controlplane API
-
-The top level controlplane API consists of the following methods:
 
 * __console__  
 API section containing methods that executes outside the context of a repository.  
@@ -70,6 +66,8 @@ conteco [API method] [arguments]
 # when modeco CLI is invoked
 modeco [API method] [arguments]
 ```
+
+See `conteco.docs.overview` for more information on how to extract and use the commandline interface.
 
 [CLI Implementation in Detail](./docs/COMMANDLINE-INTERFACE.md)
 

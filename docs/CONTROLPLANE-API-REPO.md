@@ -31,6 +31,9 @@ It creates or updates the position of the tag with value `$CONTECO_TAG`.
 __`config`__  
 Sets the remote origin of the repository and sets the credentials to be stored.
 
+__`info`__  
+Returns a summary of the repository contents.
+
 __`init`__  
 Initialises or reinitialises the repository. Direct port of _git init_.
 

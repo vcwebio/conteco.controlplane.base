@@ -4,6 +4,11 @@
 
 # Internal Implementation Methods
 
+### `/conteco/bin`
+
+__`base`__  
+CLI handler for `controlplane.base`, for demo purposes only.
+
 ## `/conteco/bin/controlplane/internal`
 
 __`entrypoint`__  

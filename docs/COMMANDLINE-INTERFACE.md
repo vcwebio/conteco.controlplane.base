@@ -13,24 +13,7 @@ This is done through the controlplane handler which can be found in the `/contec
 For convention, each controlplane has its own, although the handler executes the same logic.  
 It underlines which controlplane is currently active.
 
-## CLI Invocation Script Extraction
-
-The invocation script are prepared and extracted using the `extract-cli` method.  
-
-
-
-The external API consists of five lifecycle component and six auxiliary component.  
-
-
-The _controlplane_ API exposes the following methods. These methods can be invoked directly.  
-The method help to extract and run an interactive commandline console.
-
 ## Method Overview
-
-### `/conteco/bin`
-
-__`base`__  
-CLI handler for `controlplane.base`, for demo purposes only.
 
 ### `/conteco/bin/controlplane`
 

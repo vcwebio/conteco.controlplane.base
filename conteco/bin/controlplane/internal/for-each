@@ -12,9 +12,12 @@
     for f in $selector ;
     do
     (
-        . ./$f/environment
-		command=$1
-        $command for-each-node ${@:2:$#-2} $f
+      . ./$f/environment
+      if [[ "$2" == "--info" ]] ; then
+      . for-each-info "$1"
+      else
+        $1 for-each-node ${@:2:$#-2} $f
+      fi
     )
     done;
 #    executionplane-complete

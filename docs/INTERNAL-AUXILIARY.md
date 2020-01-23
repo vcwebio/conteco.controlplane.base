@@ -20,6 +20,10 @@ __`for-each`__
 Wrapper around the API calls that run within the context of a repository - repo, config, build, release, deploy and run.
 It's bootstrapped from within the API method. It gets the repositories from the selection and invokes the API method for each.
 
+__`for-each-info`__  
+Auxiliary method to invoke the correct info-generating script for the current API method.  
+It returns an overview of the settings relevant for the context.
+
 __`output-parser-tagged`__  
 Used by the CLI to parse the output from unmanaged commands.
 

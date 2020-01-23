@@ -5,7 +5,8 @@ export CONTECO_DESCRIPTION="The Conteco controlplane base image."
 
 export CONTECO_TYPE="controlplane"
 export CONTECO_NAME="base"
-export CONTECO_TAG="v1.2.0"
+export CONTECO_TAG="v1.2.1"
+export CONTECO_TAG_TYPE="incremental"
 
 export CONTECO_BASE="external.controlplane"
 export CONTECO_BUILD="image-base"

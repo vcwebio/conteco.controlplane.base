@@ -54,6 +54,11 @@ Invocation of Client Console v2 should (initially) follow the same pattern as v1
 
 ## Controlplane API
 
+### Implement Info Summary
+
+Needs implementing for all top level API methods and per controlplane.  
+These are scripts that return key value settings of the image.
+
 ### Cluster / Single Node flag
 
 Implement cluster / single node flag which default can be set from extract-cli.  

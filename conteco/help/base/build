@@ -1,6 +1,7 @@
 #
 #
 # build API - controlplane.base
+# Use the --info flag to get build specific container image information.
 #
 # The build API consists of one method that builds the repository container image.
 #

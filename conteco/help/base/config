@@ -1,6 +1,7 @@
 #
 #
 # config API - controlplane.base
+# Use the --info flag to get config specific container image information.
 #
 # The config API contains methods that configure the repository.
 #

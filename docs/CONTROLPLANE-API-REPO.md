@@ -59,6 +59,9 @@ Removes the workspace branch from the repository.
 __`status`__  
 Gives the current status of the repository. Direct port of _git status_.
 
+__`symbolic-ref`__  
+Direct port of _git symbolic-ref_.  
+
 __`tag`__  
 Direct port of _git tag_.  
 

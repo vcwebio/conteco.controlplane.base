@@ -1,6 +1,7 @@
 #
 #
 # repo API - controlplane.base
+# Use the --info flag to get repo specific container image information.
 #
 # The repo API consists of methods that operate on the repository.
 # These are either direct ports or implemented using methods of GIT.
@@ -51,6 +52,9 @@
 #
 # repo status <repository selector>
 # Gives the current status of the repository. Direct port of _git status_.
+#
+# repo symbolic-ref <repository selector>
+# Direct port of _git symbolic-ref_.
 #
 # repo tag <repository selector>
 # Direct port of _git tag_.

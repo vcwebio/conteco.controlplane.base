@@ -1,5 +1,7 @@
-REPOSITORY INFORMATION
-----------------------
+#!/usr/bin/env bash
+echo "
+IMAGE DEPLOY INFO
+-----------------
 label               ${CONTECO_LABEL}
 description         ${CONTECO_DESCRIPTION}
 
@@ -17,3 +19,4 @@ stack-names         ${CONTECO_CD_GLOBAL_STACKNAMES}
 boot-stacks         ${CONTECO_CD_GLOBAL_BOOTSTACKS}
 run-stacks          ${CONTECO_CD_GLOBAL_RUNSTACKS}
 volume-list         ${CONTECO_CD_GLOBAL_VOLUME_LIST}
+"

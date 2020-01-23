@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+(
+  infoFile="/conteco/assets/info-summary/$1"
+  if [[ -f $infoFile ]] ; then
+    $infoFile | envsubst
+  else
+    executionplane-warning "No info file for $1. Showing repo info."
+    infoFile="/conteco/assets/info-summary/repo"
+    $infoFile | envsubst
+  fi
+)

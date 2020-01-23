@@ -1,6 +1,7 @@
 #
 #
 # console API - controlplane.base
+# Use the --info flag to get console specific information.
 #
 # The console API contains methods that run outside the image repository context.
 #

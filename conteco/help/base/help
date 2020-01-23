@@ -10,4 +10,5 @@
 # It provides full implementation for repo, build and release and partial implementation of config and console.
 # There is no implementation for deploy and run.
 #
+# Each to level API method implements the --info flag returning information relevant to the API method about the image.
 #

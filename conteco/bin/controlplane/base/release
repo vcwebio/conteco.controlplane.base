@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
-if [[ "$1" == "for-each-node" ]] ; then
 (
-	shift
-  . executionplane-invoke "$0 $@"
-	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
+	export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
+	. executionplane-invoke "$0 $@"
+	imageName="${@: -1}"
+	rootPath="/conteco/pwd/${imageName}"
+	. $rootPath/environment
+
+	if [[ $# -gt 1 && "$1" == "--info" ]] ; then
+		. info-summary build
+		exit 0
+	fi
+
 	executionplane "--errors-only" docker image push "$CONTECO_REGISTRY$imageName:latest"
 	if [[ "${CONTECO_TAG}" != "" ]] ; then
 		executionplane "--errors-only" docker image push "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
 	fi
   executionplane-complete
 )
-else
-  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
-	for-each $(basename $0) $@
-fi

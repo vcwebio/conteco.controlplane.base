@@ -1,5 +1,15 @@
 # Current Work List
 
+## Full Stack Description
+
+```bash
+--> conteco - configuring sets of container images
+      --> modeco - configuring functional modules
+            --> swareco - configuring and running a cluster
+                  --> soleco - configuring and running a solution
+                        --> infometis - running the data world
+```
+
 ## ModEco Modules
 
 ### Cluster Registry Module
@@ -13,24 +23,7 @@ Aim is to have an (unsafe) externally accessible registry so internet access can
 Module based on ELK pure parsing container logs, filtering out executionplane entries only.
 The entries are parsed into a simple log. Only essential fields should be indexed by ES.
 
-### Templated Repository Generator
-
-Need to create a blank repository generator images generating blank images for, amongst others.
-* base
-* stack
-* module
-
-Could this also be used to update the schema of existing ones?
-
 ## Documentation
-
-### docs.overview
-
-The docs.overview image should have concise documentation to get started.  
-The specific, more specialised bits should go to the documentation of the implementing image.  
-There may be other docs images, e.g. examples etc. but not yet clear how.
-
-docs.overview is to be the only dedicated documentation container until further notice.
 
 ## Controlplane Console
 

@@ -60,9 +60,8 @@ git clone https://github.com/vcwebio/conteco.templates.build.git
 git clone https://github.com/vcwebio/conteco.traefik.base.git
 git clone https://github.com/vcwebio/conteco.tshark.base.git
 git clone https://github.com/vcwebio/conteco.zookeeper.base.git
-git clone https://github.com/vcwebio/modeco.ekg.base.git
-git clone https://github.com/vcwebio/modeco.kekg.base.git
-git clone https://github.com/vcwebio/modeco.swarm.base.git
-git clone https://github.com/vcwebio/modeco.swarm_es.base.git
-git clone https://github.com/vcwebio/modeco.templates.base.git
-git clone https://github.com/vcwebio/modeco.traefik.base.git
+git clone https://github.com/vcwebio/modeco.base.ekg.git
+git clone https://github.com/vcwebio/modeco.base.kekg.git
+git clone https://github.com/vcwebio/modeco.swarm.main.git
+git clone https://github.com/vcwebio/modeco.swarm_es.main.git
+git clone https://github.com/vcwebio/modeco.traefik.main.git

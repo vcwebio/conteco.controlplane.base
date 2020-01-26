@@ -1,35 +1,28 @@
 #!/usr/bin/env bash
-if [[ "$1" == "for-each-node" ]] ; then
 (
-	shift
+	export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
 	. executionplane-invoke "$0 $@"
-	method=$1
-	shift
-	# set path of node
-	if [[ $# -gt 1 ]] ; then
-	rootPath="/conteco/pwd/${BASH_ARGV[0]}"
-	else
-	rootPath="/conteco/pwd/$1"
-	fi
+	imageName="${@: -1}"
+	rootPath="/conteco/pwd/${imageName}"
+	. $rootPath/environment
+
 	currentpwd=$(pwd)
 	if [[ -d $rootPath ]] ; then
 	cd $rootPath
 	fi
-	echo $rootPath
-	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
-	case "$method" in
+	case "$1" in
 		add)
 			executionplane git add .
 		;;
 		branch)
-			executionplane git branch ${@:1:$#-1}
+			executionplane git branch ${@:2:$#-2}
 		;;
 		create-workspace)
 			executionplane git branch "workspace"
 			executionplane git checkout "workspace"
 		;;
 		commit)
-			message="${@:1:$#-1}"
+			message="${@:2:$#-2}"
 			executionplane git commit -m "$(echo "$message")"
 		;;
 		compact)
@@ -53,25 +46,25 @@ if [[ "$1" == "for-each-node" ]] ; then
 			executionplane git init
 		;;
 		log)
-			executionplane git log ${@:1:$#-1}
+			executionplane git log ${@:2:$#-2}
 		;;
 		log10)
 			executionplane git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10
-			;;
+		;;
 		pull)
-			executionplane git pull ${@:1:$#-1}
-			;;
+			executionplane git pull ${@:2:$#-2}
+		;;
 		push)
-		  if [[ "$2" == "" ]] ; then
+		  if [[ "$3" == "" ]] ; then
 				executionplane "--errors-only" git push origin master
 				executionplane "--errors-only" git push -f origin "$CONTECO_TAG"
 			else
-				executionplane git push ${@:1:$#-1}
+				executionplane git push ${@:2:$#-2}
 			fi
-			;;
+		;;
 		remote)
-			executionplane git remote ${@:1:$#-1}
-			;;
+			executionplane git remote ${@:2:$#-2}
+		;;
 		remove)
 			cd $currentpwd
 			executionplane rm -rf $rootPath
@@ -81,23 +74,24 @@ if [[ "$1" == "for-each-node" ]] ; then
 		;;
 		status)
 			executionplane git status
-			;;
+		;;
 		symbolic-ref)
-			executionplane git symbolic-ref ${@:1:$#-1}
+			executionplane git symbolic-ref ${@:2:$#-2}
 		;;
 		tag)
-			executionplane git tag ${@:1:$#-1}
-			;;
+			if [[ "$3" == "" ]] ; then
+				executionplane git tag ${CONTECO_TAG}
+			else
+				executionplane git tag ${@:2:$#-2}
+			fi
+		;;
+		--info)
+			. info-summary repo
+		;;
 		*)
-			executionplane-error "Method not recognised: $method."
-			;;
+			executionplane-error "Method not recognised: $1."
+		;;
 	esac
 	cd $currentpwd
 	executionplane-complete
 )
-else
-(
-	export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
-	for-each $(basename $0) $@
-)
-fi

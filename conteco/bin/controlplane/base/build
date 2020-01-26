@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
-if [[ "$1" == "for-each-node" ]] ; then
 (
-	shift
-  . executionplane-invoke "$0 $@"
-	# extract build method
-	if [[ $# -gt 1 && "$1" == "--deep" ]] ; then
-		method="deep"
-		rootPath="/conteco/pwd/${BASH_ARGV[0]}"
-	else
-		rootPath="/conteco/pwd/$1"
+	export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
+	. executionplane-invoke "$0 $@"
+	imageName="${@: -1}"
+	rootPath="/conteco/pwd/${imageName}"
+	. $rootPath/environment
+
+	if [[ $# -gt 1 ]] ; then
+		if [[ "$1" == "--deep" ]] ; then
+			method="deep"
+		elif [[ "$1" == "--info" ]] ; then
+			. info-summary build
+			exit 0
+		fi
 	fi
-	imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.${CONTECO_TYPE}.${CONTECO_NAME}"
 
 	# deep build down to base included
 	if [[ ($method == "deep" && "${CONTECO_TYPE}" != "external") ]] ; then
@@ -30,7 +33,3 @@ if [[ "$1" == "for-each-node" ]] ; then
 	fi
   executionplane-complete
 )
-else
-  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
-	for-each $(basename $0) $@
-fi

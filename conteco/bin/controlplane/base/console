@@ -1,37 +1,35 @@
 #!/usr/bin/env bash
 (
   . executionplane-invoke "$0 $@"
-  method=$1
-  shift
-  case $method in
+  case $1 in
     extract-repo)
-      imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.$@"
+      imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.$2"
 			. executionplane-capture-output docker create ${CONTECO_REGISTRY}$imageName
 			destination="/conteco/pwd/$imageName"
 			executionplane mkdir -p $destination
 			executionplane docker container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
 		;;
     load)
-      imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.$1"
+      imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.$2"
       executionplane docker image pull "$CONTECO_REGISTRY$imageName"
-			if [[ "$2" != "" ]] ; then
-				executionplane docker tag "$CONTECO_REGISTRY$imageName" "$CONTECO_REGISTRY$imageName:$2"
+			if [[ "$3" != "" ]] ; then
+				executionplane docker tag "$CONTECO_REGISTRY$imageName" "$CONTECO_REGISTRY$imageName:$3"
 			fi
 		;;
     set-repo-user)
-			executionplane git config --global user.name "$1"
-			executionplane git config --global user.email "$2"
+			executionplane git config --global user.name "$2"
+			executionplane git config --global user.email "$3"
 		;;
     unload)
-      imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.$1"
+      imageName="${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.$2"
 			executionplane docker image rm "$CONTECO_REGISTRY$imageName"
-      if [[ "$2" != "" ]] ; then
-        executionplane docker image rm "$CONTECO_REGISTRY$imageName:$2"
+      if [[ "$3" != "" ]] ; then
+        executionplane docker image rm "$CONTECO_REGISTRY$imageName:$3"
 			fi
 		;;
     *)
-      executionplane-error "Method not recognised: $method."
-      ;;
+      executionplane-error "Method not recognised: $1."
+    ;;
   esac
   executionplane-complete
 )

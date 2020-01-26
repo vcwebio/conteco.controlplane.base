@@ -80,7 +80,7 @@
 		;;
 		tag)
 			if [[ "$3" == "" ]] ; then
-				executionplane git tag ${CONTECO_TAG}
+				executionplane git tag -f ${CONTECO_TAG}
 			else
 				executionplane git tag ${@:2:$#-2}
 			fi

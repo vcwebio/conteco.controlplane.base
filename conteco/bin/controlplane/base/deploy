@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 (
+  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
   . executionplane-invoke "$0 $@"
-	executionplane-error "API Section not implemented: ${CONTECO_NAME} $(command $0)."
-	executionplane-complete
+  imageName="${@: -1}"
+  rootPath="/conteco/pwd/${imageName}"
+  . $rootPath/environment
+
+  case $1 in
+    --info)
+      . info-summary deploy
+    ;;
+    *)
+      executionplane-error "Method not recognised: $1."
+    ;;
+  esac
+  executionplane-complete
 )

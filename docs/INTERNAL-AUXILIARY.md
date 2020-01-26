@@ -11,16 +11,15 @@ CLI handler for `controlplane.base`, for demo purposes only.
 
 ## `/conteco/bin/controlplane/internal`
 
+__`cli-executor`__  
+CLI script incorporating repository selection.
+
 __`entrypoint`__  
 `controlplane` image specific `CONTECO_PREENTRYPOINT` invoked at container instantiation.  
 It sets the `CONTECO_EXECUTIONPLANE_BASEPATH` to `CONTECO_EXECUTIONPLANE_ORIGINALPATH` as it is a __ContEco__ defined image.  
 It also sets the default for `CONTECO_EXECUTIONTAG`.
 
-__`for-each`__  
-Wrapper around the API calls that run within the context of a repository - repo, config, build, release, deploy and run.
-It's bootstrapped from within the API method. It gets the repositories from the selection and invokes the API method for each.
-
-__`for-each-info`__  
+__`info-summary`__  
 Auxiliary method to invoke the correct info-generating script for the current API method.  
 It returns an overview of the settings relevant for the context.
 

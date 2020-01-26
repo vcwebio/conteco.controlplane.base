@@ -6,30 +6,28 @@
 	rootPath="/conteco/pwd/${imageName}"
 	. $rootPath/environment
 
-	if [[ $# -gt 1 ]] ; then
-		if [[ "$1" == "--deep" ]] ; then
-			method="deep"
-		elif [[ "$1" == "--info" ]] ; then
-			. info-summary build
-			exit 0
-		fi
-	fi
-
 	# deep build down to base included
-	if [[ ($method == "deep" && "${CONTECO_TYPE}" != "external") ]] ; then
+	if [[ ($1 == "--deep" && "${CONTECO_TYPE}" != "external") ]] ; then
 		baseImage=$(echo ${CONTECO_BASE} | cut -f1 -d":")
-		build ${@:1:$#-1} $baseImage
+		build ${@:1:$#-1} ${CONTECO_REALM}/${CONTECO_ECOSYSTEM}.$baseImage
 	fi
 
-	# build latest image
-	tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
-	cat $rootPath/Dockerfile | envsubst > $tmpfile
-	executionplane "--errors-only" docker build -t $imageName -f $tmpfile $rootPath
-	rm $tmpfile
+	case $1 in
+		--info)
+			. info-summary build
+		;;
+		*)
+			# build latest image
+			tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
+			cat $rootPath/Dockerfile | envsubst > $tmpfile
+			executionplane "--errors-only" docker build -t $imageName -f $tmpfile $rootPath
+			rm $tmpfile
 
-	# tag latest image
-	if [[ "${CONTECO_TAG}" != "" ]] ; then
-		executionplane "--errors-only" docker tag "$imageName" "$imageName:${CONTECO_TAG}"
-	fi
+			# tag latest image
+			if [[ "${CONTECO_TAG}" != "" ]] ; then
+				executionplane "--errors-only" docker tag "$imageName" "$imageName:${CONTECO_TAG}"
+			fi
+		;;
+	esac
   executionplane-complete
 )

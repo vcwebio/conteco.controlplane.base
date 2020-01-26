@@ -6,14 +6,16 @@
 	rootPath="/conteco/pwd/${imageName}"
 	. $rootPath/environment
 
-	if [[ $# -gt 1 && "$1" == "--info" ]] ; then
-		. info-summary build
-		exit 0
-	fi
-
-	executionplane "--errors-only" docker image push "$CONTECO_REGISTRY$imageName:latest"
-	if [[ "${CONTECO_TAG}" != "" ]] ; then
-		executionplane "--errors-only" docker image push "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
-	fi
+	case $1 in
+		--info)
+			. info-summary release
+		;;
+		*)
+			executionplane "--errors-only" docker image push "$CONTECO_REGISTRY$imageName:latest"
+			if [[ "${CONTECO_TAG}" != "" ]] ; then
+				executionplane "--errors-only" docker image push "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
+			fi
+		;;
+	esac
   executionplane-complete
 )

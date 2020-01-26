@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export CONTECO_LABEL="Conteco controlplane base"
+export CONTECO_LABEL=" controlplane.base - Conteco"
 export CONTECO_DESCRIPTION="The Conteco controlplane base image."
 
 export CONTECO_TYPE="controlplane"

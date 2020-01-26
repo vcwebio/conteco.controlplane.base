@@ -1,8 +1,12 @@
 git clone https://github.com/vcwebio/conteco.artifactory.base.git
 git clone https://github.com/vcwebio/conteco.bash.base.git
 git clone https://github.com/vcwebio/conteco.controlplane.base.git
+git clone https://github.com/vcwebio/conteco.controlplane.cli.git
 git clone https://github.com/vcwebio/conteco.controlplane.conteco.git
+git clone https://github.com/vcwebio/conteco.controlplane.infometis.git
 git clone https://github.com/vcwebio/conteco.controlplane.modeco.git
+git clone https://github.com/vcwebio/conteco.controlplane.soleco.git
+git clone https://github.com/vcwebio/conteco.controlplane.swareco.git
 git clone https://github.com/vcwebio/conteco.docs.overview.git
 git clone https://github.com/vcwebio/conteco.elasticsearch.base.git
 git clone https://github.com/vcwebio/conteco.elasticsearch-dump.base.git

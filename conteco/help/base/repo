@@ -57,6 +57,7 @@
 # Direct port of _git symbolic-ref_.
 #
 # repo tag <repository selector>
-# Direct port of _git tag_.
+# Without arguments it creates / updates a GIT tag with name CONTECO_TAG.
+# With arguments, it is a direct port of _git tag_.
 #
 #

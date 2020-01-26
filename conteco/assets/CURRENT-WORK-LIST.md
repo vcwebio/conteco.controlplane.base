@@ -52,11 +52,6 @@ Invocation of Client Console v2 should (initially) follow the same pattern as v1
 Needs implementing for all top level API methods and per controlplane.  
 These are scripts that return key value settings of the image.
 
-### Cluster / Single Node flag
-
-Implement cluster / single node flag which default can be set from extract-cli.  
-It should also be easy to set interactively.
-
 ## ModEco
 
 Tweak the structure of the ModEco ecosystem to create modules with packages.  

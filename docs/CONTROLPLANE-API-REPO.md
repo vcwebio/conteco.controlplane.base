@@ -63,7 +63,8 @@ __`symbolic-ref`__
 Direct port of _git symbolic-ref_.  
 
 __`tag`__  
-Direct port of _git tag_.  
+Without arguments it creates / updates a GIT tag with name CONTECO_TAG.  
+With arguments, it is a direct port of _git tag_.
 
 -----
 [`controlplane.base`](../README.md) >> `repo` API - Full

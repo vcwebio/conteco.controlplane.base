@@ -1,15 +1,5 @@
 # Current Work List
 
-## Full Stack Description
-
-```bash
---> conteco - configuring sets of container images
-      --> modeco - configuring functional modules
-            --> swareco - configuring and running a cluster
-                  --> soleco - configuring and running a solution
-                        --> infometis - running the data world
-```
-
 ## ModEco Modules
 
 ### Cluster Registry Module
@@ -24,26 +14,6 @@ Module based on ELK pure parsing container logs, filtering out executionplane en
 The entries are parsed into a simple log. Only essential fields should be indexed by ES.
 
 ## Documentation
-
-## Controlplane Console
-
-### Client Console v1
-
-Amend `controlplane` images to take the __ecosystem__ it operates on from the image __tag__.  
-Extend the use of the `--silent` and `--errors-only` flags for commands.  
-
-### Client Console v2
-
-Override the `--silent` and `--errors-only` flag with a `--verbose` flag at top level (sibling of `--interactive`)
-
-Create new client that pipes all commands to a container image invocation with no output.  
-The ideal solution would be to invoke the commands as a controlplane service with command line - service name must then be unique to allow command concurrency.  
-
-Service invocation opens the door to cluster-wide commands, executed on each node. The logic to determine the scope of a command (local or global) is implemented in the client. The client could be a service in itself.
-
-The client requires swarm log collection (ELK or KELK type) to display the output.
-
-Invocation of Client Console v2 should (initially) follow the same pattern as v1: extraction with `extract-cli` and invocation with `start-service` instead of `start`. The `start-service` command then starts the (replicated) client service and hooks interactively into the container instance on the local node.
 
 ## Controlplane API
 

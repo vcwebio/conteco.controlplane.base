@@ -17,25 +17,9 @@ It underlines which controlplane is currently active.
 
 ### `/conteco/bin/controlplane`
 
-__`extract-cli`__  [linux/windows] [sudo]
-This method extracts the CLI invocation scripts for the specfied platform.  
-It checks `CONTECO_OS` for the operating system (Linux or Windows) and prepares methods accordingly.  
-If the operating system is not set, then both sets are prepared.  
-
 __`start`__  [working directory] [controlplane type] [realm]
 This method is invoked on the container instance to start the CLI.  
 It requires the current working directory, the specific controlplane and optionalyy the CONTECO_REALM it wants to operate on.
-
-### `/conteco/extract`
-
-This folder holds the invocation scripts that are extracted from the image.  
-They contain environment variables which are substituted prior to extraction.
-
-__`start`__   
-Invocation of the CLI on linux.
-
-__`start.bat`__  
-Invocation of the CLI on Windows.
 
 -----
 [`controlplane.base`](../README.md) >> `controlplane` CLI

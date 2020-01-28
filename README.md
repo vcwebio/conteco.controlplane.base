@@ -42,10 +42,8 @@ No implementation within `controlplane.base`.
 
 ## `controlplane` CLI
 
-`controlplane.base` implements a CLI within the image.  
-It also implements the scripts to invoke this CLI.  
-The scripts are extracted from the image to the current folder by:
-
+`controlplane.base` implements CLI v1.  
+`controlplane.cli` generates the script required to invoke the CLI - start.bat and start resp.  
 See `conteco.docs.overview` for more information on how to extract and use the commandline interface.
 
 [CLI Implementation in Detail](./docs/COMMANDLINE-INTERFACE.md)

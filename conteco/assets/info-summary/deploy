@@ -5,8 +5,8 @@ IMAGE DEPLOY INFO
 label               ${CONTECO_LABEL}
 description         ${CONTECO_DESCRIPTION}
 
-realm               ${CONTECO_REALM}
-ecosystem           ${CONTECO_ECOSYSTEM}
+realm               ${CONTECO_REALM_RUNTIME}
+ecosystem           ${CONTECO_ECOSYSTEM_RUNTIME}
 
 image-type          ${CONTECO_TYPE}
 instance-name       ${CONTECO_NAME}

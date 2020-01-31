@@ -2,6 +2,9 @@
 
 ## ModEco Modules
 
+### New
+
+
 ### Cluster Registry Module
 
 Docker registry:2 with Nginx rewrite (probably will have to be localhost:5000).  
@@ -53,4 +56,11 @@ The configuration should use the autodisover feature.
 
 ### image.wrapper
 
+#### to-JSON
+
 Modify `to-JSON` so the `output-to-JSON` override can amend the __@timestamp__, __source__, __level__ and __message__. This could be done with multivalue parsing on single output line.
+
+#### Implement RUNTIME REALM flag for wrapper
+
+Required so vcwebio controlplanes can be used in other realms.
+Should be in initial grouping before --container

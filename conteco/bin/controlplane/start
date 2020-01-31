@@ -8,11 +8,14 @@ if [[ "$pwd_volume" == *"\\"* ]] ; then
 else
 	export CONTECO_OS="linux"
 fi
+
+# Runtime values for REALM and ECOSYSTEM
+export CONTECO_REALM_RUNTIME="${CONTECO_REALM}"
 if [[ "$2" != "" ]] ; then
-	export CONTECO_REALM="$2"
+	export CONTECO_REALM_RUNTIME="$2"
 fi
-# controlplane makes runtime switch of CONTECO_ECOSYSTEM to CONTECO_NAME
-export CONTECO_ECOSYSTEM="${CONTECO_NAME}"
+export CONTECO_ECOSYSTEM_RUNTIME="${CONTECO_NAME}"
+
 export PS1="${CONTECO_NAME}#$ "
 export CONTECO_PWD_VOLUME="$pwd_volume"
 bash

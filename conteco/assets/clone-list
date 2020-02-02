@@ -21,6 +21,7 @@ git clone https://github.com/vcwebio/conteco.external.kafka.git
 git clone https://github.com/vcwebio/conteco.external.kafka-connect.git
 git clone https://github.com/vcwebio/conteco.external.kafka-manager.git
 git clone https://github.com/vcwebio/conteco.external.kibana.git
+git clone https://github.com/vcwebio/conteco.external.ksql-cli.git
 git clone https://github.com/vcwebio/conteco.external.ksql-server.git
 git clone https://github.com/vcwebio/conteco.external.logstash.git
 git clone https://github.com/vcwebio/conteco.external.metricbeat.git
@@ -67,6 +68,7 @@ git clone https://github.com/vcwebio/conteco.zookeeper.base.git
 git clone https://github.com/vcwebio/modeco.base.ekg.git
 git clone https://github.com/vcwebio/modeco.base.ingest.git
 git clone https://github.com/vcwebio/modeco.base.kekg.git
+git clone https://github.com/vcwebio/modeco.base.ksql-server.git
 git clone https://github.com/vcwebio/modeco.base.metrics.git
 git clone https://github.com/vcwebio/modeco.swarm.main.git
 git clone https://github.com/vcwebio/modeco.swarm.metrics.git

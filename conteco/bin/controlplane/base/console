@@ -4,6 +4,9 @@
   case $1 in
     extract-repo)
       imageName="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$2"
+      if [[ "$3" == "--reload" ]] ; then
+        executionplane docker image pull "$CONTECO_REGISTRY$imageName"
+      fi
 			. executionplane-capture-output docker create ${CONTECO_REGISTRY}$imageName
 			destination="/conteco/pwd/$imageName"
 			executionplane mkdir -p $destination
@@ -22,9 +25,9 @@
 		;;
     unload)
       imageName="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$2"
-			executionplane docker image rm "$CONTECO_REGISTRY$imageName"
+			executionplane docker image rm --force "$CONTECO_REGISTRY$imageName"
       if [[ "$3" != "" ]] ; then
-        executionplane docker image rm "$CONTECO_REGISTRY$imageName:$3"
+        executionplane docker image rm --force "$CONTECO_REGISTRY$imageName:$3"
 			fi
 		;;
     *)

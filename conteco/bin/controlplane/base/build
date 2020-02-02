@@ -22,7 +22,7 @@
 			. info-summary build
 		;;
 		*)
-			if [[ "$buildExternal" =="true" || "$CONTECO_TYPE" != "external" ]] ; then
+			if [[ "$buildExternal" == "true" || "$CONTECO_TYPE" != "external" ]] ; then
 				# build latest image
 				tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
 				cat $rootPath/Dockerfile | envsubst > $tmpfile

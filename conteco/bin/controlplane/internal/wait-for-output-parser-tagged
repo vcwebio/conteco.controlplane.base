@@ -7,6 +7,6 @@ fi
 test="2"
 while (( $test > $threshold ))
 do
-  usleep 500000
+  sleep 0.5
   test=$(ps aux | grep -i /conteco/bin/controlplane/internal/output-parser-tagged | wc -l)
 done

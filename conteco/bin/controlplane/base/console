@@ -13,11 +13,13 @@
 			executionplane docker container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
 		;;
     load)
+      fromTar="false"
+      if [[ "$2" == "--from-tar" ]] ; then
+        fromTar="true"
+        shift
+      fi
       imageName="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$2"
-      executionplane docker image pull "$CONTECO_REGISTRY$imageName"
-			if [[ "$3" != "" ]] ; then
-				executionplane docker tag "$CONTECO_REGISTRY$imageName" "$CONTECO_REGISTRY$imageName:$3"
-			fi
+      repo-load "$fromTar" "$imageName"
 		;;
     set-repo-user)
 			executionplane git config --global user.name "$2"
@@ -29,6 +31,10 @@
       if [[ "$3" != "" ]] ; then
         executionplane docker image rm --force "$CONTECO_REGISTRY$imageName:$3"
 			fi
+    ;;
+    save)
+      imageName="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$2"
+      repo-save "$imageName"
 		;;
     *)
       executionplane-error "Method not recognised: $1."

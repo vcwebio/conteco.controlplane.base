@@ -37,6 +37,11 @@ Returns a summary of the repository contents.
 __`init`__  
 Initialises or reinitialises the repository. Direct port of _git init_.
 
+__`load`__ ['--from-tar' optional] [image name] [image tag - optional]  
+With `--from-tar` it loads the image from the `tar` file stored in the `/images` folder.
+Without `--from-tar` it pulls and tags the container image specified by [image name].  
+If the [image tag] is supplied than it creates a second tag for the image.
+
 __`log`__  
 Displays the commit log of the repository. Direct port of _git log_.
 
@@ -55,6 +60,9 @@ Direct port of _git remote_.
 
 __`remove-workspace`__  
 Removes the workspace branch from the repository.
+
+__`save`__  
+Saves the current tagged image in cache to a tar file in the `/images` folder.
 
 __`status`__  
 Gives the current status of the repository. Direct port of _git status_.

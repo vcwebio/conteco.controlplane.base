@@ -26,12 +26,12 @@
 				# build latest image
 				tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
 				cat $rootPath/Dockerfile | envsubst > $tmpfile
-				executionplane "--errors-only" docker build -t $imageName -f $tmpfile $rootPath
+				executionplane "--errors-only" docker build -t "$CONTECO_REGISTRY$imageName" -f $tmpfile $rootPath
 				rm $tmpfile
 
 				# tag latest image
 				if [[ "${CONTECO_TAG}" != "" ]] ; then
-					executionplane "--errors-only" docker tag "$imageName" "$imageName:${CONTECO_TAG}"
+					executionplane "--errors-only" docker tag "$CONTECO_REGISTRY$imageName" "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
 				fi
 			else
 				executionplane-info "Image excluded from build."

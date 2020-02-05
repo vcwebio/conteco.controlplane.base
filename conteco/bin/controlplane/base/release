@@ -10,6 +10,9 @@
 		--info)
 			. info-summary release
 		;;
+		--save)
+			repo-save $imageName
+		;;
 		*)
 			executionplane "--errors-only" docker image push "$CONTECO_REGISTRY$imageName:latest"
 			if [[ "${CONTECO_TAG}" != "" ]] ; then

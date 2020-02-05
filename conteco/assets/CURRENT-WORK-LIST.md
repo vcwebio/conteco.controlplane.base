@@ -42,6 +42,10 @@ Could there be more than one core package? And what about demo? Core + import?
 
 Make initial container log processing pipeline lighter and faster with priority to metrics processing, then logs, then other entries.
 
+### conteco. external . *
+
+Tackle the user the container runs under - too many ROOT users now.
+
 ### conteco. * .base
 
 Sort out the logging output of wrapped external images.

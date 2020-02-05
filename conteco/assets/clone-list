@@ -43,6 +43,7 @@ git clone https://github.com/vcwebio/conteco.kafka.base.git
 git clone https://github.com/vcwebio/conteco.kafka-connect.base.git
 git clone https://github.com/vcwebio/conteco.kafka-manager.base.git
 git clone https://github.com/vcwebio/conteco.kibana.base.git
+git clone https://github.com/vcwebio/conteco.ksql-cli.base.git
 git clone https://github.com/vcwebio/conteco.ksql-server.base.git
 git clone https://github.com/vcwebio/conteco.logstash.base.git
 git clone https://github.com/vcwebio/conteco.metricbeat.base.git
@@ -70,8 +71,10 @@ git clone https://github.com/vcwebio/modeco.base.ingest.git
 git clone https://github.com/vcwebio/modeco.base.kekg.git
 git clone https://github.com/vcwebio/modeco.base.ksql-server.git
 git clone https://github.com/vcwebio/modeco.base.metrics.git
+git clone https://github.com/vcwebio/modeco.base.registry.git
 git clone https://github.com/vcwebio/modeco.swarm.main.git
 git clone https://github.com/vcwebio/modeco.swarm.metrics.git
+git clone https://github.com/vcwebio/modeco.swarm.registry.git
 git clone https://github.com/vcwebio/modeco.swarm_es.main.git
 git clone https://github.com/vcwebio/modeco.traefik.main.git
 git clone https://github.com/vcwebio/modeco.traefik.metrics.git

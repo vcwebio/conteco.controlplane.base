@@ -31,6 +31,11 @@
 # repo init <repository selector>
 # Initialises or reinitialises the repository. Direct port of _git init_.
 #
+# repo load ['--from-tar' optional] [image name] [image tag - optional] <repository selector>
+# With `--from-tar` it loads the image from the `tar` file stored in the `/images` folder.
+# Without `--from-tar` it pulls and tags the container image specified by [image name].
+# If the [image tag] is supplied than it creates a second tag for the image.
+#
 # repo log <repository selector>
 # Displays the commit log of the repository. Direct port of _git log_.
 #
@@ -49,6 +54,9 @@
 #
 # repo remove-workspace <repository selector>
 # Removes the workspace branch from the repository.
+#
+# repo save <repository selector>
+# Saves the current tagged image in cache to a tar file in the `/images` folder.
 #
 # repo status <repository selector>
 # Gives the current status of the repository. Direct port of _git status_.

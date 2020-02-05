@@ -10,8 +10,9 @@ __`extract repo`__ [repository short name]
 Extracts the repository from the container image specified by [repository short name].
 The [repository short name] consists of $CONTECO_TYPE.$CONTECO_NAME, i.e. the last two name parts dot separated before the image tag.
 
-__`load`__ [image name] [image tag - optional]  
-Pulls and tags the container image specified by [image name].  
+__`load`__ ['--from-tar' optional] [image name] [image tag - optional]  
+With `--from-tar` it loads the image from the `tar` file stored in the `/images` folder.
+Without `--from-tar` it pulls and tags the container image specified by [image name].  
 If the [image tag] is supplied than it creates a second tag for the image.
 
 __`set-repo-user`__ [name] [email]  

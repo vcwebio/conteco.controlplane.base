@@ -45,6 +45,15 @@
 		init)
 			executionplane git init
 		;;
+		load)
+			fromTar="false"
+			if [[ "$2" == "--from-tar" ]] ; then
+				fromTar="true"
+				shift
+			fi
+			echo "repo-load $fromTar ${imageName}:${CONTECO_TAG}"
+			repo-load $fromTar "${imageName}:${CONTECO_TAG}"
+		;;
 		log)
 			executionplane git log ${@:2:$#-2}
 		;;
@@ -71,6 +80,9 @@
 		;;
 		remove-workspace)
 			executionplane git branch -d "workspace"
+		;;
+		save)
+      repo-save "$imageName:$CONTECO_TAG"
 		;;
 		status)
 			executionplane git status

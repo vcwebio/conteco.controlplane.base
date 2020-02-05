@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+fromTar="$1"
+imageName="$2"
+if [[ "$fromTar" == "true" ]] ; then
+  reference=$(echo "${CONTECO_REGISTRY}${imageName}.tar" | tr /: _ )
+  executionplane docker load --input "/conteco/pwd/images/$reference"
+else
+  executionplane docker image pull "$CONTECO_REGISTRY$imageName"
+fi

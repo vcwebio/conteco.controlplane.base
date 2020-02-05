@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+imageName=$1
+if [[ ! -d /conteco/pwd/images ]] ; then
+  mkdir /conteco/pwd/images
+fi
+reference=$(echo "${CONTECO_REGISTRY}${imageName}.tar" | tr /: _ )
+executionplane docker save --output "/conteco/pwd/images/${reference}" "${CONTECO_REGISTRY}${imageName}"

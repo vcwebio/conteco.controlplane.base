@@ -15,5 +15,8 @@ It creates two image tags: _latest_ and _${CONTECO_TAG}_
 __--deep__  
 Rebuilds first the __base__ images recursively followed by the build of the actual image.
 
+__--exclude-external__  
+This _--exclude-external_ flag force a recursive build of the base images recursively before building the container image.
+
 -----
 [`controlplane.base`](../README.md) >> `build` API - Full

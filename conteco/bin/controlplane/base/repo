@@ -42,6 +42,12 @@
 			executionplane git remote set-url origin "https://github.com/${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}.git"
 			executionplane git config credential.helper store
 		;;
+		extract)
+			. executionplane-capture-output docker create ${CONTECO_REGISTRY}$imageName
+			destination="/conteco/pwd/$imageName"
+			executionplane mkdir -p $destination
+			executionplane docker container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
+		;;
 		init)
 			executionplane git init
 		;;
@@ -51,7 +57,7 @@
 				fromTar="true"
 				shift
 			fi
-			echo "repo-load $fromTar ${imageName}:${CONTECO_TAG}"
+			repo-load $fromTar "${imageName}"
 			repo-load $fromTar "${imageName}:${CONTECO_TAG}"
 		;;
 		log)
@@ -80,6 +86,11 @@
 		;;
 		remove-workspace)
 			executionplane git branch -d "workspace"
+		;;
+		retag-image)
+	  	newTag="$2/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}"
+			executionplane docker tag "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG" "$newTag"
+			executionplane docker tag "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG" "$newTag:${CONTECO_TAG}"
 		;;
 		save)
       repo-save "$imageName:$CONTECO_TAG"

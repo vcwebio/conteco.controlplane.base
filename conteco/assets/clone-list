@@ -69,9 +69,11 @@ git clone https://github.com/vcwebio/conteco.zookeeper.base.git
 git clone https://github.com/vcwebio/modeco.base.ekg.git
 git clone https://github.com/vcwebio/modeco.base.ingest.git
 git clone https://github.com/vcwebio/modeco.base.kekg.git
-git clone https://github.com/vcwebio/modeco.base.ksql-server.git
+git clone https://github.com/vcwebio/modeco.base.ksql.git
 git clone https://github.com/vcwebio/modeco.base.metrics.git
 git clone https://github.com/vcwebio/modeco.base.registry.git
+git clone https://github.com/vcwebio/modeco.swarm.ingest.git
+git clone https://github.com/vcwebio/modeco.swarm.ksql.git
 git clone https://github.com/vcwebio/modeco.swarm.main.git
 git clone https://github.com/vcwebio/modeco.swarm.metrics.git
 git clone https://github.com/vcwebio/modeco.swarm.registry.git

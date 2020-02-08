@@ -17,6 +17,12 @@
 # console set-repo-user [name] [email]
 # Sets the current use identity to be used for GIT operations on the repositories.
 #
+# console start-registry  [port optional]
+# Starts the controlplane local insecure registry on the port specified or port 5000.
+#
+# console stop-registry  [port optional]
+# Stops the controlplane local insecure registry.
+#
 # console unload [image name] [image tag - optional]
 # Untags the container image specified by [image name].
 # If the [image tag] is supplied than it untags both latest and tag specific image.

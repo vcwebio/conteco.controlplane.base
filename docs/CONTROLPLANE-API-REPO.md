@@ -31,6 +31,9 @@ It creates or updates the position of the tag with value `$CONTECO_TAG`.
 __`config`__  
 Sets the remote origin of the repository and sets the credentials to be stored.
 
+__`console`__
+Extracts the repository from the cached repository image on top of the existing repository.
+
 __`info`__  
 Returns a summary of the repository contents.
 
@@ -60,6 +63,9 @@ Direct port of _git remote_.
 
 __`remove-workspace`__  
 Removes the workspace branch from the repository.
+
+__`retag-image`__  
+Retags the image associated with the repository by replacing the registry-realm prefix with the new prefix supplied.
 
 __`save`__  
 Saves the current tagged image in cache to a tar file in the `/images` folder.

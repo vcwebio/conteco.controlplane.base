@@ -15,6 +15,7 @@
 	buildExternal="true"
 	if [[ ($1 == "--exclude-external") ]] ; then
 		buildExternal="false"
+		shift
 	fi
 
 	case $1 in

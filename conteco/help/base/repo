@@ -28,6 +28,9 @@
 # repo config <repository selector>
 # Sets the remote origin of the repository and sets the credentials to be stored.
 #
+# console extract <repository selector>
+# Extracts the repository from the cached repository image on top of the existing repository.
+#
 # repo init <repository selector>
 # Initialises or reinitialises the repository. Direct port of _git init_.
 #
@@ -51,6 +54,9 @@
 #
 # repo remote <repository selector>
 # Direct port of _git remote_.
+#
+# repo retag-image [new prefix] <repository selector>
+# Retags the image associated with the repository by replacing the registry-realm prefix with the new prefix supplied.
 #
 # repo remove-workspace <repository selector>
 # Removes the workspace branch from the repository.

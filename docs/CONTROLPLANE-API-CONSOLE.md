@@ -6,6 +6,13 @@
 
 API section containing methods that executes outside the context of a repository.  
 
+__`clone-repo`__ [repository name]
+Git clone the repository if the repository folder does not exist.
+
+__`execute-selection`__  [command + arguments] [selector]
+Execute the command and argument on each of all the images selected by the selector.
+The selector extracts images from the conteco/assets/image-list file stored by controlplane.base
+
 __`extract-repo`__ [repository short name]
 Extracts the repository from the container image specified by [repository short name].
 The [repository short name] consists of $CONTECO_TYPE.$CONTECO_NAME, i.e. the last two name parts dot separated before the image tag.
@@ -14,6 +21,9 @@ __`load`__ ['--from-tar' optional] [image name] [image tag - optional]
 With `--from-tar` it loads the image from the `tar` file stored in the `/images` folder.
 Without `--from-tar` it pulls and tags the container image specified by [image name].  
 If the [image tag] is supplied than it creates a second tag for the image.
+
+__`save`__ ['--from-tar' optional] [image name] [image tag - optional]  
+Saves the image as tar file putting it into the /conteco/pwd/images folder.
 
 __`set-repo-user`__ [name] [email]  
 Sets the current use identity to be used for GIT operations on the repositories.

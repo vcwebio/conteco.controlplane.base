@@ -9,6 +9,9 @@
 The repo API section implements methods that operate on the repository.  
 These are either direct ports of or implemented using methods from GIT.
 
+__`--info`__  
+Returns summary information for the repository relevant to the current context.
+
 __`add`__  
 Stages all changed files. A direct port of _git add ._
 
@@ -31,11 +34,8 @@ It creates or updates the position of the tag with value `$CONTECO_TAG`.
 __`config`__  
 Sets the remote origin of the repository and sets the credentials to be stored.
 
-__`console`__
+__`extract`__
 Extracts the repository from the cached repository image on top of the existing repository.
-
-__`info`__  
-Returns a summary of the repository contents.
 
 __`init`__  
 Initialises or reinitialises the repository. Direct port of _git init_.
@@ -60,6 +60,9 @@ It also updates the remote with the current $CONTECO_TAG.
 
 __`remote`__  
 Direct port of _git remote_.
+
+__`remove`__  
+Removes the repository from the filesystem.
 
 __`remove-workspace`__  
 Removes the workspace branch from the repository.

@@ -1,12 +1,22 @@
 # Current Work List
 
-### Cluster Registry Module
+## Pending
 
-Docker registry:2 with Nginx rewrite (probably will have to be localhost:5000).  
-See: How to set up private registry on Ubuntu 1804  
-Aim is to have an (unsafe) externally accessible registry so internet access can be avoided.
+### Confluent Platform
 
-## Documentation
+Add confluent platform to the kafka images.  
+This will involve switching to cp- prefixed images.  
+The platform is free to use for developers and on single broker clusters.
+
+### Modeco Module CONFIGURATION
+
+The base module packages should update from the conteco images.  
+The module package should update from the base packages.
+
+### Modeco DEPLOY
+
+Should follow the same syntax as other methods:  
+deploy [stack name selector] [module packages selector]
 
 ## Controlplane API
 

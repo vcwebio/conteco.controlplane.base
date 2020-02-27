@@ -4,6 +4,9 @@
 
 # `build` API - Full
 
+__`--info`__  
+Returns summary information for the repository relevant to the current context.
+
 `controlplane.base` is the sole implementer of the `build` API.  
 
 The `build` API consists of one method and can take one optional flag.

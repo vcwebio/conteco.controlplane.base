@@ -4,6 +4,9 @@
 
 # `config` API - Partial
 
+__`--info`__  
+Returns summary information for the repository relevant to the current context.
+
 `controlplane.base` implements the following common methods of the `config` API section:
 
 __`build`__  

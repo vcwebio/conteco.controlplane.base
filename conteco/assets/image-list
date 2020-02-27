@@ -12,6 +12,7 @@ conteco.elasticsearch.base
 conteco.elasticsearch-dump.base
 conteco.external.artifactory
 conteco.external.bash
+conteco.external.confluent-cc
 conteco.external.controlplane
 conteco.external.elasticsearch
 conteco.external.elasticsearch-dump
@@ -20,9 +21,13 @@ conteco.external.grafana
 conteco.external.kafka
 conteco.external.kafka-connect
 conteco.external.kafka-manager
+conteco.external.kafka-rest
+conteco.external.kafka-server
 conteco.external.kibana
 conteco.external.ksql-cli
 conteco.external.ksql-server
+conteco.external.ksqldb-cli
+conteco.external.ksqldb-server
 conteco.external.logstash
 conteco.external.metricbeat
 conteco.external.mysql
@@ -32,7 +37,6 @@ conteco.external.registry
 conteco.external.schema-registry
 conteco.external.sql-server
 conteco.external.streamsets
-conteco.external.streamsets-libs
 conteco.external.traefik
 conteco.external.tshark
 conteco.external.zookeeper
@@ -69,12 +73,14 @@ conteco.zookeeper.base
 modeco.base.ekg
 modeco.base.ingest
 modeco.base.ksql
+modeco.base.ksqldb
 modeco.base.kz
 modeco.base.metrics
 modeco.base.registry
 modeco.base.streamsets
 modeco.swarm.ingest
 modeco.swarm.ksql
+modeco.swarm.ksqldb
 modeco.swarm.main
 modeco.swarm.metrics
 modeco.swarm.registry

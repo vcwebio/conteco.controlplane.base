@@ -4,11 +4,11 @@
 
 # `release` API - Full
 
-`controlplane.base` is the sole implementer of the `build` API.  
+__`--info`__  
+Returns summary information for the repository relevant to the current context.
 
-The `release` API consists of one method without flags.  
-
-It pushes both image tags from the image to the associated image registry.
+`controlplane.base` is the sole implementer of the `release` API.  
+The API method does not implement any flags.  
 
 -----
 [`controlplane.base`](../README.md) >> `release` API - Full

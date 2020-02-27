@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# ${@:2:$#-2}
+
+selector="${@: -1}"
+selection=$(cat /conteco/assets/image-list | grep "${CONTECO_ECOSYSTEM_RUNTIME}" | grep "$selector")
+readarray -t items <<< "$selection"
+  for item in ${items[@]};
+  do
+    ${@:1:$#-1} "${CONTECO_REALM_RUNTIME}/$item"
+  done;

@@ -55,11 +55,14 @@
 # repo remote <repository selector>
 # Direct port of _git remote_.
 #
-# repo retag-image [new prefix] <repository selector>
-# Retags the image associated with the repository by replacing the registry-realm prefix with the new prefix supplied.
+# repo remove <repository selector>
+# Remove the repository from the filesystem.
 #
 # repo remove-workspace <repository selector>
 # Removes the workspace branch from the repository.
+#
+# repo retag-image [new prefix] <repository selector>
+# Retags the image associated with the repository by replacing the registry-realm prefix with the new prefix supplied.
 #
 # repo save <repository selector>
 # Saves the current tagged image in cache to a tar file in the `/images` folder.

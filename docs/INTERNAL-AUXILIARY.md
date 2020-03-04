@@ -19,9 +19,17 @@ __`entrypoint`__
 It sets the `CONTECO_EXECUTIONPLANE_BASEPATH` to `CONTECO_EXECUTIONPLANE_ORIGINALPATH` as it is a __ContEco__ defined image.  
 It also sets the default for `CONTECO_EXECUTIONTAG`.
 
+__`extract-file`__  
+CLI script that streams the contents of the file requested.  
+If the file doesn't exist on the local filesystem then it is extracted from the container images.
+
 __`info-summary`__  
 Auxiliary method to invoke the correct info-generating script for the current API method.  
 It returns an overview of the settings relevant for the context.
+
+__`invoke-script`__  
+CLI script that executes the script file requested.  
+If the script file doesn't exist on the local filesystem then it is extracted from the container images.
 
 __`output-parser-tagged`__  
 Used by the CLI to parse the output from unmanaged commands.

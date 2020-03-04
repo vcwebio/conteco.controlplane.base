@@ -1,5 +1,6 @@
 conteco.artifactory.base
 conteco.bash.base
+conteco.confluent-cc.base
 conteco.controlplane.base
 conteco.controlplane.cli
 conteco.controlplane.conteco
@@ -24,8 +25,6 @@ conteco.external.kafka-manager
 conteco.external.kafka-rest
 conteco.external.kafka-server
 conteco.external.kibana
-conteco.external.ksql-cli
-conteco.external.ksql-server
 conteco.external.ksqldb-cli
 conteco.external.ksqldb-server
 conteco.external.logstash
@@ -46,9 +45,11 @@ conteco.image.wrapper
 conteco.kafka.base
 conteco.kafka-connect.base
 conteco.kafka-manager.base
+conteco.kafka-rest.base
+conteco.kafka-server.base
 conteco.kibana.base
-conteco.ksql-cli.base
-conteco.ksql-server.base
+conteco.ksqldb-cli.base
+conteco.ksqldb-server.base
 conteco.logstash.base
 conteco.metricbeat.base
 conteco.metricbeat.node
@@ -76,8 +77,8 @@ modeco.base.ksql
 modeco.base.ksqldb
 modeco.base.kz
 modeco.base.metrics
-modeco.base.registry
 modeco.base.streamsets
+modeco.package.registry
 modeco.swarm.ingest
 modeco.swarm.ksql
 modeco.swarm.ksqldb
@@ -86,4 +87,3 @@ modeco.swarm.metrics
 modeco.swarm.registry
 modeco.swarm_es.main
 modeco.traefik.main
-modeco.traefik.metrics

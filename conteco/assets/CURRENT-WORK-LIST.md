@@ -2,21 +2,12 @@
 
 ## Pending
 
-### Confluent Platform
+### Publish Activities
 
-Add confluent platform to the kafka images.  
-This will involve switching to cp- prefixed images.  
-The platform is free to use for developers and on single broker clusters.
 
 ### Modeco Module CONFIGURATION
-
 The base module packages should update from the conteco images.  
 The module package should update from the base packages.
-
-### Modeco DEPLOY
-
-Should follow the same syntax as other methods:  
-deploy [stack name selector] [module packages selector]
 
 ## Controlplane API
 

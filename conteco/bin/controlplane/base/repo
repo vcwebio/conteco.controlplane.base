@@ -40,6 +40,8 @@
 		;;
 		config)
 			executionplane git remote set-url origin "https://github.com/${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}.git"
+			executionplane git branch --set-upstream-to=origin/master master
+			executionplane git config core.filemode false
 			executionplane git config credential.helper store
 		;;
 		extract)

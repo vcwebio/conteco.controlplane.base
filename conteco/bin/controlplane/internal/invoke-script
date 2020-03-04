@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+imageName=$1
+scriptFile=$2
+shift
+shift
+rootPath="/conteco/pwd/${imageName}"
+if [[ -f $rootPath/$scriptFile ]] ; then
+	. $rootPath/$scriptFile $@
+else
+	tmpfile=$(mktemp /tmp/run-script.XXXXXX)
+	. executionplane-capture-output docker create ${CONTECO_REGISTRY}$imageName
+	executionplane docker container cp ${CONTECO_EXECUTIONPLANE_OUTPUT}:/conteco/repo/${scriptFile} $tmpfile
+	. $tmpfile $@
+	rm $tmpfile
+fi

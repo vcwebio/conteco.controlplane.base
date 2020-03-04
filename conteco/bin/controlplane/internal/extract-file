@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+imageName=$1
+file=$2
+shift
+shift
+rootPath="/conteco/pwd/${imageName}"
+if [[ -f $rootPath/$file ]] ; then
+	cat $rootPath/$file
+else
+	tmpfile=$(mktemp /tmp/extract-file.XXXXXX)
+	. executionplane-capture-output docker create ${CONTECO_REGISTRY}$imageName
+	executionplane docker container cp ${CONTECO_EXECUTIONPLANE_OUTPUT}:/conteco/repo/${scriptFile} $tmpfile
+	cat $tmpfile
+	rm $tmpfile
+fi

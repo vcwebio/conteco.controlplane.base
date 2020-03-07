@@ -19,7 +19,7 @@ __`entrypoint`__
 It sets the `CONTECO_EXECUTIONPLANE_BASEPATH` to `CONTECO_EXECUTIONPLANE_ORIGINALPATH` as it is a __ContEco__ defined image.  
 It also sets the default for `CONTECO_EXECUTIONTAG`.
 
-__`extract-file`__  
+__`extract-resource`__  
 CLI script that streams the contents of the file requested.  
 If the file doesn't exist on the local filesystem then it is extracted from the container images.
 

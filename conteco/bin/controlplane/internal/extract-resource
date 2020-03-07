@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+imageName=$1
+input=$2
+output=$3
+
+executionplane-info "Executing extract-resource $@"
+
+rootPath="/conteco/pwd/${imageName}"
+if [[ -f $rootPath/$input ]] ; then
+	if [[ $output == "" ]] ; then
+		cat $rootPath/$input
+	else
+		cp $rootPath/$input $output
+	fi
+else
+	. executionplane-capture-output docker create ${CONTECO_REGISTRY}$imageName
+	if [[ $output == "" ]] ; then
+		tmpfile=$(mktemp /tmp/extract-resource.XXXXXX)
+		executionplane docker container cp ${CONTECO_EXECUTIONPLANE_OUTPUT}:/conteco/repo/${input} $tmpfile
+		cat $tmpfile
+		rm $tmpfile
+	else
+		executionplane docker container cp ${CONTECO_EXECUTIONPLANE_OUTPUT}:/conteco/repo/${input} $output
+	fi
+fi

@@ -79,6 +79,7 @@ modeco.base.kz
 modeco.base.metrics
 modeco.base.streamsets
 modeco.package.registry
+modeco.package.traefik
 modeco.swarm.ingest
 modeco.swarm.ksql
 modeco.swarm.ksqldb

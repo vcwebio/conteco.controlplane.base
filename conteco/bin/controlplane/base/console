@@ -16,6 +16,10 @@
       fi
       cd ..
 		;;
+    controlplane-service)
+      shift
+      controlplane-service $@
+    ;;
     execute-selection)
       shift
       console-iterate-selection $@

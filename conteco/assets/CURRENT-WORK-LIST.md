@@ -2,6 +2,11 @@
 
 ## Pending
 
+conteco.external.ksql-cli
+conteco.external.ksql-server
+conteco.ksql-cli.base
+conteco.ksql-server.base
+
 ### Publish Activities
 
 

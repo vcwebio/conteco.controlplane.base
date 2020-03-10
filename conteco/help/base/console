@@ -8,6 +8,13 @@
 # console clone-repo [repository name]
 # Git clone the repository if the repository folder does not exist.
 #
+# console cmd [command + arguments]
+# Execute the command, to be used in conjunction with execute-selection.
+#
+# console controlplane-service [API command + arguments]
+# Execute the command across all nodes.
+# It forces an API command by prefixing the command supplied with .invoke 
+#
 # console execute-selection [command + arguments] [selector]
 # Execute the command and argument on each of all the images selected by the selector.
 # The selector extracts images from the conteco/assets/image-list file stored by controlplane.base

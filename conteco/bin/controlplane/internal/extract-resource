@@ -4,7 +4,7 @@ input=$2
 output=$3
 
 rootPath="/conteco/pwd/${imageName}"
-if [[ -f $rootPath/$input ]] ; then
+if [[ -d $rootPath && -f $rootPath/$input ]] ; then
 	if [[ $output == "" ]] ; then
 		cat $rootPath/$input
 	else

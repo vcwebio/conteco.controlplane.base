@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 name=$(create-random)
-executionplane docker service create --name "controlplane-$name" -d --mode global --restart-condition none --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock ${CONTECO_REGISTRY}${CONTECO_REALM_RUNTIME}/conteco.controlplane.${CONTECO_ECOSYSTEM_RUNTIME} --executiontag "$CONTECO_EXECUTIONTAG" $@
+executionplane docker service create --name "controlplane-$name" -d --mode global --restart-condition none --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock ${CONTECO_REGISTRY}${CONTECO_REALM_RUNTIME}/conteco.controlplane.${CONTECO_ECOSYSTEM_RUNTIME} --executiontag "$CONTECO_EXECUTIONTAG" .invoke $@
 continue="true"
 while [[ "true" == "$continue" ]] ;
 do

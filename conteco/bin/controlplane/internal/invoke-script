@@ -4,7 +4,7 @@ scriptFile=$2
 shift
 shift
 rootPath="/conteco/pwd/${imageName}"
-if [[ -f $rootPath/$scriptFile ]] ; then
+if [[ -d $rootPath && -f $rootPath/$scriptFile ]] ; then
 	. $rootPath/$scriptFile $@
 else
 	tmpfile=$(mktemp /tmp/run-script.XXXXXX)

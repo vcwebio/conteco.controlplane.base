@@ -6,24 +6,12 @@
 # The repo API consists of methods that operate on the repository.
 # These are either direct ports or implemented using methods of GIT.
 #
-# repo add  <repository selector>
-# Stages all changed files. A direct port of git add .
-#
-# repo branch [arguments]  <repository selector>
-# Executes _git branch_ [arguments] on the selected repositories.
-#
-# repo create-workspace <repository selector>
-# This method creates a _workspace_ branch and checks it out.
-#
 # repo commit [message]  <repository selector>
-# Commits the staged files to the current branch.
+# Add the unstaged files and commits the staged files to the current (master) branch.
+# It then adjusts the current tag to the latest commit.
 #
 # repo compact  <repository selector>
 # Compacts the commit log with garbage collection and pushes it out to the remote.
-#
-# repo checkin-workspace  <repository selector>
-# Checks out the main branch and merges the _workspace_ branch into it.
-# It creates or updates the position of the tag with value `$CONTECO_TAG`.
 #
 # repo config <repository selector>
 # Sets the remote origin of the repository and sets the credentials to be stored.
@@ -31,35 +19,19 @@
 # console extract <repository selector>
 # Extracts the repository from the cached repository image on top of the existing repository.
 #
-# repo init <repository selector>
-# Initialises or reinitialises the repository. Direct port of _git init_.
-#
 # repo load ['--from-tar' optional] [image name] [image tag - optional] <repository selector>
 # With `--from-tar` it loads the image from the `tar` file stored in the `/images` folder.
 # Without `--from-tar` it pulls and tags the container image specified by [image name].
 # If the [image tag] is supplied than it creates a second tag for the image.
 #
-# repo log <repository selector>
-# Displays the commit log of the repository. Direct port of _git log_.
-#
 # repo log10  <repository selector>
 # Displays a compact summary of the last 10 commits of the repository.
 #
-# repo pull <repository selector>
-# Pulls the remote into the repository. Direct port of _git pull_.
-#
 # repo push  <repository selector>
-# Pushes the current branch to its remote. Direct port of _git push_.
-# It also tags the latest commit with the current $CONTECO_TAG
-#
-# repo remote <repository selector>
-# Direct port of _git remote_.
+# Pushes the current branch to its remote and updates the current remote tag to the latest commit
 #
 # repo remove <repository selector>
 # Remove the repository from the filesystem.
-#
-# repo remove-workspace <repository selector>
-# Removes the workspace branch from the repository.
 #
 # repo retag-image [new prefix] <repository selector>
 # Retags the image associated with the repository by replacing the registry-realm prefix with the new prefix supplied.
@@ -69,12 +41,5 @@
 #
 # repo status <repository selector>
 # Gives the current status of the repository. Direct port of _git status_.
-#
-# repo symbolic-ref <repository selector>
-# Direct port of _git symbolic-ref_.
-#
-# repo tag <repository selector>
-# Without arguments it creates / updates a GIT tag with name CONTECO_TAG.
-# With arguments, it is a direct port of _git tag_.
 #
 #

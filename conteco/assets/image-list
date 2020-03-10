@@ -25,6 +25,8 @@ conteco.external.kafka-manager
 conteco.external.kafka-rest
 conteco.external.kafka-server
 conteco.external.kibana
+conteco.external.ksql-cli
+conteco.external.ksql-server
 conteco.external.ksqldb-cli
 conteco.external.ksqldb-server
 conteco.external.logstash

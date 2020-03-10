@@ -9,6 +9,13 @@ API section containing methods that executes outside the context of a repository
 __`clone-repo`__ [repository name]
 Git clone the repository if the repository folder does not exist.
 
+__'cmd'__ [command + arguments]
+Execute the command, to be used in conjunction with execute-selection.
+
+__'controlplane-service'__ [API command + arguments]
+Execute the command across all nodes.
+It forces an API command by prefixing the command supplied with .invoke
+
 __`execute-selection`__  [command + arguments] [selector]
 Execute the command and argument on each of all the images selected by the selector.
 The selector extracts images from the conteco/assets/image-list file stored by controlplane.base

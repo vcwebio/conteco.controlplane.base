@@ -12,24 +12,12 @@ These are either direct ports of or implemented using methods from GIT.
 __`--info`__  
 Returns summary information for the repository relevant to the current context.
 
-__`add`__  
-Stages all changed files. A direct port of _git add ._
-
-__`branch`__ [arguments]  
-Executes _git branch_ [arguments] on the selected repositories. Direct port of _git branch_
-
-__`create-workspace`__  
-Creates a _workspace_ branch and checks it out.  
-
 __`commit`__  
-Commits the staged files to the current branch. Direct port of _git commit -m_.
+Adds the unstaged files and commits the staged files to the current branch.  
+It also updates the current tag to the latest commit.
 
 __`compact`__  
 Compacts the commit log with garbage collection and pushes it out to the remote.  
-
-__`checkin-workspace`__  
-Checks out the main branch and merges the _workspace_ branch into it.
-It creates or updates the position of the tag with value `$CONTECO_TAG`.
 
 __`config`__  
 Sets the remote origin of the repository and sets the credentials to be stored.
@@ -37,35 +25,20 @@ Sets the remote origin of the repository and sets the credentials to be stored.
 __`extract`__
 Extracts the repository from the cached repository image on top of the existing repository.
 
-__`init`__  
-Initialises or reinitialises the repository. Direct port of _git init_.
-
 __`load`__ ['--from-tar' optional] [image name] [image tag - optional]  
 With `--from-tar` it loads the image from the `tar` file stored in the `/images` folder.
 Without `--from-tar` it pulls and tags the container image specified by [image name].  
 If the [image tag] is supplied than it creates a second tag for the image.
 
 __`log`__  
-Displays the commit log of the repository. Direct port of _git log_.
-
-__`log10`__  
 Displays a compact summary of the last 10 commits of the repository.
-
-__`pull`__   
-Pulls the remote into the repository. Direct port of _git pull_.
 
 __`push`__   
 Pushes the current branch to its remote. Direct port of _git push_.
 It also updates the remote with the current $CONTECO_TAG.
 
-__`remote`__  
-Direct port of _git remote_.
-
 __`remove`__  
 Removes the repository from the filesystem.
-
-__`remove-workspace`__  
-Removes the workspace branch from the repository.
 
 __`retag-image`__  
 Retags the image associated with the repository by replacing the registry-realm prefix with the new prefix supplied.
@@ -75,13 +48,6 @@ Saves the current tagged image in cache to a tar file in the `/images` folder.
 
 __`status`__  
 Gives the current status of the repository. Direct port of _git status_.
-
-__`symbolic-ref`__  
-Direct port of _git symbolic-ref_.  
-
-__`tag`__  
-Without arguments it creates / updates a GIT tag with name CONTECO_TAG.  
-With arguments, it is a direct port of _git tag_.
 
 -----
 [`controlplane.base`](../README.md) >> `repo` API - Full

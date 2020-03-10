@@ -11,19 +11,11 @@
 	cd $rootPath
 	fi
 	case "$1" in
-		add)
-			executionplane git add .
-		;;
-		branch)
-			executionplane git branch ${@:2:$#-2}
-		;;
-		create-workspace)
-			executionplane git branch "workspace"
-			executionplane git checkout "workspace"
-		;;
 		commit)
 			message="${@:2:$#-2}"
+			executionplane git add .
 			executionplane git commit -m "$(echo "$message")"
+			executionplane git tag -f ${CONTECO_TAG}
 		;;
 		compact)
 			executionplane git reflog expire --updateref --rewrite --stale-fix --expire=all --all
@@ -32,11 +24,6 @@
 			executionplane git gc --prune=all --aggressive
 			executionplane git push -f --all
 			executionplane git push -f --tags
-		;;
-		checkin-workspace)
-			executionplane git checkout master
-			executionplane git merge workspace
-			executionplane git tag -f "${CONTECO_TAG}"
 		;;
 		config)
 			executionplane git remote set-url origin "https://github.com/${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}.git"
@@ -50,9 +37,6 @@
 			executionplane mkdir -p $destination
 			executionplane docker container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
 		;;
-		init)
-			executionplane git init
-		;;
 		load)
 			fromTar="false"
 			if [[ "$2" == "--from-tar" ]] ; then
@@ -63,31 +47,15 @@
 			repo-load $fromTar "${imageName}:${CONTECO_TAG}"
 		;;
 		log)
-			executionplane git log ${@:2:$#-2}
-		;;
-		log10)
 			executionplane git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10
 		;;
-		pull)
-			executionplane git pull ${@:2:$#-2}
-		;;
 		push)
-		  if [[ "$3" == "" ]] ; then
-				executionplane "--errors-only" git push origin master
-				executionplane "--errors-only" git push -f origin "$CONTECO_TAG"
-			else
-				executionplane git push ${@:2:$#-2}
-			fi
-		;;
-		remote)
-			executionplane git remote ${@:2:$#-2}
+			executionplane "--errors-only" git push origin master
+			executionplane "--errors-only" git push -f origin "$CONTECO_TAG"
 		;;
 		remove)
 			cd $currentpwd
 			executionplane rm -rf $rootPath
-		;;
-		remove-workspace)
-			executionplane git branch -d "workspace"
 		;;
 		retag-image)
 			executionplane docker tag "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG" "$2/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}"
@@ -98,16 +66,6 @@
 		;;
 		status)
 			executionplane git status
-		;;
-		symbolic-ref)
-			executionplane git symbolic-ref ${@:2:$#-2}
-		;;
-		tag)
-			if [[ "$3" == "" ]] ; then
-				executionplane git tag -f ${CONTECO_TAG}
-			else
-				executionplane git tag ${@:2:$#-2}
-			fi
 		;;
 		--info)
 			. info-summary repo

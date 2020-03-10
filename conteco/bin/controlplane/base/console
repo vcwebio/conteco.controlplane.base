@@ -15,14 +15,18 @@
         executionplane-warning "Reposiotry folder already exists!"
       fi
       cd ..
-		;;
+    ;;
+    cmd)
+      shift
+      executionplane $@
+    ;;
     controlplane-service)
       shift
       controlplane-service $@
     ;;
     execute-selection)
       shift
-      console-iterate-selection $@
+      console-iterate-selection .invoke $@
     ;;
     extract-repo)
       imageName="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$2"

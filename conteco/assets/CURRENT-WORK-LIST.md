@@ -2,17 +2,7 @@
 
 ## Pending
 
-conteco.external.ksql-cli
-conteco.external.ksql-server
-conteco.ksql-cli.base
-conteco.ksql-server.base
-
 ### Publish Activities
-
-
-### Modeco Module CONFIGURATION
-The base module packages should update from the conteco images.  
-The module package should update from the base packages.
 
 ## Controlplane API
 
@@ -46,6 +36,11 @@ This single base container should then replace metricbeat.node and metricbeat.ov
 The configuration should use the autodisover feature.
 
 ### image.wrapper
+
+#### The Bash Trap
+
+Investigate how the Bash trap can work to ensure that all errors / information end up in the container logs.
+https://medium.com/@dirk.avery/the-bash-trap-trap-ce6083f36700
 
 #### to-JSON
 

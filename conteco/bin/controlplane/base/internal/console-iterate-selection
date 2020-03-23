@@ -6,5 +6,13 @@ selection=$(cat /conteco/assets/image-list | grep "${CONTECO_ECOSYSTEM_RUNTIME}"
 readarray -t items <<< "$selection"
   for item in ${items[@]};
   do
-    ${@:1:$#-1} "${CONTECO_REALM_RUNTIME}/$item"
+    current=$(pwd)
+    cd "${CONTECO_REALM_RUNTIME}/$item"
+    commandline="${@:1:$#-1}"
+    if [[ "$commandline" == ".invoke console"* ]] ; then
+      $commandline
+    else
+      $commandline "${CONTECO_REALM_RUNTIME}/$item"
+    fi
+    cd $current
   done;

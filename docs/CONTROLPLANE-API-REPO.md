@@ -49,5 +49,11 @@ Saves the current tagged image in cache to a tar file in the `/images` folder.
 __`status`__  
 Gives the current status of the repository. Direct port of _git status_.
 
+__`tag-registry__   
+Retags the selected images with the current registry prefix.  
+
+__untag-registry`__  
+Retags the selected images without the current registry prefix.  
+
 -----
 [`controlplane.base`](../README.md) >> `repo` API - Full

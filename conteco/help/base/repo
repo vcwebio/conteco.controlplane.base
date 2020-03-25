@@ -42,4 +42,10 @@
 # repo status <repository selector>
 # Gives the current status of the repository. Direct port of _git status_.
 #
+# repo tag-registry <repository selector>
+# Retags the selected images with the current registry prefix.
+#
+# repo untag-registry <repository selector>
+# Retags the selected images without the current registry prefix.
+#
 #

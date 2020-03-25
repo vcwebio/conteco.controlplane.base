@@ -67,6 +67,14 @@
 		status)
 			executionplane git status
 		;;
+		tag-registry)
+			executionplane docker tag "$imageName:$CONTECO_TAG" "${CONTECO_REGISTRY}$imageName"
+			executionplane docker tag "$imageName:$CONTECO_TAG" "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG"
+		;;
+		untag-registry)
+			executionplane docker tag "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG" "$imageName"
+			executionplane docker tag "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG" "$imageName:$CONTECO_TAG"
+		;;
 		--info)
 			. info-summary repo
 		;;

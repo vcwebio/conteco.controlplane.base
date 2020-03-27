@@ -5,6 +5,9 @@
 #
 # The console API contains methods that run outside the image repository context.
 #
+# console backup/restore [internal/external/package/module]
+# Create or restore backup of conteco external/internal and modeco package/module images.
+#
 # console clone-repo [repository name]
 # Git clone the repository if the repository folder does not exist.
 #
@@ -13,7 +16,7 @@
 #
 # console controlplane-service [API command + arguments]
 # Execute the command across all nodes.
-# It forces an API command by prefixing the command supplied with .invoke 
+# It forces an API command by prefixing the command supplied with .invoke
 #
 # console execute-selection [command + arguments] [selector]
 # Execute the command and argument on each of all the images selected by the selector.

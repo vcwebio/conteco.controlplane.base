@@ -6,6 +6,9 @@
     --info)
       . info-summary console
     ;;
+    backup|restore)
+      console-backup-restore "$1" "$2"
+    ;;
     clone-repo)
       repoName="$2"
       cd "${CONTECO_REALM_RUNTIME}"
@@ -29,12 +32,11 @@
       console-iterate-selection .invoke $@
     ;;
     extract-repo)
-      imageName="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$2"
       if [[ "$3" == "--reload" ]] ; then
-        executionplane docker image pull "$CONTECO_REGISTRY$imageName"
+        executionplane docker image pull "$CONTECO_REGISTRY$2"
       fi
-			. executionplane-capture-output docker create ${CONTECO_REGISTRY}$imageName
-			destination="/conteco/pwd/$imageName"
+			. executionplane-capture-output docker create ${CONTECO_REGISTRY}$2
+			destination="/conteco/pwd/$2"
 			executionplane mkdir -p $destination
 			executionplane docker container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
 		;;
@@ -44,9 +46,8 @@
         fromTar="true"
         shift
       fi
-      imageName="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$2"
-      repo-load "$fromTar" "$imageName"
-		;;
+      repo-load "$fromTar" "$2"
+    ;;
     save)
       imageName="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$2"
       repo-save "$imageName"
@@ -72,10 +73,9 @@
       executionplane docker volume rm --force "${prefix}_data"
     ;;
     unload)
-      imageName="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$2"
-			executionplane docker image rm --force "$CONTECO_REGISTRY$imageName"
+			executionplane docker image rm --force "$CONTECO_REGISTRY$2"
       if [[ "$3" != "" ]] ; then
-        executionplane docker image rm --force "$CONTECO_REGISTRY$imageName:$3"
+        executionplane docker image rm --force "$CONTECO_REGISTRY$2:$3"
 			fi
     ;;
    *)

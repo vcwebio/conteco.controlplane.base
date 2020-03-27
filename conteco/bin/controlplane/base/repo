@@ -58,8 +58,8 @@
 			executionplane rm -rf $rootPath
 		;;
 		retag-image)
-			executionplane docker tag "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG" "$2/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}"
-			executionplane docker tag "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG" "$2/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}:${CONTECO_TAG}"
+			executionplane docker tag "${CONTECO_REGISTRY}$imageName" "$2/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}"
+			executionplane docker tag "${CONTECO_REGISTRY}$imageName" "$2/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}:${CONTECO_TAG}"
 		;;
 		save)
       repo-save "$imageName:$CONTECO_TAG"

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+mode="$1" # backup or restore
+collection="$2" # internal, external, packages, modules
+if [[ " internal module " == *"$collection"* ]] ; then
+  negate="true"
+else
+  negate="false"
+fi
+
+# check that backup repository exists - halt if not
+repo="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.backup.$collection"
+if [[ ! -d "$repo" ]] ; then
+  executionplane-error "There is no back repository for the collection requested: ${CONTECO_ECOSYSTEM_RUNTIME}.backup.$collection"
+  exit 0
+fi
+
+# run backup or restore routine
+if [[ "$mode" == "restore" ]] ; then
+  for f in $repo/conteco/assets/*
+  do
+    executionplane --silent tar -xvf $f
+  done;
+else
+  executionplane rm $repo/conteco/assets/*.tar
+  for f in ${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.*
+  do
+    folderName=$(basename $f)
+    if [[ "$folderName" != *".backup."* ]] ; then
+      if [[ "$folderName" == *"$collection"* ]] ; then
+        match="true"
+      else
+        match="false"
+      fi
+      if [[ "$match" == "true" && "$negate" == "false" ]] ; then
+        executionplane --silent tar cvf "$repo/conteco/assets/$folderName.tar" "${CONTECO_REALM_RUNTIME}/$folderName"
+      elif [[ "$match" == "false" && "$negate" == "true" ]] ; then
+        executionplane --silent tar cvf "$repo/conteco/assets/$folderName.tar" "${CONTECO_REALM_RUNTIME}/$folderName"
+      fi
+    fi
+  done;
+  config set-version $(date +"%Y%m%d") $repo
+fi

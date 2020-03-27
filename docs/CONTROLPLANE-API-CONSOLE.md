@@ -6,6 +6,9 @@
 
 API section containing methods that executes outside the context of a repository.  
 
+__`backup/restore`__ [internal/external/package/module]
+Create or restore backup of conteco external/internal and modeco package/module images.
+
 __`clone-repo`__ [repository name]
 Git clone the repository if the repository folder does not exist.
 

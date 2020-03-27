@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
-# ${@:2:$#-2}
 
 selector="${@: -1}"
 selection=$(cat /conteco/assets/image-list | grep "${CONTECO_ECOSYSTEM_RUNTIME}" | grep "$selector")
 readarray -t items <<< "$selection"
   for item in ${items[@]};
   do
+    imageName="${CONTECO_REALM_RUNTIME}/$item"
     current=$(pwd)
-    cd "${CONTECO_REALM_RUNTIME}/$item"
+    if [[ -d "$imageName" ]] ; then
+      cd "$imageName"
+    fi
     commandline="${@:1:$#-1}"
-    if [[ "$commandline" == ".invoke console"* ]] ; then
+    if [[ "$commandline" == ".invoke console cmd"* ]] ; then
       $commandline
     else
-      $commandline "${CONTECO_REALM_RUNTIME}/$item"
+      $commandline $imageName
     fi
     cd $current
   done;

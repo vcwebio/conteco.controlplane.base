@@ -1,4 +1,6 @@
 conteco.artifactory.base
+conteco.backup.external
+conteco.backup.internal
 conteco.bash.base
 conteco.confluent_cc.base
 conteco.controlplane.base
@@ -21,10 +23,10 @@ conteco.external.filebeat
 conteco.external.grafana
 conteco.external.kafka
 conteco.external.kafka_connect
+conteco.external.kafka_connect_datagen
 conteco.external.kafka_manager
 conteco.external.kafka_rest
 conteco.external.kafka_server
-conteco.external.kafka_server_datagen
 conteco.external.kibana
 conteco.external.ksql_cli
 conteco.external.ksql_server
@@ -80,6 +82,8 @@ conteco.templates.build
 conteco.traefik.base
 conteco.tshark.base
 conteco.zookeeper.base
+modeco.backup.module
+modeco.backup.package
 modeco.package.confluent_cc
 modeco.package.ekg
 modeco.package.ingest

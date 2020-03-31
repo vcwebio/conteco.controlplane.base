@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
 mode="$1" # backup or restore
-collection="$2" # internal, external, packages, modules
+collection="$2" # internal, external, package, module
 if [[ " internal module " == *"$collection"* ]] ; then
   negate="true"
 else
   negate="false"
+fi
+if [[ "$CONTECO_ECOSYSTEM_RUNTIME" == "conteco" ]] ; then
+  matchName="external"
+else
+  matchName="package"
 fi
 
 # check that backup repository exists - halt if not
@@ -27,7 +32,7 @@ else
   do
     folderName=$(basename $f)
     if [[ "$folderName" != *".backup."* ]] ; then
-      if [[ "$folderName" == *"$collection"* ]] ; then
+      if [[ "$folderName" == *"$matchName"* ]] ; then
         match="true"
       else
         match="false"

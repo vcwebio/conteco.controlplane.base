@@ -84,6 +84,7 @@ conteco.tshark.base
 conteco.zookeeper.base
 modeco.backup.module
 modeco.backup.package
+modeco.confluent.poc
 modeco.package.confluent_cc
 modeco.package.ekg
 modeco.package.ingest

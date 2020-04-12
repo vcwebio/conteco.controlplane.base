@@ -63,12 +63,11 @@
         port="5000"
       fi
       prefix="${CONTECO_ECOSYSTEM_RUNTIME}_registry_base_2"
-      registryImage="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.registry.base:2"
+      registryImage="$CONTECO_REGISTRY${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.registry.base:2"
       executionplane docker run -d -p "${port}:5000" --restart=always --name "${prefix}" -v "${prefix}_data:/var/lib/registry" "${registryImage}"
 		;;
     stop-registry)
       prefix="${CONTECO_ECOSYSTEM_RUNTIME}_registry_base_2"
-      registryImage="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.registry.base:2"
       executionplane docker container rm --force "${prefix}"
       executionplane docker volume rm --force "${prefix}_data"
     ;;

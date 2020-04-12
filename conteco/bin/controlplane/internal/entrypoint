@@ -11,3 +11,12 @@ export CONTECO_REPOSITORYPREFIX="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RU
 
 export CONTECO_REALM_RUNTIME="${CONTECO_REALM}"
 export CONTECO_ECOSYSTEM_RUNTIME="${CONTECO_NAME}"
+
+# extract registry from image name of running cli container
+while [[ "$(docker container ls | grep conteco.controlplane )" == "" ]] ;
+do
+  sleep 1
+done;
+imagePrefix="$(docker container ls | grep conteco.controlplane | awk '{ print $2 }' FS=' ' | awk '{ print $1 }' FS='/conteco.' )"
+registry="${imagePrefix/${CONTECO_REALM}/}"
+export CONTECO_REGISTRY="$registry"

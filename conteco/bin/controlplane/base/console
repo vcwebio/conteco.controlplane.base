@@ -27,7 +27,7 @@
       shift
       controlplane-service $@
     ;;
-    execute-selection)
+    execute)
       shift
       console-iterate-selection .invoke $@
     ;;

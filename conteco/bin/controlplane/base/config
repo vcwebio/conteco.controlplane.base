@@ -7,7 +7,7 @@
 	. $rootPath/environment
 
 	case $1 in
-		build)
+		all|build)
 			(
 			export CONTECO_REGISTRY=
 			cat $rootPath/Dockerfile | envsubst > $rootPath/Dockerfile.static

@@ -4,7 +4,7 @@
 	. executionplane-invoke "$0 $@"
 	imageName="${@: -1}"
 	rootPath="/conteco/pwd/${imageName}"
-	. $rootPath/environment
+  . invoke-script $imageName environment
 
 	case $1 in
 		all|build)

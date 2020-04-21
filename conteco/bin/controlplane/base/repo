@@ -4,7 +4,7 @@
 	. executionplane-invoke "$0 $@"
 	imageName="${@: -1}"
 	rootPath="/conteco/pwd/${imageName}"
-	. $rootPath/environment
+	. invoke-script $imageName environment
 
 	currentpwd=$(pwd)
 	if [[ -d $rootPath ]] ; then

@@ -64,8 +64,11 @@ conteco.metricbeat.node
 conteco.metricbeat.overlay
 conteco.module.ekg
 conteco.module.confluent_cc
+conteco.module.kafka_connect
 conteco.module.kafka_rest
+conteco.module.ksql_server
 conteco.module.streamsets
+conteco.module.schema_registry
 conteco.mysql.base
 conteco.nexus.base
 conteco.nginx.base

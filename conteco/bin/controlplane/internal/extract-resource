@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
-imageName=$1
-input=$2
-output=$3
+imageName="$1"
+input="$2"
+output="$3"
+requiredTag="$4"
+(
 
-rootPath="/conteco/pwd/${imageName}"
-if [[ -d $rootPath && -f $rootPath/$input ]] ; then
-	cp $rootPath/$input $output
-else
+	rootPath="/conteco/pwd/${imageName}"
+	if [[ -d $rootPath && -f $rootPath/$input ]] ; then
+
+		currentpwd="$(pwd)"
+		cd $rootPath
+		. $rootPath/environment
+		executionplane-info "Required tag: $requiredTag; Current tag: ${CONTECO_TAG}"
+		cp $rootPath/$input $output
+		cd $currentpwd
+	fi
+
 	. executionplane-capture-output docker create ${CONTECO_REGISTRY}$imageName
 	executionplane docker container cp ${CONTECO_EXECUTIONPLANE_OUTPUT}:/conteco/repo/${input} $output
-fi
+
+)

@@ -17,9 +17,9 @@ fi
 export CONTECO_ECOSYSTEM_RUNTIME="${CONTECO_NAME}"
 
 hostname="${CONTECO_HOSTNAME}"
-if [[ "$hostname" = "host.docker.internal" ]] ; then
+if [[ "$hostname" == "host.docker.internal" ]] ; then
 	hostname="linuxkit"
 fi
-export PS1="${CONTECO_HOSTNAME}:${CONTECO_NAME}#$ "
+export PS1="${hostname}:${CONTECO_NAME}#$ "
 export CONTECO_PWD_VOLUME="$pwd_volume"
 bash

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 selector="${@: -1}"
-selection=$(cat /conteco/assets/image-list | grep "${CONTECO_ECOSYSTEM_RUNTIME}" | grep "$selector")
+selection=$(cat /conteco/assets/image-list | grep "${CONTECO_ECOSYSTEM_RUNTIME}.${selector}")
 readarray -t items <<< "$selection"
   for item in ${items[@]};
   do

@@ -11,12 +11,16 @@ conteco.controlplane.modeco
 conteco.controlplane.soleco
 conteco.controlplane.swareco
 conteco.docs.overview
+conteco.dotnetcore_runtime22.base
+conteco.dotnetcore_runtime31.base
 conteco.elasticsearch.base
 conteco.elasticsearch_dump.base
 conteco.external.artifactory
 conteco.external.bash
 conteco.external.confluent_cc
 conteco.external.controlplane
+conteco.external.dotnetcore_rt22
+conteco.external.dotnetcore_rt31
 conteco.external.elasticsearch
 conteco.external.elasticsearch_dump
 conteco.external.filebeat
@@ -92,6 +96,8 @@ modeco.confluent.poc
 modeco.module.template
 modeco.package.bash
 modeco.package.confluent_cc
+modeco.package.dotnetcore_rt22
+modeco.package.dotnetcore_rt31
 modeco.package.ekg
 modeco.package.ingest
 modeco.package.kafka_connect

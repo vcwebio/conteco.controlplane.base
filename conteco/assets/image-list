@@ -19,8 +19,8 @@ conteco.external.artifactory
 conteco.external.bash
 conteco.external.confluent_cc
 conteco.external.controlplane
-conteco.external.dotnetcore_rt22
-conteco.external.dotnetcore_rt31
+conteco.external.dotnetcore_runtime22
+conteco.external.dotnetcore_runtime31
 conteco.external.elasticsearch
 conteco.external.elasticsearch_dump
 conteco.external.filebeat

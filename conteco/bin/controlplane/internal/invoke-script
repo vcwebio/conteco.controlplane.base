@@ -5,6 +5,7 @@ shift
 shift
 rootPath="/conteco/pwd/${imageName}"
 if [[ -d $rootPath && -f $rootPath/$scriptFile ]] ; then
+	chmod 777 $rootPath/$scriptFile
 	. $rootPath/$scriptFile $@
 else
 	tmpfile=$(mktemp /tmp/run-script.XXXXXX)

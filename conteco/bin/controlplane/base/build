@@ -7,15 +7,9 @@
 	. invoke-script $imageName environment
 
 	# deep build down to base included
-	if [[ ($1 == "--deep" && "${CONTECO_TYPE}" != "external") ]] ; then
+	if [[ $1 == "--deep" ]] ; then
 		baseImage=$(echo ${CONTECO_BASE} | cut -f1 -d":")
 		build ${@:1:$#-1} ${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$baseImage
-	fi
-
-	buildExternal="true"
-	if [[ ($1 == "--exclude-external") ]] ; then
-		buildExternal="false"
-		shift
 	fi
 
 	case $1 in
@@ -23,19 +17,15 @@
 			. info-summary build
 		;;
 		*)
-			if [[ "$buildExternal" == "true" || "$CONTECO_TYPE" != "external" ]] ; then
-				# build latest image
-				tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
-				cat $rootPath/Dockerfile | envsubst > $tmpfile
-				executionplane "--errors-only" docker build -t "$CONTECO_REGISTRY$imageName" -f $tmpfile $rootPath
-				rm $tmpfile
+			# build latest image
+			tmpfile=$(mktemp /tmp/Dockerfile.XXXXXX)
+			cat $rootPath/Dockerfile | envsubst > $tmpfile
+			executionplane "--errors-only" docker build -t "$CONTECO_REGISTRY$imageName" -f $tmpfile $rootPath
+			rm $tmpfile
 
-				# tag latest image
-				if [[ "${CONTECO_TAG}" != "" ]] ; then
-					executionplane "--errors-only" docker tag "$CONTECO_REGISTRY$imageName" "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
-				fi
-			else
-				executionplane-info "Image excluded from build."
+			# tag latest image
+			if [[ "${CONTECO_TAG}" != "" ]] ; then
+				executionplane "--errors-only" docker tag "$CONTECO_REGISTRY$imageName" "$CONTECO_REGISTRY$imageName:${CONTECO_TAG}"
 			fi
 		;;
 	esac

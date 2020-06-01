@@ -31,7 +31,11 @@
 			executionplane git config core.filemode false
 			executionplane git config credential.helper store
 		;;
-		extract)
+		create)
+			executionplane git init
+			executionplane git remote add origin test
+		;;
+			extract)
 			. executionplane-capture-output docker create ${CONTECO_REGISTRY}$imageName
 			destination="/conteco/pwd/$imageName"
 			executionplane mkdir -p $destination
@@ -49,8 +53,21 @@
 		log)
 			executionplane git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10
 		;;
+		major-reset)
+		  if [[ "$CONTECO_TAG_TYPE" == "incremental" ]] ; then
+				executionplane git tag | git push origin ":refs/tags/$INPUT"
+				executionplane rm -rf .git
+				config increment major "$imageName"
+				repo create "$imageName"
+				config build "$imageName"
+				repo commit -m "initial checkin after reset, for earlier history extract repository from container image of previous (major) version." "$imageName"
+				repo config "$imageName"
+				repo push "$imageName"
+				repo config "$imageName"
+			fi
+		;;
 		push)
-			executionplane "--errors-only" git push origin master
+			executionplane "--errors-only" git push -f origin master
 			executionplane "--errors-only" git push -f origin "$CONTECO_TAG"
 		;;
 		remove)

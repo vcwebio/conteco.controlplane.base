@@ -10,6 +10,7 @@ conteco.external.elasticsearch
 conteco.external.elasticsearch_dump
 conteco.external.filebeat
 conteco.external.grafana
+conteco.external.journalbeat
 conteco.external.kafka
 conteco.external.kafka_connect
 conteco.external.kafka_connect_datagen
@@ -55,9 +56,10 @@ conteco.dotnetcore_runtime31.base
 conteco.elasticsearch.base
 conteco.elasticsearch_dump.base
 conteco.filebeat.base
-conteco.filebeat.ssl
+conteco.filebeat.kafka
 conteco.grafana.base
 conteco.image.wrapper
+conteco.journalbeat.base
 conteco.kafka.base
 conteco.kafka_connect.base
 conteco.kafka_connect.sasl
@@ -119,8 +121,9 @@ modeco.package.confluent_sasl
 modeco.package.dotnetcore_rt22
 modeco.package.dotnetcore_rt31
 modeco.package.ekg
-modeco.package.ingest
-modeco.package.ingest_ssl
+modeco.package.ingest_file
+modeco.package.ingest_journal
+modeco.package.ingest_kafka
 modeco.package.kafka_connect
 modeco.package.kafka_connect_sasl
 modeco.package.kafka_connect_datagen

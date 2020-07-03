@@ -55,7 +55,7 @@ conteco.dotnetcore_runtime22.base
 conteco.dotnetcore_runtime31.base
 conteco.elasticsearch.base
 conteco.elasticsearch_dump.base
-conteco.filebeat.base
+conteco.filebeat.file
 conteco.filebeat.kafka
 conteco.grafana.base
 conteco.image.wrapper

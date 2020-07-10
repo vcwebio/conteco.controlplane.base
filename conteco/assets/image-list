@@ -10,11 +10,12 @@ conteco.external.elasticsearch
 conteco.external.elasticsearch_dump
 conteco.external.filebeat
 conteco.external.grafana
+conteco.external.heartbeat
 conteco.external.journalbeat
 conteco.external.kafka
 conteco.external.kafka_connect
 conteco.external.kafka_connect_datagen
-conteco.external.kafka_rest
+conteco.external.kafka_restconteco
 conteco.external.kafka_server
 conteco.external.kibana
 conteco.external.ksql_cli
@@ -27,12 +28,12 @@ conteco.external.mirrormaker
 conteco.external.mysql
 conteco.external.nexus
 conteco.external.nginx
-conteco.external.registry
+conteco.external.registryconteco
 conteco.external.replicator
 conteco.external.schema_registry
 conteco.external.sql_server
 conteco.external.streamsets
-conteco.external.traefik
+conteco.external.traefikekg
 conteco.external.tshark
 conteco.external.zookeeper
 
@@ -54,11 +55,12 @@ conteco.dotnetcore_runtime22.base
 conteco.dotnetcore_runtime31.base
 conteco.elasticsearch.base
 conteco.elasticsearch_dump.base
-conteco.filebeat.file
+conteco.filebeat.fileekg
 conteco.filebeat.file_sasl
 conteco.filebeat.kafka
 conteco.filebeat.kafka_sasl
 conteco.grafana.base
+conteco.heartbeat.base
 conteco.image.wrapper
 conteco.journalbeat.base
 conteco.journalbeat.sasl
@@ -83,7 +85,6 @@ conteco.metricbeat.node
 conteco.metricbeat.overlay
 conteco.mirrormaker.base
 conteco.module.ekg
-conteco.module.confluent_cc
 conteco.module.kafka_connect
 conteco.module.kafka_connect_sasl
 conteco.module.kafka_connect_datagen
@@ -103,13 +104,13 @@ conteco.nginx.base
 conteco.nginx.rewrite
 conteco.registry.base
 conteco.replicator.base
-conteco.schema_registry.base
+conteco.schema_registry.baseekg
 conteco.schema_registry.sasl
 conteco.sql_server.base
 conteco.stack.ekg
 conteco.stack.kz
 conteco.stack.kz_server
-conteco.streamsets.base
+conteco.streamsets.baseekg
 conteco.templates.build
 conteco.traefik.base
 conteco.tshark.base
@@ -122,6 +123,7 @@ modeco.package.confluent_sasl
 modeco.package.dotnetcore_rt22
 modeco.package.dotnetcore_rt31
 modeco.package.ekg
+modeco.package.heartbeat
 modeco.package.ingest_file
 modeco.package.ingest_file_sasl
 modeco.package.ingest_journal

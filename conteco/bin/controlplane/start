@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
-pwd_volume="$1"
-if [[ "$pwd_volume" == *"\\"* ]] ; then
-	pwd_volume=$( echo $pwd_volume | tr '\\' '\/' | tr -d ':' )
-	pwd_volume="/${pwd_volume//\/\//\/}"
-	pwd_volume="${pwd_volume,,}"
+# $1 platform
+# £2 repository category: external, internal, package, module, solution, cluster, interface
+# $3 realm
+
+if [[ "$1" == "windows" ]] ; then
 	export CONTECO_OS="windows"
 else
 	export CONTECO_OS="linux"
 fi
 
+export CONTECO_PWD_VOLUME="controlplane_repos_$2"
+
 # Runtime values for REALM and ECOSYSTEM
 export CONTECO_REALM_RUNTIME="${CONTECO_REALM}"
-if [[ "$2" != "" ]] ; then
-	export CONTECO_REALM_RUNTIME="$2"
+if [[ "$3" != "" ]] ; then
+	export CONTECO_REALM_RUNTIME="$3"
 fi
 export CONTECO_ECOSYSTEM_RUNTIME="${CONTECO_NAME}"
 
@@ -20,6 +22,10 @@ hostname="${CONTECO_HOSTNAME}"
 if [[ "$hostname" == "host.docker.internal" ]] ; then
 	hostname="linuxkit"
 fi
-export PS1="${hostname}:${CONTECO_NAME}#$ "
-export CONTECO_PWD_VOLUME="$pwd_volume"
+if [[ " modeco conteco " == *"$CONTECO_NAME"* ]] ; then
+	export PS1="${hostname}:${CONTECO_NAME}-${2}#$ "
+else
+	export PS1="${hostname}:${CONTECO_NAME}#$ "
+fi
+
 bash

@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-(
-  export PATH="/conteco/bin/controlplane/internal:$CONTECO_EXECUTIONPLANE_ORIGINALPATH"
-  . cli-executor $@
-)

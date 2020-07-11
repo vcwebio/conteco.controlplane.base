@@ -9,6 +9,7 @@ else
 	export CONTECO_OS="linux"
 fi
 
+export CONTECO_REPOSITORY_CATEGORY="$2"
 export CONTECO_PWD_VOLUME="controlplane_repos_$2"
 
 # Runtime values for REALM and ECOSYSTEM
@@ -23,9 +24,10 @@ if [[ "$hostname" == "host.docker.internal" ]] ; then
 	hostname="linuxkit"
 fi
 if [[ " modeco conteco " == *"$CONTECO_NAME"* ]] ; then
-	export PS1="${hostname}:${CONTECO_NAME}-${2}#$ "
+	export PS1="${hostname}:${CONTECO_NAME}-${CONTECO_REPOSITORY_CATEGORY}#$ "
 else
 	export PS1="${hostname}:${CONTECO_NAME}#$ "
 fi
+echo "" > ./current-repo-selection
 
 bash

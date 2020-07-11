@@ -2,16 +2,6 @@
 
 mode="$1" # backup or restore
 collection="$2" # internal, external, package, module
-if [[ " internal module " == *"$collection"* ]] ; then
-  negate="true"
-else
-  negate="false"
-fi
-if [[ "$CONTECO_ECOSYSTEM_RUNTIME" == "conteco" ]] ; then
-  matchName="external"
-else
-  matchName="package"
-fi
 
 # check that backup repository exists - halt if not
 repo="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.backup.$collection"
@@ -32,16 +22,7 @@ else
   do
     folderName=$(basename $f)
     if [[ "$folderName" != *".backup."* ]] ; then
-      if [[ "$folderName" == *"$matchName"* ]] ; then
-        match="true"
-      else
-        match="false"
-      fi
-      if [[ "$match" == "true" && "$negate" == "false" ]] ; then
-        executionplane --silent tar cvf "$repo/conteco/assets/$folderName.tar" "${CONTECO_REALM_RUNTIME}/$folderName"
-      elif [[ "$match" == "false" && "$negate" == "true" ]] ; then
-        executionplane --silent tar cvf "$repo/conteco/assets/$folderName.tar" "${CONTECO_REALM_RUNTIME}/$folderName"
-      fi
+      executionplane --silent tar cvf "$repo/conteco/assets/$folderName.tar" "${CONTECO_REALM_RUNTIME}/$folderName"
     fi
   done;
   config set-version $(date +"%Y%m%d") $repo

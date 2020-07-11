@@ -15,7 +15,7 @@
       if [[ ! -d $repoName ]] ; then
         executionplane git clone "$repoName"
       else
-        executionplane-warning "Reposiotry folder already exists!"
+        executionplane-warning "Repository folder already exists!"
       fi
       cd ..
     ;;
@@ -48,10 +48,16 @@
       fi
       repo-load "$fromTar" "$2"
     ;;
+    reset)
+      echo "" > ./current-repo-selection
+    ;;
     save)
       imageName="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.$2"
       repo-save "$imageName"
-		;;
+    ;;
+    set)
+      echo "$2" > ./current-repo-selection
+    ;;
     set-repo-user)
 			executionplane git config --global user.name "$2"
 			executionplane git config --global user.email "$3"

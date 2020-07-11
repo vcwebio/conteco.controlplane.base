@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# $1 platform
+# £2 repository category: external, internal, package, module, solution, cluster, interface
+# $3 realm
+
+if [[ "$1" == "windows" ]] ; then
+	export CONTECO_OS="windows"
+else
+	export CONTECO_OS="linux"
+fi
+
+export CONTECO_REPOSITORY_CATEGORY="$2"
+export CONTECO_PWD_VOLUME="controlplane_repos_$2"
+
+# Runtime values for REALM and ECOSYSTEM
+export CONTECO_REALM_RUNTIME="${CONTECO_REALM}"
+if [[ "$3" != "" ]] ; then
+	export CONTECO_REALM_RUNTIME="$3"
+fi
+export CONTECO_ECOSYSTEM_RUNTIME="${CONTECO_NAME}"
+
+hostname="${CONTECO_HOSTNAME}"
+if [[ "$hostname" == "host.docker.internal" ]] ; then
+	hostname="linuxkit"
+fi
+if [[ " modeco conteco " == *"$CONTECO_NAME"* ]] ; then
+	export PS1="${hostname}:${CONTECO_NAME}-${CONTECO_REPOSITORY_CATEGORY}#$ "
+else
+	export PS1="${hostname}:${CONTECO_NAME}#$ "
+fi
+echo "" > ./current-repo-selection
+
+bash

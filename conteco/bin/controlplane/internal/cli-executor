@@ -6,29 +6,42 @@ if [[ "${@: -1}" == "--help" ]] ; then
 	wait-for-output-parser-tagged
 else
 
-	selector="$(< ./current-repo-selection)"
-	if [[ "$selector" == "" ]] ; then
-		selector="${@: -1}"
-	else
-		storedSelection="true"
-	fi
-
-	if [[ " external package " == *"$CONTECO_REPOSITORY_CATEGORY"* ]] ; then
-		selector="${CONTECO_REPOSITORY_CATEGORY}.$selector"
-	fi
-
-	selector="$(set-selector "$selector")"
-
-	if [[ "$selector" == *"$" ]] ; then
-		selector="${selector::-1}"
-	else
-		selector="$selector*"
-	fi
-
 	if [[ "$1" == "console" ]] ; then
-	  .invoke $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
-	  wait-for-output-parser-tagged
+		.invoke $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
+		wait-for-output-parser-tagged
 	else
+
+		selector="$(< ./current-repo-selection)"
+		if [[ "$selector" == "" ]] ; then
+			selector="${@: -1}"
+		else
+			storedSelection="true"
+		fi
+
+		if [[ "$selector" == "." ]] ; then
+			selector=
+		fi
+
+		if [[ " external package " == *"$CONTECO_REPOSITORY_CATEGORY"* ]] ; then
+		  if [[ "$selector" != "backup."* ]] ; then
+	  		selector="${CONTECO_REPOSITORY_CATEGORY}.$selector"
+			fi
+		fi
+
+		if [[ $selector != "${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}."* && $selector != "${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}" ]] ; then
+			if [[ $selector == "${CONTECO_ECOSYSTEM_RUNTIME}."* ]] ; then
+				selector="${CONTECO_REALM_RUNTIME}/${selector}"
+			else
+				selector="${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.${selector}"
+			fi
+		fi
+
+		if [[ "$selector" == *"$" ]] ; then
+			selector="${selector::-1}"
+		else
+			selector="$selector*"
+		fi
+
 	  for f in $selector ;
 	  do
 	    if [[ "$storedSelection" == "true" ]] ; then

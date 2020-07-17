@@ -156,3 +156,6 @@ modeco.registry.g1
 modeco.swarm.g1
 modeco.swarm.g2
 modeco.traefik.g1
+
+soleco.registry.local
+soleco.traefik.local

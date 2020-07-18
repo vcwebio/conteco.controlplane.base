@@ -18,6 +18,7 @@ if [[ "$3" != "" ]] ; then
 	export CONTECO_REALM_RUNTIME="$3"
 fi
 export CONTECO_ECOSYSTEM_RUNTIME="${CONTECO_NAME}"
+export CONTECO_NAME_CONTROLPLANE="${CONTECO_NAME}"
 
 hostname="${CONTECO_HOSTNAME}"
 if [[ "$hostname" == "host.docker.internal" ]] ; then

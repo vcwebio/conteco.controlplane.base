@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+(
+	export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
+	. executionplane-invoke "$0 $@"
+	imageName="${@: -1}"
+	rootPath="/conteco/pwd/${imageName}"
+  . invoke-script $imageName environment
+
+	case $1 in
+		all|build)
+			(
+			export CONTECO_REGISTRY=
+			cat $rootPath/Dockerfile | envsubst > $rootPath/Dockerfile.static
+			)
+		;;
+		increment)
+			config-increment $2 $rootPath
+		;;
+		remove-crs)
+			config-remove-crs $rootPath
+		;;
+		set-version)
+			config-set-version $2 $rootPath
+		;;
+		--info)
+			. info-summary config
+		;;
+		*)
+			executionplane-error "Method not recognised: $1."
+		;;
+	esac
+  executionplane-complete
+)

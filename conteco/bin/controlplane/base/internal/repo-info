@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+rootPath=$1
+infoFile="/conteco/assets/info-summary"
+infoSummary=$(cat $infoFile | envsubst)
+echo "$infoSummary"

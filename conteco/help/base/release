@@ -1,0 +1,8 @@
+#
+#
+# release API - controlplane.base
+# Use the --info flag to get release specific container image information.
+#
+# controlplane.base does not implement any methods for deploy API.
+#
+#

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+(
+  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
+	$@
+)

@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+(
+	export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_BASE"
+	. executionplane-invoke "$0 $@"
+	imageName="${@: -1}"
+	rootPath="/conteco/pwd/${imageName}"
+	. invoke-script $imageName environment
+
+	currentpwd=$(pwd)
+	if [[ -d $rootPath ]] ; then
+	cd $rootPath
+	fi
+	case "$1" in
+		commit)
+			message="${@:2:$#-2}"
+			executionplane git add .
+			executionplane git commit -m "$(echo "$message")"
+			executionplane git tag -f ${CONTECO_TAG}
+		;;
+		compact)
+			executionplane git reflog expire --updateref --rewrite --stale-fix --expire=all --all
+			executionplane git repack -A -d -f -F --window=4095 --depth=4095 --unpack-unreachable=all
+			executionplane git prune --expire=all
+			executionplane git gc --prune=all --aggressive
+			executionplane git push -f --all
+			executionplane git push -f --tags
+		;;
+		config)
+			executionplane git remote set-url origin "https://github.com/${CONTECO_REALM_RUNTIME}/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}.git"
+			executionplane git branch --set-upstream-to=origin/master master
+			executionplane git config core.filemode false
+			executionplane git config credential.helper store
+		;;
+		create)
+			executionplane git init
+			executionplane git remote add origin test
+		;;
+			extract)
+			. executionplane-capture-output docker create ${CONTECO_REGISTRY}$imageName
+			destination="/conteco/pwd/$imageName"
+			executionplane mkdir -p $destination
+			executionplane docker container cp $CONTECO_EXECUTIONPLANE_OUTPUT:/conteco/repo/. $destination
+		;;
+		load)
+			fromTar="false"
+			if [[ "$2" == "--from-tar" ]] ; then
+				fromTar="true"
+				shift
+			fi
+			repo-load $fromTar "${imageName}"
+			repo-load $fromTar "${imageName}:${CONTECO_TAG}"
+		;;
+		log)
+			executionplane git log --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --date=relative -n 10
+		;;
+		push)
+			executionplane "--errors-only" git push -f origin master
+			executionplane "--errors-only" git push -f origin "$CONTECO_TAG"
+		;;
+		remove)
+			cd $currentpwd
+			executionplane rm -rf $rootPath
+		;;
+		reset)
+#			executionplane git tag | git push origin ":refs/tags/$INPUT"
+			executionplane rm -rf .git
+			repo create "$imageName"
+			repo commit -m "initial checkin after reset, for earlier history extract repository from container image of previous (major) version." "$imageName"
+			repo config "$imageName"
+			repo push "$imageName"
+			repo config "$imageName"
+		;;
+		retag-image)
+			executionplane docker tag "${CONTECO_REGISTRY}$imageName" "$2/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}"
+			executionplane docker tag "${CONTECO_REGISTRY}$imageName" "$2/${CONTECO_ECOSYSTEM_RUNTIME}.${CONTECO_TYPE}.${CONTECO_NAME}:${CONTECO_TAG}"
+		;;
+		save)
+      repo-save "$imageName:$CONTECO_TAG"
+		;;
+		status)
+			executionplane git status
+		;;
+		tag-registry)
+			executionplane docker tag "$imageName:$CONTECO_TAG" "${CONTECO_REGISTRY}$imageName"
+			executionplane docker tag "$imageName:$CONTECO_TAG" "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG"
+		;;
+		untag-registry)
+			executionplane docker tag "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG" "$imageName"
+			executionplane docker tag "${CONTECO_REGISTRY}$imageName:$CONTECO_TAG" "$imageName:$CONTECO_TAG"
+		;;
+		--info)
+			. info-summary repo
+		;;
+		*)
+			executionplane-error "Method not recognised: $1."
+		;;
+	esac
+	cd $currentpwd
+	executionplane-complete
+)

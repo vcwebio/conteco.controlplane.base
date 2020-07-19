@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+(
+  export PATH="/conteco/bin/controlplane/internal:$CONTECO_EXECUTIONPLANE_ORIGINALPATH"
+  . cli-executor run stop $@
+  . cli-executor run shutdown $@
+  . cli-executor deploy down $@
+  . cli-executor deploy $@
+  . cli-executor run boot $@
+  . cli-executor run start $@
+)

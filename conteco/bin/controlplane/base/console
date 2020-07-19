@@ -27,11 +27,7 @@
       shift
       controlplane-service $@
     ;;
-    execute)
-      shift
-      console-iterate-selection .invoke $@
-    ;;
-    extract-repo)
+    extract)
       if [[ "$3" == "--reload" ]] ; then
         executionplane docker image pull "$CONTECO_REGISTRY$2"
       fi

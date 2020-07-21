@@ -8,23 +8,34 @@ if [[ "$1" == "windows" ]] ; then
 else
 	export CONTECO_OS="linux"
 fi
-
-export CONTECO_REPOSITORY_CATEGORY="$2"
-export CONTECO_PWD_VOLUME="controlplane_repos_$2"
-
+shift
+export CONTECO_REPOSITORY_CATEGORY="$1"
+export CONTECO_PWD_VOLUME="controlplane_repos_$1"
+shift
 # Runtime values for REALM and ECOSYSTEM
 export CONTECO_REALM_RUNTIME="${CONTECO_REALM}"
 export CONTECO_ECOSYSTEM_RUNTIME="${CONTECO_NAME}"
 export CONTECO_NAME_CONTROLPLANE="${CONTECO_NAME}"
-if [[ "$3" != "" ]] ; then
-	if [[ "$3" != "${CONTECO_NAME}"* ]] ; then
-		export CONTECO_REALM_RUNTIME="$3"
-		shift
-	fi
+
+
+# parse settings: REGISTRY
+if [[ "$1" == "--registry="* ]] ; then
+	export CONTECO_REGISTRY="$(echo "$1" | cut -d'=' -f  2)"
+	shift
 fi
-if [[ "$3" != "" ]] ; then
-	export CONTECO_ECOSYSTEM_RUNTIME="$3"
+
+# parse settings: REALM
+if [[ "$1" == "--realm="* ]] ; then
+	export CONTECO_REALM_RUNTIME="$(echo "$1" | cut -d'=' -f  2)"
+	shift
 fi
+
+# parse settings: ECOSYSTEM
+if [[ "$1" == "--ecosystem="* ]] ; then
+	export CONTECO_ECOSYSTEM_RUNTIME="$(echo "$1" | cut -d'=' -f  2)"
+	shift
+fi
+
 
 hostname="${CONTECO_HOSTNAME}"
 if [[ "$hostname" == "host.docker.internal" ]] ; then
@@ -38,4 +49,4 @@ fi
 
 echo "" > ./current-repo-selection
 
-bash
+bash $@

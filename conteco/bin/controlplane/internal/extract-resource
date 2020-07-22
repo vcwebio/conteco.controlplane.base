@@ -7,7 +7,7 @@ requiredTag="$4"
 	extractFromImage="true"
 	rootPath="/conteco/pwd/${imageName}"
 
-	if [[ -d $rootPath && -f $rootPath/$input ]] ; then
+	if [[ -d $rootPath ]] ; then
 		currentpwd="$(pwd)"
 		cd $rootPath
 		. $rootPath/environment
@@ -15,7 +15,11 @@ requiredTag="$4"
 			requiredTag="${CONTECO_TAG}"
 		fi
 		if [[ "$requiredTag" == "${CONTECO_TAG}" ]] ; then
-			cp $rootPath/$input $output
+			if [[ -f $rootPath/$input ]] ; then
+				cp $rootPath/$input $output
+			else
+				executionplane-warning "$input: Requested file does not exist!"
+			fi
 			extractFromImage="false"
 		fi
 		cp $rootPath/$input $output

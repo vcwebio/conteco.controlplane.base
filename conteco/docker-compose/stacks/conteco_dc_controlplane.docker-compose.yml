@@ -4,7 +4,7 @@ services:
 
 # START SERVICE controlplane.base
   controlplane:
-    image: ${CONTECO_REGISTRY}${CONTECO_REALM_RUNTIME}/conteco.controlplane.base:v2.0.5
+    image: ${CONTECO_REGISTRY}${CONTECO_REALM_RUNTIME}/conteco.controlplane.base:v2.0.6
     environment: [${CONTECO_DC_CONTROLPLANE_ENVIRONMENT}]
     command: [${CONTECO_DC_CONTROLPLANE_COMMAND}]
     volumes: ['/etc:/hostfs/etc:ro','/var/run/docker.sock:/var/run/docker.sock','controlplane_repos_${CONTECO_DC_GLOBAL_STACKNAMES}:/conteco/pwd']

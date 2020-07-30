@@ -3,12 +3,11 @@
 # £2 repository category: external, internal, package, module, solution, cluster, interface
 # $3 realm
 
-if [[ "$1" == "windows" ]] ; then
-	export CONTECO_OS="windows"
-else
-	export CONTECO_OS="linux"
-fi
+if [[ "$1" == "windows" ]] ; then export CONTECO_OS="windows";
+elif [[ "$1" == "container" ]] ; then export CONTECO_OS="container"; # this is non-interactive mode
+else export CONTECO_OS="linux"; fi # default is linux
 shift
+
 export CONTECO_REPOSITORY_CATEGORY="$1"
 export CONTECO_PWD_VOLUME="controlplane_repos_$1"
 shift
@@ -49,4 +48,8 @@ fi
 
 echo "" > ./current-repo-selection
 
-bash $@
+if [[ "$@" == *"@"* ]] ; then
+	echo "$@" | tr "@" "\n" > commands.sh
+	bash commands.sh
+	rm commands.sh
+else bash $@; fi

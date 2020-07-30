@@ -2,13 +2,15 @@
 shopt -s nullglob
 
 if [[ "${@: -1}" == "--help" ]] ; then
-	.invoke  $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
-	wait-for-output-parser-tagged
+	. _invoke $@;
+#	.invoke  $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
+#	wait-for-output-parser-tagged
 else
 
 	if [[ "$1" == "console" ]] ; then
-		.invoke $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
-		wait-for-output-parser-tagged
+		. _invoke $@;
+#		.invoke $@ > >( output-parser-tagged ) 2> >( output-parser-tagged );
+#		wait-for-output-parser-tagged
 	else
 
 		selector="$(< ./current-repo-selection)"
@@ -45,11 +47,14 @@ else
 	  for f in $selector ;
 	  do
 	    if [[ "$storedSelection" == "true" ]] ; then
-				.invoke $1 ${@:2:$#-1} $f > >( output-parser-tagged ) 2> >( output-parser-tagged );
+				. _invoke $1 ${@:2:$#-1} $f;
+#				.invoke $1 ${@:2:$#-1} $f > >( output-parser-tagged ) 2> >( output-parser-tagged );
+#				wait-for-output-parser-tagged
 			else
-				.invoke $1 ${@:2:$#-2} $f > >( output-parser-tagged ) 2> >( output-parser-tagged );
+				. _invoke $1 ${@:2:$#-2} $f;
+#				.invoke $1 ${@:2:$#-2} $f > >( output-parser-tagged ) 2> >( output-parser-tagged );
+#				wait-for-output-parser-tagged
 			fi
-	    wait-for-output-parser-tagged
 	  done;
 	fi
 fi
